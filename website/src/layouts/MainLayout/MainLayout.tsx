@@ -1,4 +1,5 @@
-import { ReactNode, useState } from "react";
+import { useLocation } from "@tanstack/react-location";
+import { ReactNode, useEffect, useState } from "react";
 import { Footer } from "./Footer";
 import { SideBar } from "./SideBar";
 
@@ -12,6 +13,14 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(
     !needAutoClose ? true : false
   );
+  const { current } = useLocation();
+
+  useEffect(() => {
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, [current]);
 
   return (
     <div className="lg:grid lg:grid-cols-12 h-full max-w-screen">
