@@ -87,7 +87,7 @@ export const Objects = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slate lg:prose-lg">
+    <section className="prose prose-slate lg:prose-lg max-w-full">
       <h1>{t("pages.begin.objects.title")}</h1>
 
       <h2>Création d'objets</h2>

@@ -8,7 +8,7 @@ export const Intro = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slante lg:prose-lg">
+    <section className="prose prose-slante lg:prose-lg max-w-full">
       <h1>{t("pages.intro.title")}</h1>
       <p>
         JavaScript est un langage de programmation de script principalement
@@ -38,7 +38,7 @@ export const Intro = () => {
         boîte de dialogue lorsque vous cliquez sur un bouton :
       </p>
       <ReactSyntaxHighlighter
-        language="javascript"
+        language="html"
         style={atomOneDark}
         showLineNumbers
       >

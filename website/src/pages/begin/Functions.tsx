@@ -71,7 +71,7 @@ export const Functions = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slate lg:prose-lg">
+    <section className="prose prose-slate lg:prose-lg max-w-full">
       <h1>{t("pages.begin.functions.title")}</h1>
       <h2>Déclaration de fonctions</h2>
       <p>Voici comment déclarer une fonction en JavaScript :</p>

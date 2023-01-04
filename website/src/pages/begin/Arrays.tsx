@@ -61,7 +61,7 @@ export const Arrays = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slante lg:prose-lg">
+    <section className="prose prose-slante lg:prose-lg max-w-full">
       <h1>{t("pages.begin.arrays.title")}</h1>
 
       <h2>Création d'un tableau</h2>

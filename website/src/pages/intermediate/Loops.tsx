@@ -34,8 +34,8 @@ export const Loops = () => {
   const t = useLocale();
 
   return (
-    <section className="gap-8 flex flex-col">
-      <h1 className="text-3xl">{t("pages.intermediate.loops.title")}</h1>
+    <section className="prose prose-slante lg:prose-lg max-w-full">
+      <h1>{t("pages.intermediate.loops.title")}</h1>
 
       <h2>Boucle for</h2>
       <p>La boucle for en JavaScript s'utilise de la manière suivante :</p>

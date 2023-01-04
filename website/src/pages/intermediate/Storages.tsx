@@ -89,7 +89,7 @@ export const Storages = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slante lg:prose-lg">
+    <section className="prose prose-slante lg:prose-lg max-w-full">
       <h1>{t("pages.intermediate.storages.title")}</h1>
       <p>
         Il existe plusieurs méthodes de stockage de données en JavaScript, qui

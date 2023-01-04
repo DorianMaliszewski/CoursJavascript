@@ -42,7 +42,7 @@ export const Variables = () => {
   const t = useLocale();
 
   return (
-    <section className="prose lg:prose-lg prose-slate">
+    <section className="prose lg:prose-lg prose-slate max-w-full">
       <h1>{t("pages.begin.variables.title")}</h1>
       <h2>Déclaration de variables</h2>
       <p>Voici comment déclarer une variable en JavaScript :</p>

@@ -39,8 +39,8 @@ export const Conditions = () => {
   const t = useLocale();
 
   return (
-    <section className="flex flex-col gap-8">
-      <h1 className="text-3xl">{t("pages.intermediate.conditions.title")}</h1>
+    <section className="prose prose-slante lg:prose-lg max-w-full">
+      <h1>{t("pages.intermediate.conditions.title")}</h1>
       <h2>If, Else</h2>
       <SyntaxHighlighter
         language="javascript"

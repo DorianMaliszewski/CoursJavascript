@@ -42,7 +42,7 @@ export const Events = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slante lg:prose-lg">
+    <section className="prose prose-slante lg:prose-lg max-w-full">
       <h1>{t("pages.begin.events.title")}</h1>
       <p>
         Les évènements en JavaScript sont des actions qui sont déclenchées par

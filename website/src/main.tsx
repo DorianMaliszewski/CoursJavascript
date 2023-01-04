@@ -9,7 +9,11 @@ const location = new ReactLocation();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Router routes={routes} location={location}>
+    <Router
+      basepath={import.meta.env.PROD ? "/CoursJavascript" : undefined}
+      routes={routes}
+      location={location}
+    >
       <MainLayout>
         <Outlet />
       </MainLayout>

@@ -25,7 +25,7 @@ export const Types = () => {
   const t = useLocale();
 
   return (
-    <section className="prose prose-slate lg:prose-lg">
+    <section className="prose prose-slate lg:prose-lg max-w-full">
       <h1>{t("pages.begin.types.title")}</h1>
       <h2>Type de valeur primitif</h2>
       <p>En JavaScript, il existe sept types de valeurs primitives :</p>
