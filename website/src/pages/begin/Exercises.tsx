@@ -6,7 +6,7 @@ export const Exercises = () => {
   return (
     <section className="prose prose-slante lg:prose-xl max-w-screen">
       <h1>{t("pages.begin.exercises.title")}</h1>
-      <h2>Exercice 1:</h2>
+      <h2>Exercice 1</h2>
       <ul>
         <li>
           Créer une page HTML avec 3 boutons et une balise div avec un id
@@ -21,6 +21,8 @@ export const Exercises = () => {
           Reproduire avec les différentes syntaxes
         </li>
       </ul>
+
+      <a href="/exercises/exo1.html" download="exo1.html" target="_blank" className="btn btn-primary">Voir la correction</a>
 
       <h2>
         Exercice 2
@@ -42,9 +44,10 @@ export const Exercises = () => {
           Reproduire avec les différentes syntaxes
         </li>
       </ul>
+      
 
       <h3>
-        Exercice 3:
+        Exercice 3
       </h3>
       <ul>
         <li>
@@ -54,6 +57,9 @@ export const Exercises = () => {
           Lorsque je soumet le formulaire les valeurs entrées s’affichent dans le DOM
         </li>
       </ul>
+
+      <a href="/exercises/exo3.html" download="exo3.html" target="_blank" className="btn btn-primary">Voir la correction</a>
+
 
       <h2>
         Exercice 4
@@ -75,6 +81,11 @@ export const Exercises = () => {
           Lorsque j’actualise la page ma liste est toujours là
         </li>
       </ul>
+
+      
+        <a href="/exercises/exo4.html" download="exo4.html" target="_blank" className="btn btn-primary mr-4">Voir la correction</a>
+        <a href="/exercises/exo4_advanced.html" download="exo4_advanced.html" target="_blank" className="btn btn-primary">Voir la correction avancée</a>
+
     </section>
   );
 };
