@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./echarts.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>
+           SMASH DELTA LABS
+        </h1>
+    </header>
+    <main>
+        <section>
+            <div>
+                <h2>
+                    DISCOVERING OUR CITY THROUGH DATA
+                </h2>
+                <p>
+                    The city of Sydney is one of the world’s most liveable – but key to that liveability, is our ability to move.
+                    
+                    We wanted to take a closer look at how Sydney moves, through a preliminary study leveraging transit data of morning peak hour* trips into the CBD. This way, we could get a better understanding of how certain areas of Sydney are served by our public and private transport network.
+                    
+                    Understanding CBD access is even more powerful when considered in the context of housing affordability - and the Rental Board of NSW's bond data was mined to explore this relationship.
+                    
+                    How does your postcode stack up?
+                    
+                    Keep scrolling to explore.
+                </p>
+            </div class="droite">
+                <div id="chart1" style="width:80%; height:400px">
+                </div>
+            </div>
+
+
+        </section>
+    </main>    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.js"></script>
+    <script>
+        fetch('./incendies.json')
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+        // Initialize the echarts instance based on the prepared dom
+      const myChart = echarts.init(document.getElementById('chart1'));
+
+// Specify the configuration items and data for the chart
+const option = {
+  title: {
+    text: 'ECharts Getting Started Example'
+  },
+  tooltip: {},
+  legend: {
+    data: ['sales']
+  },
+  xAxis: {
+    data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
+  },
+  yAxis: {},
+  series: [
+    {
+      name: 'sales',
+      type: 'bar',
+      data: [5, 20, 36, 10, 10, 20]
+    }
+  ]
+};
+
+// Display the chart using the configuration items and data just specified.
+myChart.setOption(option);
+    </script>
+</body>
+</html>
