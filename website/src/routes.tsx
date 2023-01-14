@@ -64,6 +64,10 @@ export const routes = [
     element: <Intermediate.Loops />,
   },
   {
+    path: PATHS.intermediate.arrayFunctions,
+    element: <Intermediate.ArrayFunctions />,
+  },
+  {
     path: PATHS.intermediate.storages,
     element: <Intermediate.Storages />,
   },

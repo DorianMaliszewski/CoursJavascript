@@ -16,6 +16,7 @@ export const PATHS = {
   intermediate: {
     conditions: `/intermediate/conditions`,
     loops: "/intermediate/loops",
+    arrayFunctions: "/intermediate/array-functions",
     storages: "/intermediate/storages",
     tips: "/intermediate/tips",
   },
