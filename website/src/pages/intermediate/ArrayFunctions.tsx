@@ -14,6 +14,23 @@ const code3 = `let numbers = [1, 2, 3, 4];
 let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
 console.log(sum); // 10`;
 
+const code4 = `let numbers = [1, 2, 3];
+numbers.push(4);
+console.log(numbers); // [1, 2, 3, 4]`;
+
+const code5 = `let numbers = [1, 2, 3];
+let lastNumber = numbers.pop();
+console.log(numbers); // [1, 2]
+console.log(lastNumber); // 3`;
+
+const code6 = `let numbers = [1, 2, 3, 4];
+let newNumbers = numbers.slice(1, 3);
+console.log(newNumbers); // [2, 3]`;
+
+const code7 = `let numbers = [1, 2, 3, 4];
+numbers.splice(1, 2);
+console.log(numbers); // [1, 4]`;
+
 export const ArrayFunctions = () => {
   const t = useLocale();
 
@@ -65,6 +82,68 @@ export const ArrayFunctions = () => {
       >
         {code3}
       </ReactSyntaxHighlighter>
+      <h2>Fonction push()</h2>
+      <p>
+        La fonction <code>push()</code> permet d'ajouter un ou plusieurs
+        éléments à la fin d'un tableau. L'exemple suivant utilise{" "}
+        <code>push()</code> pour ajouter un nombre à un tableau:
+      </p>
+      <ReactSyntaxHighlighter
+        language="javascript"
+        wrapLines
+        showLineNumbers
+        style={atomOneDark}
+      >
+        {code4}
+      </ReactSyntaxHighlighter>
+
+      <h2>Fonction pop()</h2>
+      <p>
+        La fonction <code>pop()</code> permet de supprimer le dernier élément
+        d'un tableau et de renvoyer cet élément. L'exemple suivant utilise{" "}
+        <code>pop()</code> pour supprimer le dernier élément d'un tableau:
+      </p>
+      <ReactSyntaxHighlighter
+        language="javascript"
+        wrapLines
+        showLineNumbers
+        style={atomOneDark}
+      >
+        {code5}
+      </ReactSyntaxHighlighter>
+
+      <h2>Fonction slice()</h2>
+      <p>
+        La fonction <code>slice()</code> permet de créer un nouveau tableau en
+        extraisant une portion d'un tableau existant. L'exemple suivant utilise{" "}
+        <code>slice()</code> pour extraire les éléments du tableau entre les
+        index 1 et 2:
+      </p>
+      <ReactSyntaxHighlighter
+        language="javascript"
+        wrapLines
+        showLineNumbers
+        style={atomOneDark}
+      >
+        {code6}
+      </ReactSyntaxHighlighter>
+
+      <h2>Fonction splice()</h2>
+      <p>
+        La fonction <code>splice()</code> permet de supprimer ou d'ajouter des
+        éléments à un tableau existant. L'exemple suivant utilise{" "}
+        <code>splice()</code> pour supprimer les éléments du tableau entre les
+        index 1 et 2:
+      </p>
+      <ReactSyntaxHighlighter
+        language="javascript"
+        wrapLines
+        showLineNumbers
+        style={atomOneDark}
+      >
+        {code7}
+      </ReactSyntaxHighlighter>
+
       <p>
         Il est important de noter que ces fonctions ne modifient pas le tableau
         d'origine, elles retournent un nouveau tableau avec les modifications

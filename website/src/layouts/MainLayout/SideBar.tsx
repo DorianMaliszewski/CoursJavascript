@@ -101,6 +101,14 @@ export const SideBar = ({ opened, onClose, autoClose }: SideBarProps) => {
               </Link>
             </li>
             <li>
+              <Link
+                onClick={handleClose}
+                to={PATHS.intermediate.objectFunctions}
+              >
+                {t("menu.intermediate.children.objectFunctions")}
+              </Link>
+            </li>
+            <li>
               <Link onClick={handleClose} to={PATHS.intermediate.storages}>
                 {t("menu.intermediate.children.storages")}
               </Link>
