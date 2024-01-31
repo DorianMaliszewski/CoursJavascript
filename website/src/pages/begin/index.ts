@@ -1,9 +1,0 @@
-export { Arrays } from "./Arrays";
-export { Events } from "./Events";
-export { Examples } from "./Examples";
-export { Exercises } from "./Exercises";
-export { Functions } from "./Functions";
-export { Objects } from "./Objects";
-export { Tips } from "./Tips";
-export { Types } from "./Types";
-export { Variables } from "./Variables";

@@ -1,0 +1,25 @@
+export const PATHS = {
+  home: "/",
+  intro: "/introduction",
+  cheatsheet: "/cheatsheet",
+  begin: {
+    variables: `/begin/variables`,
+    types: `/begin/types`,
+    functions: `/begin/functions`,
+    events: `/begin/events`,
+    objects: `/begin/objects`,
+    arrays: `/begin/arrays`,
+    tips: `/begin/tips`,
+    examples: `/begin/examples`,
+    exercises: `/begin/exercises`,
+  },
+  intermediate: {
+    conditions: `/intermediate/conditions`,
+    loops: "/intermediate/loops",
+    arrayFunctions: "/intermediate/array-functions",
+    objectFunctions: "/intermediate/object-functions",
+    storages: "/intermediate/storages",
+    tips: "/intermediate/tips",
+  },
+  jquery: "/jquery",
+}
