@@ -1,6 +1,6 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Javascript > Les types de variables'
+title: 'Javascript > Types'
 ---
 
 # Les types de variables

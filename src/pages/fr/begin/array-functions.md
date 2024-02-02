@@ -1,9 +1,10 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Les fonctions de tableaux'
+title: 'Javascript > Array functions'
 ---
 
 # Les fonctions de tableau
+
 ## Fonction map()
 
 La fonction <code>map()</code> permet de parcourir tous les éléments

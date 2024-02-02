@@ -1,6 +1,6 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Javascript > Fonctions'
+title: 'Javascript > Functions'
 ---
 # Les fonctions
 

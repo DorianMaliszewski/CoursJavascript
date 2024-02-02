@@ -1,6 +1,6 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Javascript > Les variables'
+title: 'Javascript > Variables'
 ---
 
 # Les variables

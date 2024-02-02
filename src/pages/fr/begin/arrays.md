@@ -1,9 +1,9 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Les tableaux en Javascript'
+title: 'Javascript > Array'
 ---
 
-# Les tableaux en Javascript
+# Les tableaux (Array)
 
 ## Création d'un tableau
 

@@ -1,24 +1,38 @@
 ---
 import Link from './Link.astro'
+import MenuIcon from './MenuIcon.astro'
 import {PATHS} from '../paths.js'
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
----
 
-<button data-drawer-target="sidebar" data-drawer-toggle="sidebar" aria-controls="sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+---
+<script is:inline>
+function handleClick() {
+  document.getElementById('sidebar').classList.toggle('-translate-x-full')
+}
+
+document.getElementById('sidebar').class = sideBarClass
+</script>
+
+<button onclick="handleClick()" aria-controls="sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
    <span class="sr-only">Open sidebar</span>
-   <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-   <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-   </svg>
+   <MenuIcon />
 </button>
 
-<aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+
+<aside id="sidebar" class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+      <div class="flex justify-between items-center">
       <Link href="/" class="flex items-center ps-2.5 mb-5">
          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">MMI2 Dev</span>
       </Link>
+      <button type="button" onclick="handleClick()" aria-controls="sidebar" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+       <span class="sr-only">Close sidebar</span>
+       <MenuIcon />
+      </button>
+      </div>
       <ul class="space-y-2 font-medium menu">
             <li>
               <Link href={PATHS.home}>
@@ -31,7 +45,7 @@ const t = useTranslations(lang);
               </Link>
             </li>
             <li className="menu-title mt-4">
-             {t("menu.begin.title")} 
+             <span>{t("menu.begin.title")}</span> 
              <ul>
             <li>
               <Link href={PATHS.begin.variables}>
@@ -63,12 +77,35 @@ const t = useTranslations(lang);
                 {t("menu.begin.children.events")}
               </Link>
             </li>
-            {/* <li> */}
-            {/*   <Link href={PATHS.begin.tips}>{t("menu.begin.children.tips")}</Link> */}
-            {/* </li> */}
             <li>
-              <Link href={PATHS.begin.examples}>
-                {t("menu.begin.children.example")}
+              <Link href={PATHS.begin.conditions}>
+                {t("menu.begin.children.conditions")}
+              </Link>
+            </li>
+            <li>
+              <Link href={PATHS.begin.loops}>
+                {t("menu.begin.children.loops")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={PATHS.begin.arrayFunctions}
+              >
+                {t("menu.begin.children.arrayFunctions")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={PATHS.begin.objectFunctions}
+              >
+                {t("menu.begin.children.objectFunctions")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={PATHS.begin.form}
+              >
+                {t("menu.begin.children.form")}
               </Link>
             </li>
             <li>
@@ -82,27 +119,18 @@ const t = useTranslations(lang);
               <span>{t("menu.intermediate.title")}</span>
               <ul>
               <li>
-                <Link href={PATHS.intermediate.conditions}>
-                  {t("menu.intermediate.children.conditions")}
+                <Link href={PATHS.intermediate.promises}>
+                  {t("menu.intermediate.children.promises")}
                 </Link>
               </li>
               <li>
-                <Link href={PATHS.intermediate.loops}>
-                  {t("menu.intermediate.children.loops")}
+                <Link href={PATHS.intermediate.asyncAwait}>
+                  {t("menu.intermediate.children.asyncAwait")}
                 </Link>
               </li>
               <li>
-                <Link
-                  href={PATHS.intermediate.arrayFunctions}
-                >
-                  {t("menu.intermediate.children.arrayFunctions")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={PATHS.intermediate.objectFunctions}
-                >
-                  {t("menu.intermediate.children.objectFunctions")}
+                <Link href={PATHS.intermediate.fetch}>
+                  {t("menu.intermediate.children.fetch")}
                 </Link>
               </li>
               <li>
@@ -110,15 +138,15 @@ const t = useTranslations(lang);
                   {t("menu.intermediate.children.storages")}
                 </Link>
               </li>
+              <li>
+                <Link href={PATHS.intermediate.exercises}>
+                  {t("menu.intermediate.children.exercises")}
+                </Link>
+              </li>
               </ul>
             </li>
             <li className="menu-title mt-4">
               <Link href={PATHS.jquery}>{t("menu.jquery.title")}</Link>
-            </li>
-            <li className="mt-8">
-              <Link href={PATHS.cheatsheet}>
-              TODO  
-              </Link>
             </li>
       </ul>
    </div>

@@ -2,7 +2,7 @@
 layout: 'layouts/Layout.astro'
 title: "Javascript > Object functions"
 ---
-# Les fonctions avec Object
+# Utilisation de la classe Object
 
 ## Fonction Object.entries()
 

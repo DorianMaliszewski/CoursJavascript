@@ -1,6 +1,6 @@
 ---
 layout: 'layouts/Layout.astro'
-title: "Javascript > Le stockage"
+title: "Javascript > Storage"
 ---
 
 # Stockage      

@@ -1,9 +1,9 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Javascript > Les objets'
+title: 'Javascript > Object'
 ---
 
-# Les objets en Javascript
+# Les objets
 
 ## Création d'objets
 

@@ -1,9 +1,9 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Javascript > Évènements'
+title: 'Javascript > Events'
 ---
 
-# Les évènements en javascript
+# Les évènements (event)
 
 Les évènements en JavaScript sont des actions qui sont déclenchées par
 l'utilisateur (comme un clic sur un bouton) ou par le navigateur (comme

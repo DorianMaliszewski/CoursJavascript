@@ -1,6 +1,6 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Les boucles en Javascript'
+title: 'Javascript > Loops'
 ---
 # Les boucles
 

@@ -1,6 +1,6 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Les tableaux en Javascript'
+title: 'Introduction'
 ---
 # Introduction
 

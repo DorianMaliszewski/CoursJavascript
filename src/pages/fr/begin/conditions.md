@@ -1,9 +1,11 @@
 ---
 layout: 'layouts/Layout.astro'
-title: 'Les conditions en Javascript'
+title: 'Javascript > Conditions'
 ---
 # Les conditions
+
 ## If, Else
+
 ```js
 let x = 5;
 
