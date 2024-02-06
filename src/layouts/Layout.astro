@@ -1,35 +1,36 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Sidebar from '../components/Sidebar.astro'
-import { getLangFromUrl, useTranslations } from 'i18n/utils';
+import Sidebar from "components/Sidebar/Sidebar.astro";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
-const {frontmatter} = Astro.props;
-const finalTitle = title ?? frontmatter.title
+const { frontmatter } = Astro.props;
+const finalTitle = title ?? frontmatter.title;
 ---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="MMI2 Dev website" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{finalTitle}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="MMI2 Dev website" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{finalTitle}</title>
     <ViewTransitions />
-	</head>
-	<body>
+  </head>
+  <body>
     <header>
       <Sidebar />
     </header>
-  <main class="p-10 px-18 sm:ml-72 prose prose-slante lg:prose-lg max-w-full">
-    <slot />
-  </main>
-	</body>
+    <main class="p-10 px-18 sm:ml-72 prose prose-slante lg:prose-lg max-w-full">
+      <slot />
+    </main>
+  </body>
 </html>

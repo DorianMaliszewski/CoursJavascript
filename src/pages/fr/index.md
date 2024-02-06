@@ -1,27 +1,26 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Apprenez le Javascript'
+layout: "layouts/Layout.astro"
+title: "MMI2 Dev > Accueil"
 ---
-# Apprenez le Javascript
 
-Pour apprendre le JavaScript, vous êtes au bon endroit! Ce site est
-conçu pour vous apprendre les bases du langage de manière interactive et
-ludique.
+# Cours MMI2
 
-JavaScript est un langage de programmation de scripts principalement
-utilisé dans les pages web interactives pour ajouter des fonctionnalités
-telles que les menus déroulants, les diaporamas d'images et les
-formulaires de validation.
+Bienvenue sur notre plateforme d'apprentissage du HTML, CSS et JavaScript !
 
-Au cours de votre apprentissage, vous découvrirez comment :
+Ce site est dédié à l'apprentissage des fondamentaux du développement web : le HTML, le CSS et le JavaScript. Que vous soyez novice en programmation ou que vous souhaitiez approfondir vos connaissances, vous êtes au bon endroit !
 
-- Structurer votre code avec des variables, des fonctions et des structures de contrôle de flux
-- Manipuler le HTML et le CSS avec le DOM
-- Gérer les évènements utilisateur tels que les clics de souris et les frappes de touches
-- Utiliser des bibliothèques et des frameworks tels que jQuery
+## Pourquoi apprendre le développement web ?
 
-J'espère que vous apprécierez votre parcours d'apprentissage et que vous
-serez bientôt en mesure de créer des pages web interactives de qualité
-professionnelle.
+Dans un monde de plus en plus numérique, la maîtrise des langages de programmation web est devenue essentielle. Que vous souhaitiez créer votre propre site web, travailler dans le domaine du développement logiciel ou simplement comprendre les bases du fonctionnement des sites que vous utilisez au quotidien, connaître le HTML, le CSS et le JavaScript est un atout précieux.
 
-Commençons!
+## Ce que vous apprendrez sur ce site
+
+- **HTML (HyperText Markup Language)** : Le langage de balisage standard utilisé pour créer et structurer le contenu des pages web.
+- **CSS (Cascading Style Sheets)** : Le langage de feuilles de style qui permet de styliser et de mettre en forme le contenu HTML, offrant ainsi des designs attrayants et une présentation visuelle optimisée.
+- **JavaScript** : Le langage de programmation côté client qui permet d'ajouter des fonctionnalités interactives et dynamiques aux pages web, améliorant ainsi l'expérience utilisateur.
+
+## Prêt à démarrer ?
+
+Plongez dans le monde passionnant du développement web avec nous et commencez dès aujourd'hui à créer des sites web qui feront sensation. Que votre objectif soit de devenir un développeur web professionnel ou simplement de maîtriser les bases pour enrichir vos compétences, nous sommes là pour vous accompagner à chaque étape de votre parcours.
+
+Bonne exploration et bon apprentissage !

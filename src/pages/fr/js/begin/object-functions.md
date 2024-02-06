@@ -1,7 +1,8 @@
 ---
-layout: 'layouts/Layout.astro'
+layout: "layouts/Layout.astro"
 title: "Javascript > Object functions"
 ---
+
 # Utilisation de la classe Object
 
 ## Fonction Object.entries()
@@ -12,7 +13,7 @@ utilise <code>Object.entries()</code> pour retourner un tableau des
 propriétés et valeurs d'un objet:
 
 ```js
-let person = { name: 'John', age: 30 };
+let person = { name: "John", age: 30 };
 let entries = Object.entries(person);
 console.log(entries); // [['name', 'John'], ['age', 30]]
 ```
@@ -25,7 +26,7 @@ des propriétés d'un objet. L'exemple suivant utilise{" "}
 objet:
 
 ```js
-let person = { name: 'John', age: 30 };
+let person = { name: "John", age: 30 };
 let keys = Object.keys(person);
 console.log(keys); // ['name', 'age']
 ```
@@ -38,8 +39,7 @@ des valeurs des propriétés d'un objet. L'exemple suivant utilise{" "}
 propriétés d'un objet:
 
 ```js
-let person = { name: 'John', age: 30 };
+let person = { name: "John", age: 30 };
 let values = Object.values(person);
 console.log(values); // ['John', 30]
 ```
-

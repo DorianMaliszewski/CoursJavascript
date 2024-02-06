@@ -1,7 +1,8 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Javascript > Conditions'
+layout: "layouts/Layout.astro"
+title: "Javascript > Conditions"
 ---
+
 # Les conditions
 
 ## If, Else
@@ -21,8 +22,6 @@ supérieure à 10. Comme <code>x</code> est égal à 5, la condition est
 fausse et le message "<code>x est plus petit ou égal à 10</code>" est
 affiché dans la console.
 
-
-
 Il existe plusieurs opérateurs de comparaison que tu peux utiliser
 dans les conditions :
 
@@ -32,7 +31,6 @@ dans les conditions :
 - <code><=</code> (inférieur ou égal)
 - <code>==</code> (égal)
 - <code>!=</code> (différent)
-
 
 Tu peux également utiliser des conditions de type "ET" (
 <code>&&</code>) et "OU" (<code>||</code>) :
@@ -49,7 +47,6 @@ if (x > 0 || y > 0) {
   console.log("au moins un des deux est positif");
 }
 ```
-
 
 ## Switch
 

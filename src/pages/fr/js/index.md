@@ -1,7 +1,8 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Introduction'
+layout: "layouts/Layout.astro"
+title: "Introduction"
 ---
+
 # Introduction
 
 JavaScript est un langage de programmation de script principalement
@@ -28,5 +29,5 @@ Voici un exemple de code JavaScript qui affiche un message dans une
 boîte de dialogue lorsque vous cliquez sur un bouton :
 
 ```html
-  <button onclick="alert('Hello World!')">Cliquez ici</button>
+<button onclick="alert('Hello World!')">Cliquez ici</button>
 ```

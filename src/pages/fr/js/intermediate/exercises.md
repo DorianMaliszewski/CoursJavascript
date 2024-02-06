@@ -1,7 +1,8 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Javascript > Advanced Exercises'
+layout: "layouts/Layout.astro"
+title: "Javascript > Advanced Exercises"
 ---
+
 # Exercices
 
 ## Todo List
@@ -9,14 +10,16 @@ title: 'Javascript > Advanced Exercises'
 Dans cet exercice vous avez besoin d'utiliser le localStorage, et la données du formulaire.
 
 Une tâche se compose d'une date de création, un titre, une description et une date de traitement:
+
 ```js
 {
     dateDeCreation: Date,
     titre: string,
     description: string,
-    dateDeTraitement: Date 
+    dateDeTraitement: Date
 }
 ```
+
 - Créez une page HTML avec 2 champs textes dans un formulaire
   - Titre
   - Description

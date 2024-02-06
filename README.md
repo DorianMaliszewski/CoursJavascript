@@ -4,18 +4,18 @@ This repo is for students in MMI2, he is including :
 
 - Javascript
 
-
 ## Start this project
 
 - Install `pnpm`, `node`
 - Clone this project
 - Run the following commands :
+
 ```bash
 pnpm install
 pnpm run dev
 ```
-- Go to `http://localhost:4321/fr`
 
+- Go to `http://localhost:4321/fr`
 
 ## Develop
 
@@ -24,12 +24,10 @@ pnpm run dev
 - Add the route in `Sidebar.astro`
 - Add the name of the link in `i18n/fr.ts`
 
-
 ## Pull request
 
 - Develop on your own branch
 - Push it then open a pull request
-
 
 ## Deploy
 

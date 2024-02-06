@@ -1,21 +1,21 @@
 ---
-layout: 'layouts/Layout.astro'
+layout: "layouts/Layout.astro"
 title: "Javascript > Storage"
 ---
 
-# Stockage      
+# Stockage
 
 Il existe plusieurs méthodes de stockage de données en JavaScript, qui
 permettent de conserver des informations côté client et de les
 réutiliser ultérieurement. Les méthodes de stockage incluent :
 
 - Le <strong>stockage local</strong>, qui permet de stocker des données
-de manière permanente dans le navigateur de l'utilisateur
+  de manière permanente dans le navigateur de l'utilisateur
 - Le <strong>sessionStorage</strong>, qui permet de stocker des données
-de manière temporaire pour une session donnée (c'est-à-dire, jusqu'à
-ce que le navigateur soit fermé)
+  de manière temporaire pour une session donnée (c'est-à-dire, jusqu'à
+  ce que le navigateur soit fermé)
 - Le <strong>cookies</strong>, qui permet de stocker des données de
-manière temporaire ou permanente sur l'ordinateur de l'utilisateur
+  manière temporaire ou permanente sur l'ordinateur de l'utilisateur
 
 ## Stockage local
 
@@ -25,6 +25,7 @@ dans le stockage local sont accessibles depuis n'importe quelle page du
 site, même si le navigateur est fermé et rouvert.
 
 Voici comment utiliser le stockage local :
+
 ```js
 // enregistrer une valeur dans le stockage local
 localStorage.setItem("cle", "valeur");
@@ -47,7 +48,7 @@ utilisant <code>JSON.parse()</code> :
 
 ```js
 // enregistrer un objet dans le stockage local
-let monObjet = { "nom": "John", "âge": 30 };
+let monObjet = { nom: "John", âge: 30 };
 localStorage.setItem("monObjet", JSON.stringify(monObjet));
 
 // récupérer un objet du stockage local
@@ -60,6 +61,7 @@ localStorage.setItem("monTableau", JSON.stringify(monTableau));
 // récupérer un tableau du stockage local
 let monTableau = JSON.parse(localStorage.getItem("monTableau"));
 ```
+
 ## SessionStorage
 
 Le sessionStorage est similaire au stockage local, mais les données sont
@@ -67,6 +69,7 @@ stockées de manière temporaire pour une session donnée (c'est-à-dire,
 jusqu'à ce que le navigateur soit fermé).
 
 Voici comment utiliser le sessionStorage :
+
 ```js
 // enregistrer une valeur dans le sessionStorage
 sessionStorage.setItem("cle", "valeur");
@@ -89,7 +92,7 @@ utilisant <code>JSON.parse()</code> :
 
 ```js
 // enregistrer un objet dans le sessionStorage
-let monObjet = { "nom": "John", "âge": 30 };
+let monObjet = { nom: "John", âge: 30 };
 sessionStorage.setItem("monObjet", JSON.stringify(monObjet));
 
 // récupérer un objet du sessionStorage
@@ -102,6 +105,7 @@ sessionStorage.setItem("monTableau", JSON.stringify(monTableau));
 // récupérer un tableau du sessionStorage
 let monTableau = JSON.parse(sessionStorage.getItem("monTableau"));
 ```
+
 ## Cookies
 
 Les cookies sont de petits fichiers stockés sur l'ordinateur de
@@ -115,10 +119,11 @@ peuvent être stockés de manière temporaire ou permanente sur
 l'ordinateur de l'utilisateur.
 
 Voici comment enregistrer un cookie :
+
 ```js
 function setCookie(nom, valeur, jours) {
   let date = new Date();
-  date.setTime(date.getTime() + (jours * 24 * 60 * 60 * 1000));
+  date.setTime(date.getTime() + jours * 24 * 60 * 60 * 1000);
   let expires = "expires=" + date.toUTCString();
   document.cookie = nom + "=" + valeur + ";" + expires + ";path=/";
 }
@@ -129,7 +134,9 @@ Voici comment utiliser la fonction <code>setCookie()</code> :
 ```js
 setCookie("nom", "valeur", 7); // enregistre un cookie qui expirera dans 7 jours
 ```
+
 Voici comment récupérer un cookie :
+
 ```js
 // récupérer un cookie
 function getCookie(nom) {
@@ -157,4 +164,3 @@ function deleteCookie(nom) {
 Note : les cookies sont souvent utilisés pour suivre les utilisateurs
 sur plusieurs sites. Assurez-vous d'informer les utilisateurs et de
 respecter leur vie privée lorsque vous utilisez des cookies.
-

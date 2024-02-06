@@ -1,5 +1,5 @@
 ---
-layout: 'layouts/Layout.astro'
+layout: "layouts/Layout.astro"
 title: "Javascript > Promise"
 ---
 
@@ -53,15 +53,15 @@ La méthode `catch` est utilisée pour traiter le rejet d'une promesse.
 maPromesse.catch((raison) => {
   console.error(`Échec : ${raison}`);
 });
-
 ```
+
 ### `finally`
 
 La méthode finally est utilisée pour exécuter du code, que la promesse soit résolue ou rejetée.
 
 ```js
 maPromesse.finally(() => {
-  console.log('Opération terminée, que ce soit un succès ou un échec.');
+  console.log("Opération terminée, que ce soit un succès ou un échec.");
 });
 ```
 
@@ -79,21 +79,22 @@ premierePromesse()
     console.error(`Une erreur s'est produite : ${erreur}`);
   });
 ```
+
 ## `Promise.all` et `Promise.race`
 
 - `Promise.all` est utilisé pour traiter un tableau de promesses et renvoie une nouvelle promesse résolue avec un tableau de résultats une fois que toutes les promesses sont résolues.
 - `Promise.race` renvoie la première promesse résolue ou rejetée parmi un tableau de promesses.
 
 ```js
-const promesse1 = fetch('https://api.exemple.com/donnees1');
-const promesse2 = fetch('https://api.exemple.com/donnees2');
+const promesse1 = fetch("https://api.exemple.com/donnees1");
+const promesse2 = fetch("https://api.exemple.com/donnees2");
 
 Promise.all([promesse1, promesse2])
   .then((resultats) => {
-    console.log('Toutes les promesses sont résolues :', resultats);
+    console.log("Toutes les promesses sont résolues :", resultats);
   })
   .catch((erreur) => {
-    console.error('Au moins une promesse a été rejetée :', erreur);
+    console.error("Au moins une promesse a été rejetée :", erreur);
   });
 ```
 

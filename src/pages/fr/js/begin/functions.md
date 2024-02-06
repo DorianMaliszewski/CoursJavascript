@@ -1,28 +1,33 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Javascript > Functions'
+layout: "layouts/Layout.astro"
+title: "Javascript > Functions"
 ---
+
 # Les fonctions
 
 ## Déclaration de fonctions
 
 Voici comment déclarer une fonction en JavaScript :
+
 ```js
 function maFonction() {
-// code de la fonction
+  // code de la fonction
 }
 ```
+
 Vous pouvez également utiliser une expression de fonction pour déclarer
 une fonction :
 
 ```js
-let maFonction = function() {
+let maFonction = function () {
   // code de la fonction
 };
 ```
+
 ## Appel de fonctions
 
 Voici comment appeler une fonction en JavaScript :
+
 ```js
 maFonction();
 ```
@@ -44,16 +49,19 @@ function maFonction(arg1, arg2) {
   console.log(arg2); // affiche la valeur de l'argument2
 }
 ```
+
 ## Fonctions avec valeurs de retour
 
 Les fonctions peuvent également renvoyer une valeur à l'aide de
 l'instruction <code>return</code> :
+
 ```js
 function maFonction(arg1, arg2) {
   let resultat = arg1 + arg2;
   return resultat; // renvoie la valeur de resultat à l'appelant
 }
 ```
+
 Vous pouvez récupérer la valeur renvoyée par une fonction en la stockant
 dans une variable :
 
@@ -82,7 +90,7 @@ Si la fonction ne prend qu'un seul argument, vous pouvez omettre les
 parenthèses :
 
 ```js
-let maFonction = arg => {
+let maFonction = (arg) => {
   // code de la fonction
 };
 ```
@@ -99,8 +107,9 @@ renvoie un tableau filtré :
 
 ```js
 let tableau = [1, 2, 3, 4, 5];
-let tableauFiltre = tableau.filter(x => x % 2 === 0); // renvoie [2, 4]
+let tableauFiltre = tableau.filter((x) => x % 2 === 0); // renvoie [2, 4]
 ```
+
 ## Portée de variables
 
 En JavaScript, les variables déclarées à l'intérieur d'une fonction sont
@@ -145,19 +154,21 @@ comment déclarer une fonction constructeur :
 function MonObjet(arg1, arg2) {
   this.propriete1 = arg1;
   this.propriete2 = arg2;
-  this.methode1 = function() {
+  this.methode1 = function () {
     // code de la méthode
-  }
+  };
 }
 ```
 
 Voici comment créer un nouvel objet à l'aide de la fonction constructeur :
+
 ```js
 let monObjet = new MonObjet(valeur1, valeur2);
 ```
 
 Vous pouvez accéder aux propriétés et aux méthodes de l'objet de la même
 manière que pour un objet créé avec l'opérateur <code>{}</code> :
+
 ```js
 console.log(monObjet.propriete1); // affiche la valeur de la propriété1
 monObjet.methode1(); // exécute la méthode1

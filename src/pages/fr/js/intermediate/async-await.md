@@ -1,7 +1,8 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Javascript > Async/Await'
+layout: "layouts/Layout.astro"
+title: "Javascript > Async/Await"
 ---
+
 # Async/Await
 
 L'Async/Await est une syntaxe introduite dans ECMAScript 2017 pour simplifier la gestion des opérations asynchrones en utilisant des promesses. Cette approche rend le code asynchrone plus lisible et plus proche de la syntaxe synchrone.
@@ -106,11 +107,11 @@ L'Async/Await peut également être utilisé de manière efficace avec la Fetch 
 ```js
 async function fetchData() {
   try {
-    const response = await fetch('https://api.exemple.com/donnees');
+    const response = await fetch("https://api.exemple.com/donnees");
     const data = await response.json();
     console.log(data);
   } catch (erreur) {
-    console.error('Erreur lors de la récupération des données :', erreur);
+    console.error("Erreur lors de la récupération des données :", erreur);
   }
 }
 

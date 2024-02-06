@@ -1,6 +1,6 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Javascript > Array functions'
+layout: "layouts/Layout.astro"
+title: "Javascript > Array functions"
 ---
 
 # Les fonctions de tableau
@@ -14,9 +14,10 @@ tableau:
 
 ```js
 let numbers = [1, 2, 3, 4];
-let doubledNumbers = numbers.map(x => x * 2);
+let doubledNumbers = numbers.map((x) => x * 2);
 console.log(doubledNumbers); // [2, 4, 6, 8]
 ```
+
 ## Fonction filter()
 
 La fonction <code>filter()</code> permet de filtrer les éléments d'un
@@ -25,7 +26,7 @@ tableau en fonction d'une condition donnée. L'exemple suivant utilise{" "}
 
 ```js
 let numbers = [1, 2, 3, 4];
-let evenNumbers = numbers.filter(x => x % 2 === 0);
+let evenNumbers = numbers.filter((x) => x % 2 === 0);
 console.log(evenNumbers); // [2, 4]
 ```
 
@@ -38,9 +39,12 @@ calculer la somme de tous les éléments d'un tableau:
 
 ```js
 let numbers = [1, 2, 3, 4];
-let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+let sum = numbers.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+);
 console.log(sum); // 10
 ```
+
 ## Fonction push()
 
 La fonction <code>push()</code> permet d'ajouter un ou plusieurs
@@ -52,6 +56,7 @@ let numbers = [1, 2, 3];
 numbers.push(4);
 console.log(numbers); // [1, 2, 3, 4]
 ```
+
 ## Fonction pop()
 
 La fonction <code>pop()</code> permet de supprimer le dernier élément
@@ -64,6 +69,7 @@ let lastNumber = numbers.pop();
 console.log(numbers); // [1, 2]
 console.log(lastNumber); // 3
 ```
+
 ## Fonction slice()
 
 La fonction <code>slice()</code> permet de créer un nouveau tableau en

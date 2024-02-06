@@ -1,6 +1,6 @@
 ---
-layout: 'layouts/Layout.astro'
-title: 'Javascript > Object'
+layout: "layouts/Layout.astro"
+title: "Javascript > Object"
 ---
 
 # Les objets
@@ -8,12 +8,14 @@ title: 'Javascript > Object'
 ## Création d'objets
 
 Voici comment créer un objet vide en JavaScript :</p>
+
 ```js
 let monObjet = {};
 ```
 
 Voici comment ajouter des propriétés (des valeurs associées à des noms)
 à un objet :
+
 ```js
 monObjet.propriete1 = valeur1;
 monObjet.propriete2 = valeur2;
@@ -21,42 +23,51 @@ monObjet.propriete2 = valeur2;
 
 Voici comment ajouter des méthodes (des fonctions associées à l'objet) à
 un objet :
+
 ```js
-monObjet.methode1 = function() {
+monObjet.methode1 = function () {
   // code de la méthode
 };
 ```
 
 Voici comment créer un objet avec des propriétés et des méthodes en une
 seule étape :
+
 ```js
 let monObjet = {
   propriete1: valeur1,
   propriete2: valeur2,
-  methode1: function() {
+  methode1: function () {
     // code de la méthode
-  }
+  },
 };
 ```
 
 ## Accès aux propriétés et aux méthodes
 
 Voici comment accéder aux propriétés d'un objet :
+
 ```js
 console.log(monObjet.propriete1); // affiche la valeur de la propriété1
 ```
+
 Voici comment accéder aux méthodes d'un objet :
+
 ```js
 monObjet.methode1(); // exécute la méthode1
 ```
+
 Vous pouvez également accéder aux propriétés et aux méthodes d'un objet
 en utilisant la syntaxe suivante :
+
 ```js
 console.log(monObjet["propriete1"]); // affiche la valeur de la propriété1
 monObjet["methode1"](); // exécute la méthode1
 ```
+
 Cette syntaxe est particulièrement utile lorsque le nom de la propriété
 ou de la méthode est stocké dans une variable :
+
 ```js
 let nomPropriete = "propriete1";
 console.log(monObjet[nomPropriete]); // affiche la valeur de la propriété1
@@ -64,16 +75,21 @@ console.log(monObjet[nomPropriete]); // affiche la valeur de la propriété1
 let nomMethode = "methode1";
 monObjet[nomMethode](); // exécute la méthode1
 ```
+
 ## Modification et suppression de propriétés
 
 Voici comment modifier une propriété d'un objet :
+
 ```js
 monObjet.propriete1 = nouvelleValeur;
 ```
+
 Voici comment supprimer une propriété d'un objet :
+
 ```js
 delete monObjet.propriete1;
 ```
+
 Notez que vous ne pouvez pas supprimer une propriété d'un objet s'il
 s'agit d'un objet intrisèque (par exemple, <code>Array.prototype</code>{" "}
 ou <code>Object.prototype</code>).
@@ -110,6 +126,7 @@ for (let nomPropriete of Object.getOwnPropertyNames(monObjet)) {
   console.log(nomPropriete); // affiche le nom de chaque propriété
 }
 ```
+
 ## Prototype
 
 En JavaScript, chaque objet a un lien vers un autre objet appelé
@@ -121,6 +138,7 @@ trouvée, il va chercher la propriété dans le prototype du prototype, et
 ainsi de suite jusqu'à ce que la chaîne de prototypes soit épuisée. Si
 la propriété n'est toujours pas trouvée, elle est considérée comme étant
 undefined. Voici comment accéder au prototype d'un objet :
+
 ```js
 let prototype = Object.getPrototypeOf(monObjet);
 ```
@@ -147,24 +165,27 @@ En JavaScript, vous pouvez créer un objet qui hérite des propriétés et
 des méthodes d'un autre objet en définissant le prototype de l'objet
 enfant comme étant l'objet parent. Voici comment créer un objet enfant
 qui hérite d'un objet parent :
+
 ```js
 let objetParent = {
   propriete1: valeur1,
-  methode1: function() {
+  methode1: function () {
     // code de la méthode
-  }
+  },
 };
 
 let objetEnfant = Object.create(objetParent);
 ```
+
 Vous pouvez également utiliser une fonction constructeur comme objet
 parent en utilisant la syntaxe suivante :
+
 ```js
 function ObjetParent(arg1, arg2) {
   this.propriete1 = arg1;
   this.propriete2 = arg2;
 }
-ObjetParent.prototype.methode1 = function() {
+ObjetParent.prototype.methode1 = function () {
   // code de la méthode
 };
 
@@ -174,12 +195,13 @@ function ObjetEnfant(arg1, arg2, arg3) {
 }
 ObjetEnfant.prototype = Object.create(ObjetParent.prototype);
 ObjetEnfant.prototype.constructor = ObjetEnfant;
-ObjetEnfant.prototype.methode2 = function() {
+ObjetEnfant.prototype.methode2 = function () {
   // code de la méthode
 };
 
 let objetEnfant = new ObjetEnfant(valeur1, valeur2, valeur3);
 ```
+
 Notez que l'objet enfant hérite des propriétés et des méthodes de
 l'objet parent, mais aussi de ses propres propriétés et méthodes. Si
 vous modifiez le prototype de l'objet parent, les modifications seront

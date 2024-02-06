@@ -1,10 +1,10 @@
-import {fr} from './fr'
+import { fr } from "./fr";
 
 export const languages = {
-  fr: 'Français',
+  fr: "Français",
 };
 
-export const defaultLang = 'fr';
+export const defaultLang = "fr";
 
 export const ui = {
   fr,
