@@ -1,5 +1,13 @@
 export const PATHS = {
   home: "/",
+  css:{
+    recapitulatif: "/css/recap",
+    flex: "/css/flex",
+    grid: "/css/grid"
+  },
+  php:{
+    php: "/php/phpsql"
+  }
   js: {
     intro: "/js",
     cheatsheet: "/cheatsheet",

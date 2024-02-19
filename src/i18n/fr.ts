@@ -25,4 +25,10 @@ export const fr = {
   "menu.js.intermediate.children.exercises": "Exercices",
   "menu.js.intermediate.children.tips": "Astuces",
   "menu.js.jquery.title": "jQuery",
+  "menu.css.title": "HTML et CSS",
+  "menu.css.recap.title": "On revoit les bases HTML/CSS",
+  "menu.css.grid.title": "Les grids",
+  "menu.css.flex.title": "Les flexbox",
+  "menu.php.title": "Le PHP et SQL",
+  "menu.php.php.title": "Connexion SQL avec PHP",
 } as const;

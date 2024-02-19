@@ -1,5 +1,7 @@
 ---
 import JSMenu from "./JSMenu.astro";
+import CSSMenu from "./CSSMenu.astro";
+import PHPMenu from "./PHPMenu.astro";
 import Link from "components/Link.astro";
 import MenuIcon from "components/MenuIcon.astro";
 import { PATHS } from "paths";
@@ -55,6 +57,18 @@ const t = useTranslations(lang);
         <details open>
           <summary>{t("menu.js.title")}</summary>
           <JSMenu />
+        </details>
+      </li>
+      <li>
+        <details open>
+          <summary>{t("menu.css.title")}</summary>
+          <CSSMenu />
+        </details>
+      </li>
+      <li>
+        <details open>
+          <summary>{t("menu.php.title")}</summary>
+          <PHPMenu />
         </details>
       </li>
     </ul>
