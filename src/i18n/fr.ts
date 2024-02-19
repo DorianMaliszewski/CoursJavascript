@@ -29,6 +29,6 @@ export const fr = {
   "menu.css.recap.title": "On revoit les bases HTML/CSS",
   "menu.css.grid.title": "Les grids",
   "menu.css.flex.title": "Les flexbox",
-  "menu.php.title": "Le PHP et SQL",
-  "menu.php.php.title": "Connexion SQL avec PHP",
+  "menu.php.title": "PHP",
+  "menu.php.php.title": "Connexion à une base de donnée",
 } as const;

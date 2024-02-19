@@ -9,16 +9,8 @@ const t = useTranslations(lang);
 
 <ul>
   <li className="mt-4">
-    <details open>
-      <summary>{t("menu.php.title")}</summary>
-      <ul>
-        <li>
-          <Link href={PATHS.php.php.title}>
-            {t("menu.php.php.title")}
-          </Link>
-        </li>
-        
-      </ul>
-    </details>
+    <Link href={PATHS.php.php}>
+      {t("menu.php.php.title")}
+    </Link>
   </li>
 </ul>

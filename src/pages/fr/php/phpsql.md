@@ -1,4 +1,9 @@
-# Cours sur la connexion à une base de données MySQL avec PHP
+---
+layout: "layouts/Layout.astro"
+title: "PHP > Connexion à une base de donnée"
+---
+
+# Connexion à une base de données MySQL
 
 ## Introduction à MySQL et PHP
 
@@ -111,7 +116,6 @@ if ($result->num_rows > 0) {
     echo "0 résultats";
 }
 ```
-
 
 ## Insertion de données dans une table MySQL
 

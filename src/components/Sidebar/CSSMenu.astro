@@ -9,26 +9,18 @@ const t = useTranslations(lang);
 
 <ul>
   <li className="mt-4">
-    <details open>
-      <summary>{t("menu.css.title")}</summary>
-      <ul>
-        <li>
-          <Link href={PATHS.css.recap.title}>
-            {t("menu.css.recap.title")}
-          </Link>
-        </li>
-        <li>
-          <Link href={PATHS.css.grid.title}>
-            {t("menu.css.grid.title")}
-          </Link>
-        </li>
-        <li>
-          <Link href={PATHS.css.flex.title}>
-            {t("menu.css.flex.title")}
-          </Link>
-        </li>
-        
-      </ul>
-    </details>
+    <Link href={PATHS.css.recap}>
+      {t("menu.css.recap.title")}
+    </Link>
+  </li>
+  <li>
+    <Link href={PATHS.css.grid}>
+      {t("menu.css.grid.title")}
+    </Link>
+  </li>
+  <li>
+    <Link href={PATHS.css.flex}>
+      {t("menu.css.flex.title")}
+    </Link>
   </li>
 </ul>

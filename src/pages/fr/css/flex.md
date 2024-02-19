@@ -1,4 +1,9 @@
-# Cours sur Flexbox
+---
+layout: "layouts/Layout.astro"
+title: "CSS > Flexbox"
+---
+
+# Les Flexbox
 
 ## Introduction à Flexbox
 
@@ -17,7 +22,7 @@ Pour créer un conteneur Flex, utilisez la propriété `display: flex` sur l'él
 
 ```css
 .container {
-    display: flex;
+  display: flex;
 }
 ```
 
@@ -27,8 +32,8 @@ La direction principale détermine l'orientation des éléments flexibles à l'i
 
 ```css
 .container {
-    display: flex;
-    flex-direction: row; /* Direction horizontale (par défaut) */
+  display: flex;
+  flex-direction: row; /* Direction horizontale (par défaut) */
 }
 ```
 
@@ -38,9 +43,9 @@ Les éléments flexibles peuvent être alignés le long de l'axe principal et tr
 
 ```css
 .container {
-    display: flex;
-    justify-content: center; /* Centre les éléments horizontalement */
-    align-items: center; /* Centre les éléments verticalement */
+  display: flex;
+  justify-content: center; /* Centre les éléments horizontalement */
+  align-items: center; /* Centre les éléments verticalement */
 }
 ```
 
@@ -50,7 +55,7 @@ L'espacement entre les éléments flexibles peut être défini à l'aide de la p
 
 ```css
 .item {
-    margin: 10px; /* Espacement de 10 pixels autour de chaque élément */
+  margin: 10px; /* Espacement de 10 pixels autour de chaque élément */
 }
 ```
 
@@ -60,8 +65,8 @@ Flexbox offre des fonctionnalités puissantes pour réorganiser les éléments f
 
 ```css
 .container {
-    display: flex;
-    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
 }
 ```
 
@@ -71,9 +76,9 @@ Les Media Queries peuvent être utilisées avec Flexbox pour créer des mises en
 
 ```css
 @media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Change la direction en colonne pour les petits écrans */
-    }
+  .container {
+    flex-direction: column; /* Change la direction en colonne pour les petits écrans */
+  }
 }
 ```
 

@@ -1,4 +1,9 @@
-# Cours sur CSS Grid
+---
+layout: "layouts/Layout.astro"
+title: "CSS > Grid"
+---
+
+# Les Grid
 
 ## Introduction à CSS Grid
 
@@ -17,9 +22,9 @@ Pour créer une grille de base, vous pouvez utiliser la propriété `display: gr
 
 ```css
 .container {
-    display: grid;
-    grid-template-columns: 100px 100px 100px; /* Trois colonnes de largeur égale */
-    grid-template-rows: 50px 50px; /* Deux lignes de hauteur égale */
+  display: grid;
+  grid-template-columns: 100px 100px 100px; /* Trois colonnes de largeur égale */
+  grid-template-rows: 50px 50px; /* Deux lignes de hauteur égale */
 }
 ```
 
@@ -29,8 +34,8 @@ Les éléments peuvent être placés dans la grille en spécifiant les lignes et
 
 ```css
 .item {
-    grid-column: 1 / 3; /* occupe les colonnes 1 à 3 */
-    grid-row: 1 / 2; /* occupe la ligne 1 */
+  grid-column: 1 / 3; /* occupe les colonnes 1 à 3 */
+  grid-row: 1 / 2; /* occupe la ligne 1 */
 }
 ```
 
@@ -40,9 +45,9 @@ CSS Grid propose également des fonctionnalités pour créer des grilles automat
 
 ```css
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    /* Crée des colonnes automatiques de 100px minimum et 1 fraction flexible */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  /* Crée des colonnes automatiques de 100px minimum et 1 fraction flexible */
 }
 ```
 
@@ -52,10 +57,10 @@ CSS Grid offre des fonctionnalités puissantes pour l'alignement et l'espacement
 
 ```css
 .container {
-    display: grid;
-    justify-content: center; /* Centre les éléments horizontalement */
-    align-items: center; /* Centre les éléments verticalement */
-    grid-gap: 20px; /* Espacement entre les éléments de la grille */
+  display: grid;
+  justify-content: center; /* Centre les éléments horizontalement */
+  align-items: center; /* Centre les éléments verticalement */
+  grid-gap: 20px; /* Espacement entre les éléments de la grille */
 }
 ```
 
@@ -65,9 +70,9 @@ Comme avec d'autres fonctionnalités CSS, les Media Queries peuvent être utilis
 
 ```css
 @media screen and (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr; /* Une colonne pour les petits écrans */
-    }
+  .container {
+    grid-template-columns: 1fr; /* Une colonne pour les petits écrans */
+  }
 }
 ```
 

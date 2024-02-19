@@ -55,12 +55,6 @@ const t = useTranslations(lang);
     <ul class="space-y-2 font-medium menu">
       <li>
         <details open>
-          <summary>{t("menu.js.title")}</summary>
-          <JSMenu />
-        </details>
-      </li>
-      <li>
-        <details open>
           <summary>{t("menu.css.title")}</summary>
           <CSSMenu />
         </details>
@@ -69,6 +63,12 @@ const t = useTranslations(lang);
         <details open>
           <summary>{t("menu.php.title")}</summary>
           <PHPMenu />
+        </details>
+      </li>
+      <li>
+        <details open>
+          <summary>{t("menu.js.title")}</summary>
+          <JSMenu />
         </details>
       </li>
     </ul>
