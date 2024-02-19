@@ -1,0 +1,24 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+  <li className="mt-4">
+    <details open>
+      <summary>{t("menu.php.title")}</summary>
+      <ul>
+        <li>
+          <Link href={PATHS.php.php.title}>
+            {t("menu.php.php.title")}
+          </Link>
+        </li>
+        
+      </ul>
+    </details>
+  </li>
+</ul>

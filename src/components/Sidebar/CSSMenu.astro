@@ -1,0 +1,34 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+  <li className="mt-4">
+    <details open>
+      <summary>{t("menu.css.title")}</summary>
+      <ul>
+        <li>
+          <Link href={PATHS.css.recap.title}>
+            {t("menu.css.recap.title")}
+          </Link>
+        </li>
+        <li>
+          <Link href={PATHS.css.grid.title}>
+            {t("menu.css.grid.title")}
+          </Link>
+        </li>
+        <li>
+          <Link href={PATHS.css.flex.title}>
+            {t("menu.css.flex.title")}
+          </Link>
+        </li>
+        
+      </ul>
+    </details>
+  </li>
+</ul>
