@@ -1,7 +1,7 @@
 export const PATHS = {
   home: "/",
   css:{
-    recapitulatif: "/css/recap",
+    recap: "/css/recap",
     flex: "/css/flex",
     grid: "/css/grid"
   },
