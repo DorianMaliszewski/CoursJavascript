@@ -10,6 +10,7 @@ export const PATHS = {
   },
   js: {
     intro: "/js",
+    tp: "/js/tp",
     cheatsheet: "/cheatsheet",
     begin: {
       variables: `/js/begin/variables`,
