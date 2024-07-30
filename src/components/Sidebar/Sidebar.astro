@@ -1,5 +1,4 @@
 ---
-
 import MMI1Menu from "./MMI1Menu/MMI1Menu.astro";
 import Link from "components/Link.astro";
 import MenuIcon from "components/MenuIcon.astro";
@@ -14,8 +13,30 @@ const t = useTranslations(lang);
   function handleClick() {
     document.getElementById("sidebar").classList.toggle("-translate-x-full");
   }
+  document.addEventListener("DOMContentLoaded", () => {
+    const detailsElements = document.querySelectorAll("details");
+    const localStorageKey = "openDetails";
 
-  document.getElementById("sidebar").class = sideBarClass;
+    const getInitialState = () => {
+      const storedState = localStorage.getItem(localStorageKey);
+      return storedState ? JSON.parse(storedState) : {};
+    };
+
+    const initialState = getInitialState();
+    detailsElements.forEach((details) => {
+      details.open = !!initialState[details.id] ?? false;
+
+      details.addEventListener("toggle", () => {
+        const state = {};
+        detailsElements.forEach((el) => {
+          if (el.id) {
+            state[el.id] = el.open;
+          }
+        });
+        localStorage.setItem(localStorageKey, JSON.stringify(state));
+      });
+    });
+  });
 </script>
 
 <button
@@ -35,7 +56,7 @@ const t = useTranslations(lang);
 >
   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
     <div class="flex justify-between items-center">
-      <Link href="/" class="flex items-center ps-2.5 mb-5">
+      <Link href="/" className="flex items-center ps-2.5 mb-5">
         <span
           class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
           >MMI Cours</span
@@ -53,12 +74,13 @@ const t = useTranslations(lang);
     </div>
     <ul class="space-y-2 font-medium menu">
       <li>
-        <details open>
+        <details id="test">
           <summary>{t("menu.mmi1.title")}</summary>
           <MMI1Menu />
         </details>
       </li>
       <li>
+        <details id="test2">
           <summary>{t("menu.mmi2.title")}</summary>
           <MMI2Menu />
         </details>

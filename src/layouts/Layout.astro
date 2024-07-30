@@ -26,7 +26,7 @@ const finalTitle = title ?? frontmatter.title;
     <ViewTransitions />
   </head>
   <body>
-    <header>
+    <header transition:persist>
       <Sidebar />
     </header>
     <main class="p-10 px-18 sm:ml-72 prose prose-slante lg:prose-lg max-w-full">

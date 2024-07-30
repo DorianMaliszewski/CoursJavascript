@@ -42,4 +42,4 @@ export const PATHS = {
     intro: "/mmi1",
     TD_HTML5: "/mmi1/TD/HTML5",
   },
-}
+};
