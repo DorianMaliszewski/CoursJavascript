@@ -2,7 +2,6 @@
   "name": "website",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "^pnpm@8.14.0",
   "scripts": {
     "dev": "astro dev --config astro.config.dev.mjs",
     "start": "astro dev",

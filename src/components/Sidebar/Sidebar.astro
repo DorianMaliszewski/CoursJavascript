@@ -1,11 +1,10 @@
 ---
-import JSMenu from "./JSMenu.astro";
-import CSSMenu from "./CSSMenu.astro";
-import PHPMenu from "./PHPMenu.astro";
+
+import MMI1Menu from "./MMI1Menu/MMI1Menu.astro";
 import Link from "components/Link.astro";
 import MenuIcon from "components/MenuIcon.astro";
-import { PATHS } from "paths";
 import { getLangFromUrl, useTranslations } from "i18n/utils";
+import MMI2Menu from "./MMI2Menu/MMI2Menu.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -39,7 +38,7 @@ const t = useTranslations(lang);
       <Link href="/" class="flex items-center ps-2.5 mb-5">
         <span
           class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-          >MMI2 Dev</span
+          >MMI Cours</span
         >
       </Link>
       <button
@@ -55,20 +54,13 @@ const t = useTranslations(lang);
     <ul class="space-y-2 font-medium menu">
       <li>
         <details open>
-          <summary>{t("menu.css.title")}</summary>
-          <CSSMenu />
+          <summary>{t("menu.mmi1.title")}</summary>
+          <MMI1Menu />
         </details>
       </li>
       <li>
-        <details open>
-          <summary>{t("menu.php.title")}</summary>
-          <PHPMenu />
-        </details>
-      </li>
-      <li>
-        <details open>
-          <summary>{t("menu.js.title")}</summary>
-          <JSMenu />
+          <summary>{t("menu.mmi2.title")}</summary>
+          <MMI2Menu />
         </details>
       </li>
     </ul>

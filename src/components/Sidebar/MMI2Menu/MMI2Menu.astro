@@ -1,0 +1,30 @@
+---
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+import CSSMenu from "./CSSMenu.astro";
+import PHPMenu from "./PHPMenu.astro";
+import JSMenu from "./JSMenu.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+    <li>
+    <details open>
+        <summary>{t("menu.css.title")}</summary>
+        <CSSMenu />
+    </details>
+    </li>
+    <li>
+    <details open>
+        <summary>{t("menu.php.title")}</summary>
+        <PHPMenu />
+    </details>
+    </li>
+    <li>
+    <details open>
+        <summary>{t("menu.js.title")}</summary>
+        <JSMenu />
+    </details>
+    </li>
+</ul>

@@ -32,4 +32,8 @@ export const fr = {
   "menu.css.flex.title": "Les flexbox",
   "menu.php.title": "PHP",
   "menu.php.php.title": "Connexion à une base de donnée",
+  "menu.mmi1.intro": "Introduction",
+  "menu.mmi1.title": "MMI1",
+  "menu.mmi2.title": "MMI2",
+  "menu.mmi1.TD.HTML5": "Introduction à HTML",
 } as const;
