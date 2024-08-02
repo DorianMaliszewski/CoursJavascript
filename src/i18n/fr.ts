@@ -36,4 +36,9 @@ export const fr = {
   "menu.mmi1.title": "MMI1",
   "menu.mmi2.title": "MMI2",
   "menu.mmi1.TD.HTML5": "Introduction à HTML",
+  "menu.mmi1.TD.CSS": "Introduction au CSS",
+  "menu.mmi1.TD.formulaire": "Les formulaires en HTML",
+  "menu.mmi1.TD.PHP_begin": "Introduction au langage PHP",
+  "menu.mmi1.TD.PHP_inter": "Base de l'algorithmique à partir de PHP",
+  "menu.mmi1.TD.figma": "Introduction à Figma",
 } as const;
