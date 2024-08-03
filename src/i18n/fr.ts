@@ -41,4 +41,6 @@ export const fr = {
   "menu.mmi1.TD.PHP_begin": "Introduction au langage PHP",
   "menu.mmi1.TD.PHP_inter": "Base de l'algorithmique à partir de PHP",
   "menu.mmi1.TD.figma": "Introduction à Figma",
+  "menu.mmi1.TD.title": "Travaux Dirigés",
+  "menu.mmi1.TP.title": "Travaux Pratiques",
 } as const;

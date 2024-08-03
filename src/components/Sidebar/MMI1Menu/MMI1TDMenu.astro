@@ -1,0 +1,31 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+import HTMLCSSMenu from "./HTMLCSSMenu.astro";
+import PHPMenuBegin from "./PHPMenuBegin.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+  <li>
+    <details id="HTMLCSS">
+      <summary>{t("menu.css.title")}</summary>
+      <HTMLCSSMenu />
+    </details>
+  </li>
+  <li>
+    <details id="PHP">
+      <summary>{t("menu.php.title")}</summary>
+      <PHPMenuBegin />
+    </details>
+  </li>
+  
+  <li>
+    <Link href={PATHS.mmi1.TD_figma}>
+      {t("menu.mmi1.TD.figma")}
+    </Link>
+  </li>
+</ul>

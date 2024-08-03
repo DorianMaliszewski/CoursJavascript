@@ -40,11 +40,11 @@ export const PATHS = {
   },
   mmi1: {
     intro: "/mmi1",
-    TD_HTML5: "/mmi1/TD/HTML5",
-    TD_CSS: "/mmi1/TD/CSS",
-    TD_formulaire: "/mmi1/TD/formulaire",
-    TD_PHP_begin: "/mmi1/TD/PHP_begin",
-    TD_PHP_inter: "/mmi1/TD/PHP_inter",
+    TD_HTML5: "/mmi1/TD/HTMLCSS/HTML5",
+    TD_CSS: "/mmi1/TD/HTMLCSS/CSS",
+    TD_formulaire: "/mmi1/TD/HTMLCSS/formulaire",
+    TD_PHP_begin: "/mmi1/TD/PHP/PHP_begin",
+    TD_PHP_inter: "/mmi1/TD/PHP/PHP_inter",
     TD_figma: "/mmi1/TD/figma",
   },
 };
