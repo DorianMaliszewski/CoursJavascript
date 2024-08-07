@@ -43,4 +43,11 @@ export const fr = {
   "menu.mmi1.TD.figma": "Introduction à Figma",
   "menu.mmi1.TD.title": "Travaux Dirigés",
   "menu.mmi1.TP.title": "Travaux Pratiques",
+  "menu.mmi1.TP.html5": "TP1 : Initiation à l'HTML",
+  "menu.mmi1.TP.css": "TP2 : Initiation au CSS",
+  "menu.mmi1.TP.formulaire": "TP3 : Mon premier formulaire",
+  "menu.mmi1.TP.phpVarTab": "TP1 : Variables, Structures de Contrôle, Tableaux et PHP & HTML",
+  "menu.mmi1.TP.phpForm": "TP2 : Les formulaires PHP",
+  "menu.mmi2.deploimentService.nodeS1": "Deploiment de services - Session 1",
+  "menu.mmi2.deploimentService.nodeS2": "Deploiment de services - Session 2",
 } as const;

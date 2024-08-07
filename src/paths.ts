@@ -46,5 +46,15 @@ export const PATHS = {
     TD_PHP_begin: "/mmi1/TD/PHP/PHP_begin",
     TD_PHP_inter: "/mmi1/TD/PHP/PHP_inter",
     TD_figma: "/mmi1/TD/figma",
+    TP_HTML5: "/mmi1/TP/html5",
+    TP_CSS: "/mmi1/TP/css",
+    TP_formulaire: "/mmi1/TP/formulaire",
+    TP_phpVarTab: "/mmi1/TP/phpVarTab",
+    TP_phpForm: "/mmi1/TP/phpForm",
   },
+  deploimentService:
+  {
+    TD_nodeS1: "/mmi2/deploimentService/nodeS1",
+    TD_nodeS2: "/mmi2/deploimentService/nodeS2",
+  }
 };

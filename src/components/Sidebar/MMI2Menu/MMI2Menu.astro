@@ -3,6 +3,8 @@ import { getLangFromUrl, useTranslations } from "i18n/utils";
 import CSSMenu from "./CSSMenu.astro";
 import PHPMenu from "./PHPMenu.astro";
 import JSMenu from "./JSMenu.astro";
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -27,4 +29,15 @@ const t = useTranslations(lang);
       <JSMenu />
     </details>
   </li>
+  <li>
+    <Link href={PATHS.deploimentService.TD_nodeS1}>
+      {t("menu.mmi2.deploimentService.nodeS1")}
+    </Link>
+  </li>
+  <li>
+    <Link href={PATHS.deploimentService.TD_nodeS2}>
+      {t("menu.mmi2.deploimentService.nodeS2")}
+    </Link>
+  </li>
+
 </ul>
