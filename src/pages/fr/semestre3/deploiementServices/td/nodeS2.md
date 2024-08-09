@@ -33,7 +33,7 @@ app.get('/api', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Serveur en cours d'exécution sur http://localhost:3000/');
+  console.log("Serveur en cours d'exécution sur http://localhost:3000/");
 });
 ```
 
@@ -106,7 +106,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Serveur en cours d'exécution sur http://localhost:3000/');
+  console.log("Serveur en cours d'exécution sur http://localhost:3000/");
 });
 ```
 
@@ -114,6 +114,7 @@ app.listen(3000, () => {
 
 1. Implémentez un système d'authentification simple avec JWT pour l'API créée précédemment.
 2. Créez des routes de login et registration comme montré ci-dessus.
+3. Utilisez Postman pour tester les routes `POST /register` et `POST /login`.
 
 ## Interaction avec une Base de Données MySQL
 
@@ -142,7 +143,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'school'
+  database: 'test'
 });
 
 connection.connect((err) => {
@@ -155,29 +156,67 @@ connection.connect((err) => {
 
 Modifiez les routes de votre API pour utiliser MySQL pour les opérations CRUD.
 
-Exemple pour la route `GET /devoirs` :
+Exemple pour la route `GET /users` :
 ```js
-app.get('/devoirs', (req, res) => {
-  connection.query('SELECT * FROM devoir', (err, results) => {
+const express = require('express');
+const mysql = require('mysql');
+const app = express();
+app.use(express.json());
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'test'
+});
+
+connection.connect(err => {
+  if (err) throw err;
+  console.log('Connecté à la base de données MySQL');
+});
+
+app.get('/users', (req, res) => {
+  connection.query('SELECT * FROM users', (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 
-app.post('/devoirs', (req, res) => {
-  const devoir = req.body;
-  connection.query('INSERT INTO devoir SET ?', devoir, (err, results) => {
+app.post('/users', (req, res) => {
+  const user = req.body;
+  connection.query('INSERT INTO users SET ?', user, (err, results) => {
     if (err) throw err;
-    res.status(201).json({ id: results.insertId, ...devoir });
+    res.status(201).json({ id: results.insertId, ...user });
   });
+});
+
+app.listen(3000, () => {
+  console.log("Serveur en cours d'exécution sur http://localhost:3000/");
 });
 ```
 
+### Exemple de JSON à envoyer pour ajouter un utilisateur
+
+Pour ajouter un utilisateur, vous pouvez envoyer un JSON via un outil comme Postman :
+
+Exemple de JSON :
+```json
+{
+  "nom": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "actif": true
+}
+```
+
+Postman est un outil permettant de tester et de manipuler des API. Vous pouvez le télécharger et l'utiliser pour envoyer des requêtes à votre serveur. [Téléchargez Postman](https://www.postman.com/downloads/)
+
 ### Exercice
 
-1. Configurez une base de données MySQL et créez la table `devoir` avec les champs spécifiés dans la session 1.
+1. Configurez une base de données MySQL et créez la table `users` avec les champs spécifiés dans la session 1.
 2. Établissez une connexion à la base de données MySQL depuis votre application Node.js.
-3. Modifiez les routes de votre API pour utiliser MySQL pour les opérations CRUD sur la table `devoir`.
+3. Modifiez les routes de votre API pour utiliser MySQL pour les opérations CRUD sur la table `users`.
+4. Utilisez Postman pour tester les routes `GET /users` et `POST /users`.
 
 ## Déploiement et Conclusion
 
@@ -199,7 +238,7 @@ PORT=3000
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=password
-DB_NAME=school
+DB_NAME=test
 ```
 
 Utilisation dans votre application :
@@ -235,50 +274,11 @@ Quelques pratiques pour optimiser les performances de votre application Node.js 
 - Mettez en cache les réponses fréquentes.
 - Optimisez les requêtes à la base de données.
 
-### Déploiement sur Heroku
-
-Heroku est une plateforme populaire pour déployer des applications Node.js. Suivez ces étapes pour déployer votre API :
-
-1. Installez l'outil en ligne de commande Heroku :
-```sh
-npm install -g heroku
-```
-
-2. Connectez-vous à votre compte Heroku :
-```sh
-heroku login
-```
-
-3. Créez une nouvelle application Heroku :
-```sh
-heroku create
-```
-
-4. Poussez votre code vers Heroku :
-```sh
-git add .
-git commit -m "Déploiement initial"
-git push heroku master
-```
-
-### Gestion des bases de données en production
-
-Pour gérer les bases de données en production, utilisez des services comme ClearDB pour héberger votre base de données MySQL sur Heroku.
-
-Connexion à une base de données MySQL hébergée :
-```js
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME
-});
-```
-
 ### Exercice
 
 1. Déployez l'API sur Heroku et connectez une base de données MySQL hébergée (ex : ClearDB pour Heroku).
 2. Assurez-vous que votre application utilise les variables d'environnement pour les clés secrètes et les connexions à la base de données.
+3. Utilisez Postman pour tester votre API déployée sur Heroku.
 
 ### Conclusion
 
@@ -297,4 +297,3 @@ Posez toutes vos questions sur les concepts vus pendant les deux sessions.
 - [Guide sur les meilleures pratiques de sécurité des API RESTful](https://www.owasp.org/index.php/REST_Security_Cheat_Sheet)
 
 ---
-²

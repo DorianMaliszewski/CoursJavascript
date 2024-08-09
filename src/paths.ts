@@ -38,23 +38,67 @@ export const PATHS = {
     },
     jquery: "/mmi2/js/jquery",
   },
-  mmi1: {
-    intro: "/mmi1",
-    TD_HTML5: "/mmi1/TD/HTMLCSS/HTML5",
-    TD_CSS: "/mmi1/TD/HTMLCSS/CSS",
-    TD_formulaire: "/mmi1/TD/HTMLCSS/formulaire",
-    TD_PHP_begin: "/mmi1/TD/PHP/PHP_begin",
-    TD_PHP_inter: "/mmi1/TD/PHP/PHP_inter",
-    TD_figma: "/mmi1/TD/figma",
-    TP_HTML5: "/mmi1/TP/html5",
-    TP_CSS: "/mmi1/TP/css",
-    TP_formulaire: "/mmi1/TP/formulaire",
-    TP_phpVarTab: "/mmi1/TP/phpVarTab",
-    TP_phpForm: "/mmi1/TP/phpForm",
-  },
-  deploimentService:
+  semestre1:
   {
-    TD_nodeS1: "/mmi2/deploimentService/nodeS1",
-    TD_nodeS2: "/mmi2/deploimentService/nodeS2",
-  }
+    intro: "/semestre1/",
+    td:
+    {
+      html: "/semestre1/integration/td/html",
+      css: "/semestre1/integration/td/css",
+      formulaire: "/semestre1/integration/td/formulaire",
+      php_begin: "/semestre1/developpementWeb/td/PHP_begin",
+      PHP_inter: "/semestre1/developpementWeb/td/PHP_inter",
+      figma: "/semestre1/produireUnSiteWeb/td/figma",
+      mockup: "/semestre1/produireUnSiteWeb/td/mockup",
+    },
+    tp:
+    {
+      HTML5: "/semestre1/integration/tp/html",
+      CSS: "/semestre1/integration/tp/css",
+      formulaire: "/semestre1/integration/tp/formulaire",
+      phpVarTab: "/semestre1/developpementWeb/tp/phpVarTab",
+      phpForm: "/semestre1/developpementWeb/tp/phpForm",
+      hebergement: "/semestre1/produireUnSiteWeb/tp/hebergement",
+      integration: "/semestre1/produireUnSiteWeb/tp/integration",
+      norme: "/semestre1/produireUnSiteWeb/tp/norme",
+    }
+  },
+  semestre2:
+  {
+    cm:
+    {
+      cms: "/semestre2/GestionDeContenus/cm/cms",
+    },
+    td:
+    {      
+      bootstrap: "/semestre2/integration/td/bootstrap",
+      cms: "/semestre2/GestionDeContenus/td/cms",
+      portfolio: "/semestre2/SiteWebAvecDonnees/td/portfolio",
+    },
+    tp:
+    {
+      dropdown: "/semestre2/integration/tp/dropdown",
+      eventJs: "/semestre2/integration/tp/eventJs",
+      hover: "/semestre2/integration/tp/hover",
+      pluginJs: "/semestre2/integration/tp/pluginJs",
+      transition: "/semestre2/integration/tp/transition",
+      wordpress: "/semestre2/GestionDeContenus/tp/wordpress",
+    }
+  },
+  semestre3:
+  {
+    td:
+    {      
+      nodeS1: "/semestre3/deploiementServices/td/nodeS1",
+      nodeS2: "/semestre3/deploiementServices/td/nodeS2",
+      retool: "/semestre3/integrerInterface/td/retool",
+    },
+    tp:
+    {
+      api: "/semestre3/deploiementServices/tp/api",
+      retool: "/semestre3/deploiementServices/tp/retool",
+      bootstrap: "/semestre3/developpementFront/tp/bootstrap",
+      sae: "/semestre3/integrerInterface/tp/sae",
+    }
+  },
 };

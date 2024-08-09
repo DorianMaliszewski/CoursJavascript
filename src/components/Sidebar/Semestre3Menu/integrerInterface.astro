@@ -1,0 +1,21 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+    <li>
+        <Link type="TD" href={PATHS.semestre3.td.retool}>
+          {t("menu.semestre3.integrerInterface.td.retool")}
+        </Link>
+    </li>
+      <li>
+        <Link type="TP" href={PATHS.semestre3.tp.sae}>
+          {t("menu.semestre3.integrerInterface.tp.sae")}
+        </Link>
+    </li>
+</ul>

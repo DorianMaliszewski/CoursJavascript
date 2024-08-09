@@ -3,34 +3,28 @@ import Link from "components/Link.astro";
 import { PATHS } from "paths";
 import { getLangFromUrl, useTranslations } from "i18n/utils";
 
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <ul>
     <li>
-        <Link href={PATHS.mmi1.TP_HTML5}>
-          {t("menu.mmi1.TP.html5")}
+        <Link type="TD" href={PATHS.semestre1.td.php_begin}>
+          {t("menu.mmi1.TD.PHP_begin")}
         </Link>
-    </li>
-    <li>
-        <Link href={PATHS.mmi1.TP_CSS}>
-          {t("menu.mmi1.TP.css")}
+      </li>
+      <li>
+        <Link type="TD" href={PATHS.semestre1.td.PHP_inter}>
+          {t("menu.mmi1.TD.PHP_inter")}
         </Link>
-    </li>
-    <li>
-        <Link href={PATHS.mmi1.TP_formulaire}>
-          {t("menu.mmi1.TP.formulaire")}
-        </Link>
-    </li>
-    <li>
-        <Link href={PATHS.mmi1.TP_phpVarTab}>
+      </li>
+      <li>
+        <Link type="TP" href={PATHS.semestre1.tp.phpVarTab}>
           {t("menu.mmi1.TP.phpVarTab")}
         </Link>
     </li>
     <li>
-        <Link href={PATHS.mmi1.TP_phpForm}>
+        <Link type="TP" href={PATHS.semestre1.tp.phpForm}>
           {t("menu.mmi1.TP.phpForm")}
         </Link>
     </li>

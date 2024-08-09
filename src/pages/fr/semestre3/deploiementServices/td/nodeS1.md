@@ -75,6 +75,13 @@ const data = fs.readFileSync('example.txt', 'utf8');
 console.log(data);
 ```
 
+Le module `fs` permet également d'écrire dans un fichier. Voici comment écrire dans un fichier de manière synchrone :
+```js
+const fs = require('fs');
+const data = 'Ceci est un texte à écrire dans un fichier.';
+fs.writeFileSync('example.txt', data, 'utf8');
+```
+
 #### Utilisation de `http` pour créer un serveur web simple
 
 Voici comment créer un serveur HTTP de base avec Node.js :
@@ -88,7 +95,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(3000, '127.0.0.1', () => {
-  console.log('Serveur en cours d'exécution sur http://127.0.0.1:3000/');
+  console.log("Serveur en cours d'exécution sur http://127.0.0.1:3000/");
 });
 ```
 
@@ -102,6 +109,7 @@ Les callbacks sont des fonctions passées en argument à une autre fonction, et 
 
 Exemple de lecture de fichier avec un callback :
 ```js
+const fs = require('fs');
 fs.readFile('example.txt', 'utf8', (err, data) => {
   if (err) throw err;
   console.log(data);
@@ -121,12 +129,24 @@ fsPromises.readFile('example.txt', 'utf8')
   .catch(err => console.error(err));
 ```
 
+Exemple d'écriture dans un fichier avec une Promise :
+```js
+const fsPromises = require('fs').promises;
+const data = 'Ceci est un texte à écrire dans un fichier.';
+
+fsPromises.writeFile('example.txt', data, 'utf8')
+  .then(() => console.log('Fichier écrit avec succès'))
+  .catch(err => console.error(err));
+```
+
 #### async/await
 
 L'async/await est une syntaxe plus moderne pour travailler avec des Promises, rendant le code asynchrone plus lisible et plus proche du code synchrone.
 
 Exemple de lecture de fichier avec async/await :
 ```js
+const fsPromises = require('fs').promises;
+
 const readFileAsync = async () => {
   try {
     const data = await fsPromises.readFile('example.txt', 'utf8');
@@ -137,6 +157,23 @@ const readFileAsync = async () => {
 };
 
 readFileAsync();
+```
+
+Exemple d'écriture dans un fichier avec async/await :
+```js
+const fsPromises = require('fs').promises;
+
+const writeFileAsync = async () => {
+  try {
+    const data = 'Ceci est un texte à écrire dans un fichier.';
+    await fsPromises.writeFile('example.txt', data, 'utf8');
+    console.log('Fichier écrit avec succès');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+writeFileAsync();
 ```
 
 ### Exercice
@@ -169,7 +206,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Serveur en cours d'exécution sur http://localhost:3000/');
+  console.log("Serveur en cours d'exécution sur http://localhost:3000/");
 });
 ```
 
@@ -219,7 +256,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'school'
+  database: 'test'
 });
 
 connection.connect((err) => {
@@ -228,21 +265,18 @@ connection.connect((err) => {
 });
 ```
 
-### Création de la table `devoir`
+### Création de la table `users`
 
-Pour stocker les devoirs, créez une table `devoir` avec les champs suivants : nom, description, matière, professeur, date debut, date rendu, et un boolean `fait`.
+Pour stocker les utilisateurs, créez une table `users` avec les champs suivants : nom, email, âge, et un boolean `actif`.
 
 Exécutez cette commande SQL pour créer la table :
 ```sql
-CREATE TABLE devoir (
+CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(255) NOT NULL,
-  description TEXT,
-  matiere VARCHAR(255),
-  professeur VARCHAR(255),
-  date_debut DATE,
-  date_rendu DATE,
-  fait BOOLEAN
+  email VARCHAR(255) NOT NULL,
+  age INT,
+  actif BOOLEAN
 );
 ```
 
@@ -250,7 +284,7 @@ CREATE TABLE devoir (
 
 Modifiez les routes de votre API pour utiliser MySQL pour les opérations CRUD.
 
-Exemple pour la route `GET /devoirs` :
+Exemple pour la route `GET /users` :
 ```js
 const express = require('express');
 const mysql = require('mysql');
@@ -261,7 +295,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'school'
+  database: 'test'
 });
 
 connection.connect(err => {
@@ -269,27 +303,48 @@ connection.connect(err => {
   console.log('Connecté à la base de données MySQL');
 });
 
-app.get('/devoirs', (req, res) => {
-  connection.query('SELECT * FROM devoir', (err, results) => {
+app.get('/users', (req, res) => {
+  connection.query('SELECT * FROM users', (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 
-app.post('/devoirs', (req, res) => {
-  const devoir = req.body;
-  connection.query('INSERT INTO devoir SET ?', devoir, (err, results) => {
+app.post('/users', (req, res) => {
+  const user = req.body;
+  connection.query('INSERT INTO users SET ?', user, (err, results) => {
     if (err) throw err;
-    res.status(201).json({ id: results.insertId, ...devoir });
+    res.status(201).json({ id: results.insertId, ...user });
   });
+});
+
+app.listen(3000, () => {
+  console.log("Serveur en cours d'exécution sur http://localhost:3000/");
 });
 ```
 
+### Exemple de JSON à envoyer pour ajouter un utilisateur
+
+Pour ajouter un utilisateur, vous pouvez envoyer un JSON via un outil comme Postman :
+
+Exemple de JSON :
+```json
+{
+  "nom": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "actif": true
+}
+```
+
+Postman est un outil permettant de tester et de manipuler des API. Vous pouvez le télécharger et l'utiliser pour envoyer des requêtes à votre serveur. [Téléchargez Postman](https://www.postman.com/downloads/)
+
 ### Exercice
 
-1. Configurez une base de données MySQL et créez la table `devoir` avec les champs spécifiés.
+1. Configurez une base de données MySQL et créez la table `users` avec les champs spécifiés.
 2. Établissez une connexion à la base de données MySQL depuis votre application Node.js.
-3. Modifiez les routes de votre API pour utiliser MySQL pour les opérations CRUD sur la table `devoir`.
+3. Modifiez les routes de votre API pour utiliser MySQL pour les opérations CRUD sur la table `users`.
+4. Utilisez Postman pour tester les routes `GET /users` et `POST /users`.
 
 ## Mise en Place d'une API RESTful de Base
 
@@ -304,21 +359,20 @@ Une API RESTful suit des principes spécifiques pour permettre une interaction e
 
 ### Création des routes RESTful
 
-- `GET /devoirs` : Récupérer tous les devoirs.
-- `POST /devoirs` : Créer un nouveau devoir.
-- `PUT /devoirs/:id` : Mettre à jour un devoir existant.
-- `DELETE /devoirs/:id` : Supprimer un devoir.
+- `GET /users` : Récupérer tous les utilisateurs.
+- `POST /users` : Créer un nouvel utilisateur.
+- `PUT /users/:id` : Mettre à jour un utilisateur existant.
+- `DELETE /users/:id` : Supprimer un utilisateur.
 
-#### Exemple de route `PUT` générique
+#### Exemple de route `PUT` pour mettre à jour un utilisateur
 
-Voici un exemple générique pour une route `PUT` qui met à jour une ressource :
 ```js
-app.put('/resource/:id', (req, res) => {
+app.put('/users/:id', (req, res) => {
   const id = req.params.id;
-  const updatedResource = req.body;
-  connection.query('UPDATE resource SET ? WHERE id = ?', [updatedResource, id], (err) => {
+  const updatedUser = req.body;
+  connection.query('UPDATE users SET ? WHERE id = ?', [updatedUser, id], (err) => {
     if (err) throw err;
-    res.json(updatedResource);
+    res.json(updatedUser);
   });
 });
 ```
@@ -337,7 +391,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'school'
+  database: 'test'
 });
 
 connection.connect(err => {
@@ -345,27 +399,51 @@ connection.connect(err => {
   console.log('Connecté à la base de données MySQL');
 });
 
-// Récupérer tous les devoirs
-app.get('/devoirs', (req, res) => {
-  connection.query('SELECT * FROM devoir', (err, results) => {
+// Récupérer tous les utilisateurs
+app.get('/users', (req, res) => {
+  connection.query('SELECT * FROM users', (err, results) => {
     if (err) throw err;
     res.json(results);
   });
 });
 
-// Créer un nouveau devoir
-app.post('/devoirs', (req, res) => {
-  const devoir = req.body;
-  connection.query('INSERT INTO devoir SET ?', devoir, (err, results) => {
+// Créer un nouvel utilisateur
+app.post('/users', (req, res) => {
+  const user = req.body;
+  connection.query('INSERT INTO users SET ?', user, (err, results) => {
     if (err) throw err;
-    res.status(201).json({ id: results.insertId, ...devoir });
+    res.status(201).json({ id: results.insertId, ...user });
   });
+});
+
+// Mettre à jour un utilisateur existant
+app.put('/users/:id', (req, res) => {
+  const id = req.params.id;
+  const updatedUser = req.body;
+  connection.query('UPDATE users SET ? WHERE id = ?', [updatedUser, id], (err) => {
+    if (err) throw err;
+    res.json(updatedUser);
+  });
+});
+
+// Supprimer un utilisateur
+app.delete('/users/:id', (req, res) => {
+  const id = req.params.id;
+  connection.query('DELETE FROM users WHERE id = ?', id, (err) => {
+    if (err) throw err;
+    res.status(204).send();
+  });
+});
+
+app.listen(3000, () => {
+  console.log("Serveur en cours d'exécution sur http://localhost:3000/");
 });
 ```
 
 ### Exercice
 
-1. Implémentez la route `PUT /devoirs/:id` pour mettre à jour un devoir existant en vous basant sur l'exemple générique ci-dessus.
-2. Implémentez la route `DELETE /devoirs/:id` pour supprimer un devoir existant en utilisant un modèle similaire.
+1. Implémentez la route `PUT /users/:id` pour mettre à jour un utilisateur existant en vous basant sur l'exemple ci-dessus.
+2. Implémentez la route `DELETE /users/:id` pour supprimer un utilisateur existant en utilisant un modèle similaire.
+3. Utilisez Postman pour tester les routes `PUT /users/:id` et `DELETE /users/:id`.
 
 Continuez la session 2 pour compléter votre API RESTful en ajoutant des fonctionnalités de sécurité, d'authentification et de déploiement.
