@@ -1,0 +1,27 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+    <li>
+        <Link type="CM" href={PATHS.semestre2.cm.cms}>
+            {t("menu.semestre2.gestionDeContenu.cm.cms")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TD" href={PATHS.semestre2.td.cms}>
+            {t("menu.semestre2.gestionDeContenu.td.cms")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TP" href={PATHS.semestre2.tp.wordpress}>
+            {t("menu.semestre2.gestionDeContenu.tp.wordpress")}
+        </Link>
+    </li>
+    
+</ul>

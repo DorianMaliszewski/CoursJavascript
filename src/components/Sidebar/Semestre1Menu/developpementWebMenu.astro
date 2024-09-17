@@ -1,0 +1,31 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+    <li>
+        <Link type="TD" href={PATHS.semestre1.td.php_begin}>
+          {t("menu.mmi1.TD.PHP_begin")}
+        </Link>
+      </li>
+      <li>
+        <Link type="TD" href={PATHS.semestre1.td.PHP_inter}>
+          {t("menu.mmi1.TD.PHP_inter")}
+        </Link>
+      </li>
+      <li>
+        <Link type="TP" href={PATHS.semestre1.tp.phpVarTab}>
+          {t("menu.mmi1.TP.phpVarTab")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TP" href={PATHS.semestre1.tp.phpForm}>
+          {t("menu.mmi1.TP.phpForm")}
+        </Link>
+    </li>
+</ul>

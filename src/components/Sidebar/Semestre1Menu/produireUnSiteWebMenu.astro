@@ -1,0 +1,36 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+    <li>
+        <Link type="TD" href={PATHS.semestre1.td.figma}>
+            {t("menu.mmi1.TD.figma")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TD" href={PATHS.semestre1.td.mockup}>
+            {t("menu.semestre1.produireUnSiteWeb.mockup")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TP" href={PATHS.semestre1.tp.integration}>
+            {t("menu.semestre1.produireUnSiteWeb.integration")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TP" href={PATHS.semestre1.tp.norme}>
+            {t("menu.semestre1.produireUnSiteWeb.norme")}
+        </Link>
+    </li>
+    <li>
+        <Link type="TP" href={PATHS.semestre1.tp.hebergement}>
+            {t("menu.semestre1.produireUnSiteWeb.hebergement")}
+        </Link>
+    </li>
+</ul>

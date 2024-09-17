@@ -22,14 +22,15 @@ const finalTitle = title ?? frontmatter.title;
     <meta name="description" content="MMI2 Dev website" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/png" href="/src/assets/univ_logo.png">
     <title>{finalTitle}</title>
     <ViewTransitions />
   </head>
   <body>
-    <header>
+    <header transition:persist>
       <Sidebar />
     </header>
-    <main class="p-10 px-18 sm:ml-72 prose prose-slante lg:prose-lg max-w-full">
+    <main class="p-10 px-18 mt-20 prose prose-slante lg:prose-lg max-w-full">
       <slot />
     </main>
   </body>

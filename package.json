@@ -2,7 +2,6 @@
   "name": "website",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "^pnpm@8.14.0",
   "scripts": {
     "dev": "astro dev --config astro.config.dev.mjs",
     "start": "astro dev",
@@ -21,5 +20,6 @@
     "daisyui": "^4.6.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0"
-  }
+  },
+  "packageManager": "pnpm@9.10.0"
 }

@@ -1,0 +1,16 @@
+---
+import Link from "components/Link.astro";
+import { PATHS } from "paths";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul>
+    <li>
+        <Link type="TD" href={PATHS.semestre2.td.portfolio}>
+            {t("menu.semestre2.siteWebAvecDonees.td.portfolio")}
+        </Link>
+    </li>    
+</ul>

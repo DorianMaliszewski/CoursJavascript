@@ -1,14 +1,15 @@
 ---
-import JSMenu from "./JSMenu.astro";
-import CSSMenu from "./CSSMenu.astro";
-import PHPMenu from "./PHPMenu.astro";
 import Link from "components/Link.astro";
 import MenuIcon from "components/MenuIcon.astro";
-import { PATHS } from "paths";
 import { getLangFromUrl, useTranslations } from "i18n/utils";
+import MMI2Menu from "./MMI2Menu/MMI2Menu.astro";
+import Semestre1Menu from "./Semestre1Menu/semestre1Menu.astro";
+import Semestre2Menu from "./Semestre2Menu/semestre2Menu.astro";
+import Semestre3Menu from "./Semestre3Menu/semestre3Menu.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
 ---
 
 <script is:inline>
@@ -16,59 +17,97 @@ const t = useTranslations(lang);
     document.getElementById("sidebar").classList.toggle("-translate-x-full");
   }
 
-  document.getElementById("sidebar").class = sideBarClass;
+  function isSideBarOpen()
+  {
+    document.getElementById("sidebar").classList.contains("-translate-x-full")
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const detailsElements = document.querySelectorAll("details");
+    const localStorageKey = "openDetails";
+
+    const getInitialState = () => {
+      const storedState = localStorage.getItem(localStorageKey);
+      return storedState ? JSON.parse(storedState) : {};
+    };
+
+    const initialState = getInitialState();
+    detailsElements.forEach((details) => {
+      details.open = !!initialState[details.id] ?? false;
+
+      details.addEventListener("toggle", () => {
+        const state = {};
+        detailsElements.forEach((el) => {
+          if (el.id) {
+            state[el.id] = el.open;
+          }
+        });
+        localStorage.setItem(localStorageKey, JSON.stringify(state));
+      });
+    });
+  });
+
 </script>
 
-<button
-  onclick="handleClick()"
-  aria-controls="sidebar"
-  type="button"
-  class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
->
-  <span class="sr-only">Open sidebar</span>
-  <MenuIcon />
-</button>
+<div style="background: linear-gradient( to bottom,var(--fallback-b1, oklch(var(--b1) / 1)) 0%,var(--fallback-b1, oklch(var(--b1) / 1)) 60%,transparent 100%);" class="fixed top-0 left-0 w-100 border-solid w-full pb-10 z-1000">
+    <button
+    onclick="handleClick()"
+    aria-controls="sidebar"
+    type="button"
+    class="inline-flex items-center p-2 mt-4 ms-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+  >
+    <span class="sr-only">Open sidebar</span>
+    <MenuIcon isOpen={false} />
+  </button>
+</div>
+
 
 <aside
   id="sidebar"
-  class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0"
+  class="fixed top-0 left-0 z-40 w-96 h-screen transition-transform -translate-x-full"
   aria-label="Sidebar"
 >
   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-    <div class="flex justify-between items-center">
-      <Link href="/" class="flex items-center ps-2.5 mb-5">
-        <span
-          class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-          >MMI2 Dev</span
-        >
-      </Link>
+    <div class="flex gap-5 items-center mb-5">
       <button
         type="button"
         onclick="handleClick()"
         aria-controls="sidebar"
-        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
         <span class="sr-only">Close sidebar</span>
-        <MenuIcon />
+        <MenuIcon isOpen={true} />
       </button>
+      <Link href="/" className="flex items-center">
+        <span
+          class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+          >MMI Cours</span
+        >
+      </Link>
     </div>
     <ul class="space-y-2 font-medium menu">
       <li>
-        <details open>
-          <summary>{t("menu.css.title")}</summary>
-          <CSSMenu />
+        <details id="semestre1">
+          <summary>{t("menu.semestre1.title")}</summary>
+          <Semestre1Menu />
         </details>
       </li>
       <li>
-        <details open>
-          <summary>{t("menu.php.title")}</summary>
-          <PHPMenu />
+        <details id="semestre2">
+          <summary>{t("menu.semestre2.title")}</summary>
+          <Semestre2Menu />
         </details>
       </li>
       <li>
-        <details open>
-          <summary>{t("menu.js.title")}</summary>
-          <JSMenu />
+        <details id="semestre3">
+          <summary>{t("menu.semestre3.title")}</summary>
+          <Semestre3Menu />
+        </details>
+      </li>
+      <li>
+        <details id="test2">
+          <summary>{t("menu.mmi2.title")}</summary>
+          <MMI2Menu />
         </details>
       </li>
     </ul>
