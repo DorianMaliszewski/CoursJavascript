@@ -146,7 +146,7 @@ Créez un fichier HTML appelé `contact.html` pour la page de contact, même si 
 
 ### Étape 6 : Recherche et Résolution de Problèmes
 
-Pour cette étape, vous allez devoir trouver des solutions par vous-même en utilisant des ressources en ligne. Voici comment procéder :
+Pour cette étape, vous allez devoir afficher une balise dialog dans votre page HTML, vous pouvez rechercher "HTML balise dialog". Vous trouverez des ressources et des exemples de code qui vous montreront comment utiliser la balise `<dialog>` pour créer des boîtes de dialogue.
 
 1. **Identifier le besoin** : Que souhaitez-vous accomplir ? Par exemple, afficher une boîte de dialogue sur votre page web.
 
@@ -155,10 +155,6 @@ Pour cette étape, vous allez devoir trouver des solutions par vous-même en uti
 3. **Analyser les résultats** : Regardez plusieurs sources pour vérifier les informations. Utilisez des sites fiables comme MDN Web Docs, W3Schools, Stack Overflow, etc.
 
 4. **Tester et appliquer** : Une fois que vous avez trouvé la solution, testez-la dans votre propre projet pour voir si elle fonctionne.
-
-### Exemple de recherche :
-
-Si vous voulez savoir comment afficher une balise dialog dans votre page HTML, vous pouvez rechercher "HTML balise dialog". Vous trouverez des ressources et des exemples de code qui vous montreront comment utiliser la balise `<dialog>` pour créer des boîtes de dialogue.
 
 ### Étape 7 : Ajouter un Tableau
 
@@ -178,8 +174,5 @@ Vous pouvez utiliser le lien suivant pour accéder à ChatGPT et poser votre que
 
 En suivant ces étapes, vous avez créé une page web structurée et ajouté des éléments multimédias. Vous avez également appris à rechercher des informations pour résoudre des problèmes par vous-même et à utiliser ChatGPT pour obtenir de l'aide. N'hésitez pas à expérimenter davantage pour améliorer vos compétences en HTML.
 
-## Résultats
-
-Une fois que vous avez terminé toutes les étapes, soumettez votre travail en utilisant le lien suivant : [Lien de soumission des résultats](#)
 
 ---

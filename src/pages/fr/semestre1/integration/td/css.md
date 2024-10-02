@@ -15,7 +15,7 @@ Un fichier CSS est constitué de règles. Chaque règle se compose d'un sélecte
 
 ```css
 sélecteur {
-  propriété: valeur;
+  propriete: valeur;
 }
 ```
 
