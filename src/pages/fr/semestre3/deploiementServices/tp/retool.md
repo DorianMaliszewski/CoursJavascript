@@ -3,171 +3,85 @@ layout: "layouts/Layout.astro"
 title: "TP Noté : Utilisation de l'API RESTful avec Retool pour la Gestion des Devoirs"
 ---
 
-# TP Noté : Utilisation de l'API RESTful avec Retool pour la Gestion des Devoirs
+### TP Noté : Utilisation de Firebase et Retool pour la Gestion des Devoirs
 
-## Objectif
+#### Objectif
+Ce TP a pour objectif de créer une interface de gestion des devoirs en utilisant Firebase comme base de données et Retool comme outil de création d'interface. Vous serez capable de créer, consulter et manipuler des devoirs à travers une interface graphique. Vous travaillerez également en autonomie pour construire une liste de tâches avec Firebase et Retool.
 
-L'objectif de ce TP est de créer une interface de gestion des devoirs en utilisant Retool et l'API RESTful que vous avez développée précédemment. Vous serez capable de voir tous les devoirs, de les filtrer, et de les gérer à travers une interface graphique.
+#### Prérequis
+- Avoir un compte Firebase et configurer un projet.
+- Avoir un compte sur Retool (un compte gratuit suffit).
 
-## Prérequis
+---
 
-- Avoir l'API RESTful pour la gestion des devoirs en cours d'exécution.
-- Un compte sur Retool (vous pouvez créer un compte gratuit sur [Retool](https://retool.com/)).
+### Étapes à Suivre
 
-## Étapes à Suivre
+#### 1. Préparation
 
-### 1. Préparation
+**Création de la structure de données dans Firebase**
+- Connectez-vous à votre console Firebase et accédez à la section **Firestore Database**.
+- Créez une collection nommée `devoirs` avec les champs suivants pour chaque document :
+  - `nom`: string
+  - `description`: string
+  - `date_debut`: date
+  - `date_rendu`: date
+  - `matiere`: string
+  - `professeur`: string
+- Enregistrez quelques exemples de devoirs pour faciliter les tests.
 
-#### Lancement de l'API
+#### 2. Configuration de Retool
 
-Assurez-vous que votre API est en cours d'exécution. Vous pouvez vérifier cela en testant les différentes routes avec Postman.
+**Création d'une Nouvelle Application**
+- Connectez-vous à votre compte Retool.
+- Cliquez sur **Create new** et sélectionnez **App** pour créer une nouvelle application.
 
-### 2. Configuration de Retool
+#### 3. Connexion à Firebase
 
-#### Création d'une Nouvelle Application
+**Création d'une Ressource Firebase**
+- Dans le panneau de gauche, cliquez sur **Resource** et sélectionnez **Create new resource**.
+- Choisissez **Firebase** comme type de ressource.
+- Configurez la ressource en ajoutant l'ID de votre projet Firebase et les informations d'authentification nécessaires.
+- Enregistrez la ressource.
 
-1. Connectez-vous à votre compte Retool.
-2. Cliquez sur "Create new" et sélectionnez "App" pour créer une nouvelle application.
+#### 4. Création de l'Interface de Gestion des Devoirs
 
-### 3. Connexion à l'API
+**Affichage des Devoirs**
+- Dans votre application Retool, ajoutez un composant **Table** à partir du panneau de composants sur la gauche.
+- Configurez la table pour qu'elle utilise les données provenant de Firebase.
+  - Cliquez sur la table et allez dans l'onglet **Data**.
+  - Dans **Data source**, sélectionnez votre ressource Firebase et configurez la requête pour récupérer tous les documents de la collection `devoirs`.
 
-#### Création d'une Ressource API
+**Ajout de Devoirs**
+- Ajoutez un bouton **Ajouter un devoir** à votre interface.
+- Ajoutez un formulaire avec les champs nécessaires (nom, description, date de début, date de rendu, matière, professeur).
+- Configurez le bouton pour envoyer une requête `add` à Firebase avec les données du formulaire, en ajoutant un nouveau document dans la collection `devoirs`.
 
-1. Dans le panneau de gauche, cliquez sur "Resource" et sélectionnez "Create new resource".
-2. Choisissez "REST API" comme type de ressource.
-3. Configurez la ressource avec l'URL de base de votre API. Par exemple, si votre API est exécutée sur un serveur à l'adresse `http://<votre-serveur>:3000`, utilisez cette URL. Remplacez `<votre-serveur>` par l'adresse IP ou le nom de domaine de votre serveur.
-4. Enregistrez la ressource.
+**Mise à Jour et Suppression de Devoirs**
+- Pour chaque ligne de la table des devoirs, ajoutez des boutons **Éditer** et **Supprimer**.
+  - **Éditer** : Configurez le bouton pour ouvrir un formulaire pré-rempli avec les informations du devoir sélectionné et envoyer une requête `update` à Firebase pour mettre à jour le document.
+  - **Supprimer** : Configurez le bouton pour envoyer une requête `delete` à Firebase pour supprimer le devoir sélectionné.
 
-### 4. Création de l'Interface de Gestion des Devoirs
-
-#### Affichage des Devoirs
-
-1. Dans votre application Retool, ajoutez un composant "Table" à partir du panneau de composants sur la gauche.
-2. Configurez la table pour qu'elle utilise les données provenant de l'API.
-
-    - Cliquez sur la table et allez dans l'onglet "Data".
-    - Dans "Data source", sélectionnez "REST API" et choisissez la ressource que vous avez créée.
-    - Configurez la requête pour récupérer tous les devoirs avec `GET /devoirs`.
-
-    Exemple de configuration de la requête :
-    ```json
-    {
-      "method": "GET",
-      "url": "/devoirs",
-      "headers": {
-        "Authorization": "Bearer {{ authToken }}"
-      }
-    }
-    ```
-
-3. Ajoutez un champ de texte et un bouton pour permettre la recherche/filtrage des devoirs par nom de devoir ou matière.
-
-    - Configurez le champ de texte pour saisir les critères de recherche.
-    - Configurez le bouton pour déclencher une nouvelle requête à l'API avec les critères de recherche comme paramètres de requête.
-
-#### Ajout de Devoirs
-
-1. Ajoutez un bouton "Ajouter un devoir" à votre interface.
-2. Ajoutez un formulaire avec les champs nécessaires (nom, description, date de début, date de rendu, matière, professeur).
-3. Configurez le bouton pour envoyer une requête `POST /devoirs` avec les données du formulaire.
-
-    Exemple de configuration de la requête :
-    ```json
-    {
-      "method": "POST",
-      "url": "/devoirs",
-      "headers": {
-        "Authorization": "Bearer {{ authToken }}",
-        "Content-Type": "application/json"
-      },
-      "body": {
-        "nom": "{{ form.nom }}",
-        "description": "{{ form.description }}",
-        "date_debut": "{{ form.date_debut }}",
-        "date_rendu": "{{ form.date_rendu }}",
-        "matiere": "{{ form.matiere }}",
-        "professeur": "{{ form.professeur }}"
-      }
-    }
-    ```
-
-#### Mise à Jour et Suppression de Devoirs
-
-1. Pour chaque ligne de la table des devoirs, ajoutez des boutons "Éditer" et "Supprimer".
-2. Configurez le bouton "Éditer" pour ouvrir un formulaire pré-rempli avec les informations du devoir sélectionné et envoyer une requête `PUT /devoirs/:id` avec les données mises à jour.
-
-    Exemple de configuration de la requête :
-    ```json
-    {
-      "method": "PUT",
-      "url": "/devoirs/{{ table.selectedRow.data.id }}",
-      "headers": {
-        "Authorization": "Bearer {{ authToken }}",
-        "Content-Type": "application/json"
-      },
-      "body": {
-        "nom": "{{ form.nom }}",
-        "description": "{{ form.description }}",
-        "date_debut": "{{ form.date_debut }}",
-        "date_rendu": "{{ form.date_rendu }}",
-        "matiere": "{{ form.matiere }}",
-        "professeur": "{{ form.professeur }}"
-      }
-    }
-    ```
-
-3. Configurez le bouton "Supprimer" pour envoyer une requête `DELETE /devoirs/:id` pour supprimer le devoir sélectionné.
-
-    Exemple de configuration de la requête :
-    ```json
-    {
-      "method": "DELETE",
-      "url": "/devoirs/{{ table.selectedRow.data.id }}",
-      "headers": {
-        "Authorization": "Bearer {{ authToken }}"
-      }
-    }
-    ```
-
-### 5. Gestion des Authentifications
-
-1. Ajoutez un formulaire de login à votre application Retool.
-2. Configurez le formulaire pour envoyer une requête `POST /login` et stocker le token JWT reçu dans une variable globale `authToken`.
-
-    Exemple de configuration de la requête :
-    ```json
-    {
-      "method": "POST",
-      "url": "/login",
-      "headers": {
-        "Content-Type": "application/json"
-      },
-      "body": {
-        "username": "{{ loginForm.username }}",
-        "password": "{{ loginForm.password }}"
-      }
-    }
-    ```
-
-3. Utilisez cette variable `authToken` pour les requêtes authentifiées comme montré dans les exemples précédents.
+#### 5. Création d'une To-Do List (Autonomie)
+- Créez une nouvelle collection dans Firebase nommée `todo`.
+- Conservez une structure simple avec des champs comme `tache`: string et `statut`: boolean.
+- Dans Retool, créez un outil pour ajouter des tâches à la liste de tâches et une interface pour les afficher et les mettre à jour.
 
 ### Conclusion
+En suivant ces étapes, vous serez en mesure de créer une interface de gestion des devoirs complète avec Firebase et Retool, en manipulant les devoirs et en réalisant une liste de tâches en autonomie.
 
-En suivant ces étapes, vous serez en mesure de créer une interface de gestion des devoirs complète avec Retool, utilisant votre API RESTful pour effectuer des opérations CRUD sur les devoirs.
+---
 
-## Critères d'Évaluation
+#### Critères d'Évaluation
 
-### Barème
+**Barème**
+- Suivi avec accompagnement pour les devoirs : 5 points
+- Travail autonome pour la To-Do List : 15 points, répartis comme suit :
+  - Ajout des tâches : 5 points
+  - Lecture et affichage des tâches : 5 points
+  - Qualité visuelle et organisation de l'interface : 5 points
 
-- Connexion et utilisation de l'API RESTful dans Retool : 4 points
-- Fonctionnalité complète de l'interface (affichage, ajout, mise à jour, suppression des devoirs) : 4 points
-- Gestion correcte de l'authentification et des autorisations : 2 points
-
-## Ressources Supplémentaires
-
-- [Documentation Retool](https://docs.retool.com/docs)
-- [Documentation officielle de Node.js](https://nodejs.org/en/docs/)
-- [Documentation officielle d'Express.js](https://expressjs.com/)
-- [Guide sur les meilleures pratiques de sécurité des API RESTful](https://www.owasp.org/index.php/REST_Security_Cheat_Sheet)
+**Ressources Supplémentaires**
+- Documentation Firebase
+- Documentation officielle de Retool
 
 Bonne chance !
