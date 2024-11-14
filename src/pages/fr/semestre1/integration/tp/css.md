@@ -54,14 +54,14 @@ title: "TP CSS pour Étudiants de Première Année en Informatique"
 
 Utilisez **Flexbox** pour disposer vos sections de manière flexible. Voici un exemple simple pour aligner les éléments horizontalement avec des espaces égaux entre eux.
 
-\```css
+```css
 .container {
     display: flex;
     flex-direction: row; /* Aligne les éléments horizontalement */
     justify-content: space-between; /* Espace les éléments de manière égale */
     align-items: center; /* Centre verticalement les éléments */
 }
-\```
+```
 
 **Explication des propriétés :**
 - `display: flex` active Flexbox sur l’élément.
@@ -78,7 +78,7 @@ Les **pseudo-classes** permettent de changer les styles lorsqu’un utilisateur 
 1. **Effet de survol sur les liens** :
    - Utilisez la pseudo-classe `:hover` pour ajouter un effet de transition. Cela adoucit le changement de style au survol. Exemple :
 
-   \```css
+   ```css
    nav a {
        color: #ffffff;
        text-decoration: none;
@@ -88,14 +88,14 @@ Les **pseudo-classes** permettent de changer les styles lorsqu’un utilisateur 
    nav a:hover {
        color: #ffa500; /* Changement de couleur au survol */
    }
-   \```
+   ```
 
    - **Explication** : Le `:hover` est déclenché lorsque l’utilisateur passe la souris sur un élément. Ici, `transition` adoucit le passage de la couleur initiale à celle au survol.
 
 2. **Effet de survol sur les images** :
    - Utilisez `:hover` pour agrandir légèrement les images au survol :
 
-   \```css
+   ```css
    img {
        transition: transform 0.3s ease;
    }
@@ -103,7 +103,7 @@ Les **pseudo-classes** permettent de changer les styles lorsqu’un utilisateur 
    img:hover {
        transform: scale(1.05); /* Agrandissement au survol */
    }
-   \```
+   ```
 
 ---
 
@@ -111,7 +111,7 @@ Les **pseudo-classes** permettent de changer les styles lorsqu’un utilisateur 
 
 Les **Media Queries** permettent d’adapter le style en fonction de la taille de l’écran, rendant votre page responsive. Exemple pour ajuster le layout sur mobile :
 
-\```css
+```css
 @media (max-width: 768px) {
     .container {
         flex-direction: column; /* Empile les éléments en colonne sur les petits écrans */
@@ -121,7 +121,7 @@ Les **Media Queries** permettent d’adapter le style en fonction de la taille d
         flex-direction: column; /* Modifie la navigation en liste verticale sur mobile */
     }
 }
-\```
+```
 
 **Explication** :
 - La media query `@media (max-width: 768px)` applique les styles uniquement si la largeur de l’écran est de 768px ou moins.
