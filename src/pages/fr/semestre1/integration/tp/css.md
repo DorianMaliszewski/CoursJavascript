@@ -3,193 +3,117 @@ layout: "layouts/Layout.astro"
 title: "TP CSS pour Étudiants de Première Année en Informatique"
 ---
 
-# TP 2 : CSS 
+# TP 2 : Créer une Page Web Interactif avec CSS
 
 ## Objectifs
 
-1. Apprendre les bases du CSS.
-2. Comprendre l'importance des sélecteurs, des propriétés et des valeurs.
-3. Utiliser le CSS pour embellir une page web existante.
-4. Ajouter des styles aux éléments HTML tels que les textes, les images et les vidéos.
+1. Pratiquer l'application des concepts de base du CSS.
+2. Créer une page web dynamique et attrayante en utilisant des sélecteurs, des propriétés et des valeurs CSS.
+3. Développer une page structurée avec des images, du texte, et des sections distinctes.
+4. Mettre en œuvre des effets visuels, des transitions et une mise en page fluide.
 
-## Instructions
+---
 
-### Étape 1 : Créer un Fichier CSS
+### Étape 1 : Structurer la page HTML
 
-Créez un fichier CSS appelé `styles.css` et liez-le à votre fichier `index.html` en ajoutant la ligne suivante dans la section `<head>` de votre fichier HTML :
+1. **Créez un fichier `index.html`** avec la structure suivante :
+   - Un en-tête (`header`) avec un titre principal (`h1`) et une navigation (`nav`).
+   - Une section principale (`main`) pour le contenu de la page.
+   - Un pied de page (`footer`) avec des informations de contact ou des liens sociaux.
 
-```html
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet Web Étudiant</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-```
+2. **Dans l'en-tête**, créez une navigation horizontale (sans formulaire) avec quelques liens fictifs (par exemple, "Accueil", "À propos", "Projets", "Contact").
+   - **Rappel** : Cherchez comment organiser une navigation horizontale avec une liste non ordonnée (`ul`) et des éléments de liste (`li`).
 
-**Explications :**
-- La balise `<link rel="stylesheet" href="styles.css">` permet de lier le fichier CSS à la page HTML.
-- Le fichier CSS contiendra les styles qui seront appliqués aux éléments HTML de la page.
+---
 
-### Étape 2 : Appliquer des Styles de Base
+### Étape 2 : Appliquer des styles de base à la page
 
-Ajoutez les styles suivants à votre fichier `styles.css` :
+1. **Sélecteur `body`** :
+   - Appliquez une couleur de fond agréable à la page et choisissez une police lisible.
+   - **Rappel** : Utilisez `background-color`, `font-family`, et `color`.
 
-```css
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
+2. **En-tête et navigation** :
+   - Ajoutez une couleur de fond sombre à l'en-tête avec un texte clair. Centre le texte et ajoute une marge pour espacer les éléments.
+   - **Rappel** : Utilisez `background-color`, `color`, `text-align`, et `padding` pour centrer et espacer les éléments.
+   - **Exercice** : Essayez de rendre la navigation réactive en affichant les éléments sous forme de **menu hamburger** sur mobile (utilisez des médias queries).
 
-header, footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1em 0;
-}
+---
 
-h1 {
-    color: #0056b3;
-}
+### Étape 3 : Ajouter des images et des vidéos
 
-p {
-    line-height: 1.6;
-}
+1. **Sélecteur `img`** :
+   - Ajoutez une image dans votre `main` (par exemple, une photo de vous-même ou de votre projet) et assurez-vous qu'elle s'ajuste bien à la taille de son conteneur.
+   - **Rappel** : Utilisez `max-width: 100%` pour rendre l'image responsive.
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
+2. **Sélecteur `video`** :
+   - Ajoutez une vidéo dans la section `main`. La vidéo peut être une démonstration ou une vidéo d'introduction.
+   - **Rappel** : Utilisez `max-width: 100%` et `height: auto` pour que la vidéo soit flexible.
 
-nav ul li {
-    display: inline;
-    margin-right: 1em;
-}
+---
 
-nav ul li a {
-    color: #0056b3;
-    text-decoration: none;
-}
-```
+### Étape 4 : Organiser le contenu avec Flexbox
 
-**Explications :**
-- La balise `body` définit les styles de base pour la page, y compris la police de caractères, la couleur de fond, la couleur du texte, les marges et les padding.
-- Les balises `header` et `footer` définissent les styles pour l'en-tête et le pied de page, y compris la couleur de fond, la couleur du texte, l'alignement du texte et le padding.
-- La balise `h1` définit la couleur du titre.
-- La balise `p` définit l'espacement entre les lignes de texte.
-- Les balises `nav ul`, `nav ul li` et `nav ul li a` définissent les styles pour le menu de navigation, y compris la suppression des puces, l'affichage en ligne des éléments de la liste et les styles des liens.
+1. **Mise en page avec Flexbox** :
+   - Utilisez **Flexbox** pour disposer vos sections (par exemple, une colonne pour le texte et une autre pour l'image).
+   - **Exercice** : Utilisez `display: flex` pour organiser vos éléments de manière flexible.
+     - Cherchez comment utiliser `flex-direction: row` pour aligner les éléments horizontalement et `justify-content` pour espacer les éléments.
+   
+2. **Exercice** : Créez une disposition où les images et le texte s'adaptent bien en fonction de la taille de l'écran.
+   - **Rappel** : Pensez à utiliser `flex-wrap` pour que les éléments se déplacent sur une nouvelle ligne quand l'espace est insuffisant.
 
-### Étape 3 : Ajouter des Styles aux Images et Vidéos
+---
 
-Ajoutez les styles suivants à votre fichier `styles.css` pour embellir les images et les vidéos :
+### Étape 5 : Ajouter des effets et transitions
 
-```css
-img {
-    max-width: 100%;
-    height: auto;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
+1. **Transition sur les liens** :
+   - Ajoutez un effet de survol doux aux liens de la navigation. Par exemple, changez leur couleur ou appliquez une transformation quand l'utilisateur survole les éléments.
+   - **Rappel** : Cherchez comment utiliser `transition` pour rendre l'effet plus fluide.
 
-video {
-    max-width: 100%;
-    height: auto;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
-```
+2. **Effet de survol sur les images** :
+   - Appliquez un effet sur les images lorsque l'utilisateur les survole, comme un zoom ou un changement de bordure.
+   - **Rappel** : Utilisez `transform: scale()` pour agrandir l'image au survol.
 
-**Explications :**
-- La balise `img` définit les styles pour les images, y compris la largeur maximale, la hauteur automatique, la bordure et le rayon de la bordure.
-- La balise `video` définit les styles pour les vidéos, y compris la largeur maximale, la hauteur automatique, la bordure et le rayon de la bordure.
+3. **Exercice** : Créez une animation pour le texte dans l'en-tête, par exemple un effet de décalage du texte au chargement de la page ou un changement de couleur au survol.
 
-### Étape 4 : Ajouter des Styles aux Sections de la Page
+---
 
-Ajoutez les styles suivants à votre fichier `styles.css` pour embellir les sections de la page :
+### Étape 6 : Mise en page avec CSS Grid
 
-```css
-main {
-    padding: 2em;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+1. **Créer une disposition en grille** :
+   - Utilisez **CSS Grid** pour organiser des sections de contenu (par exemple, plusieurs projets ou compétences sous forme de cartes).
+   - **Exercice** : Créez une grille avec des colonnes qui s'ajustent en fonction de la taille de l'écran (utilisez `grid-template-columns` et `@media`).
+   - **Rappel** : Cherchez comment utiliser `grid-gap` pour espacer les éléments et `grid-template-areas` pour personnaliser la disposition.
 
-header, footer {
-    padding: 1em 0;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-}
+---
 
-header nav ul {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-}
+### Étape 7 : Ajouter des sections dynamiques
 
-header nav ul li {
-    margin: 0 1em;
-}
-```
+1. **Carte de projet** :
+   - Créez une section qui présente des projets ou des compétences sous forme de cartes avec des images et du texte.
+   - **Exercice** : Ajoutez une bordure, une ombre portée, et un effet de survol qui modifie la taille de la carte et sa couleur de fond.
+   - **Rappel** : Utilisez `box-shadow`, `border-radius` et `transition` pour donner un effet agréable au survol.
 
-**Explications :**
-- La balise `main` définit les styles pour la section principale de la page, y compris le padding, la couleur de fond, le rayon de la bordure et l'ombre de la boîte.
-- Les balises `header` et `footer` ont été mises à jour pour inclure du padding, la couleur de fond, la couleur du texte et l'alignement du texte.
-- Les balises `header nav ul` et `header nav ul li` définissent les styles pour le menu de navigation dans l'en-tête, y compris l'affichage en flex, la justification du contenu au centre et la marge des éléments de la liste.
+2. **Sections supplémentaires** :
+   - Ajoutez une ou deux sections supplémentaires sous forme de **témoignages** ou d'**avis**. Utilisez une mise en page en grille ou en colonne.
 
-### Étape 5 : Ajouter des Effets de Survol
+---
 
-Ajoutez les styles suivants à votre fichier `styles.css` pour ajouter des effets de survol aux liens :
+### Étape 8 : Responsivité et Media Queries
 
-```css
-nav ul li a:hover {
-    color: #ff6347;
-}
+1. **Utilisation des Media Queries** :
+   - Faites en sorte que votre page soit responsive. Par exemple, modifiez la disposition des sections pour les petits écrans.
+   - **Exercice** : Utilisez `@media` pour adapter les styles selon la taille de l'écran (par exemple, changer la navigation horizontale en une barre verticale sur mobile).
+   - **Rappel** : Cherchez comment appliquer des règles CSS spécifiques pour les petits écrans.
 
-img:hover, video:hover {
-    border-color: #ff6347;
-}
-```
-
-**Explications :**
-- La balise `nav ul li a:hover` définit la couleur du texte des liens lorsque l'utilisateur survole avec la souris.
-- Les balises `img:hover` et `video:hover` définissent la couleur de la bordure des images et des vidéos lorsque l'utilisateur survole avec la souris.
-
-### Étape 6 : Recherche et Résolution de Problèmes
-
-Pour cette étape, vous allez devoir trouver des solutions par vous-même en utilisant des ressources en ligne. Voici comment procéder :
-
-1. **Identifier le besoin** : Que souhaitez-vous accomplir ? Par exemple, ajouter des animations CSS à votre page web.
-2. **Formuler la recherche** : Utilisez un moteur de recherche (comme Google) pour trouver des informations. Par exemple, si vous voulez savoir comment ajouter des animations CSS, recherchez "CSS animations".
-3. **Analyser les résultats** : Regardez plusieurs sources pour vérifier les informations. Utilisez des sites fiables comme MDN Web Docs, W3Schools, Stack Overflow, etc.
-4. **Tester et appliquer** : Une fois que vous avez trouvé la solution, testez-la dans votre propre projet pour voir si elle fonctionne.
-
-### Exemple de recherche :
-
-Si vous voulez savoir comment ajouter des animations CSS à votre page HTML, vous pouvez rechercher "CSS animations". Vous trouverez des ressources et des exemples de code qui vous montreront comment utiliser les propriétés `@keyframes` et `animation` pour créer des animations.
-
-### Étape 7 : Ajouter des Styles Avancés
-
-Pour cette étape, vous allez ajouter des styles avancés à votre site en utilisant ChatGPT comme ressource. Voici comment procéder :
-
-1. **Formuler la recherche** : Utilisez ChatGPT pour poser des questions spécifiques. Par exemple, vous pouvez demander "Comment créer une grille CSS ?".
-2. **Analyser la réponse** : Utilisez les informations fournies par ChatGPT pour comprendre comment créer et structurer une grille CSS.
-3. **Tester et appliquer** : Ajoutez la grille CSS à votre fichier HTML en utilisant les informations obtenues.
-
-### Exemple de recherche sur ChatGPT :
-
-Vous pouvez utiliser le lien suivant pour accéder à ChatGPT et poser votre question : [ChatGPT](https://chat.openai.com)
+---
 
 ### Conclusion
 
-En suivant ces étapes, vous avez appris à utiliser le CSS pour embellir une page web. Vous avez également appris à rechercher des informations pour résoudre des problèmes par vous-même et à utiliser ChatGPT pour obtenir de l'aide. N'hésitez pas à expérimenter davantage pour améliorer vos compétences en CSS.
+Félicitations ! Vous avez maintenant une page web structurée avec un en-tête, un contenu principal, des images, des vidéos, une navigation interactive et des effets visuels. Vous avez également utilisé des techniques avancées comme **Flexbox** et **CSS Grid** pour organiser votre page de manière dynamique et responsive. 
 
-## Résultats
+N'oubliez pas de tester votre page sur différents appareils et tailles d'écran pour vous assurer qu'elle s'affiche correctement partout.
 
-Une fois que vous avez terminé toutes les étapes, soumettez votre travail en utilisant le lien suivant : [Lien de soumission des résultats](#)
+Une fois votre page terminée, soumettez-la en suivant les instructions fournies par votre enseignant.
+
 
 ---
