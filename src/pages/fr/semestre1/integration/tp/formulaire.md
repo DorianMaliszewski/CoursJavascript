@@ -1,189 +1,191 @@
 ---
 layout: "layouts/Layout.astro"
-title: "TP Formulaires pour Étudiants de Première Année en Informatique"
+title: "TP : Création d'une Page d'Inscription"
 ---
 
-# TP 3 : Formulaires 
+# TP 3 : Page d'Inscription Statique avec HTML et CSS
 
 ## Objectifs
 
-1. Apprendre à créer des formulaires en HTML.
-2. Comprendre l'importance des différents éléments de formulaire.
-3. Utiliser le CSS pour styliser un formulaire.
-4. Ajouter un formulaire à la page de contact et le rendre fonctionnel et esthétique.
+1. Comprendre comment structurer un formulaire HTML.
+2. Utiliser Flexbox pour centrer et organiser des éléments dans une page.
+3. Appliquer des styles CSS de base pour améliorer l'apparence d'un formulaire.
+4. Découvrir et utiliser des transitions CSS pour enrichir l'expérience utilisateur.
+
+---
 
 ## Instructions
 
-### Étape 1 : Ajouter un Formulaire à la Page de Contact
+### Étape 1 : Créer une Page HTML
 
-Modifiez votre fichier `contact.html` pour ajouter un formulaire de contact. Ajoutez le code HTML suivant dans la section `<main>` de votre fichier `contact.html` :
+Créez une page nommée `inscription.html`. Cette page doit contenir un formulaire d'inscription avec les champs suivants :
 
+- **Nom** : champ texte (`type="text"`)
+- **Prénom** : champ texte (`type="text"`)
+- **Email** : champ email (`type="email"`)
+- **Date de naissance** : champ date (`type="date"`)
+- **Sexe** : menu déroulant (`<select>`) avec les options "Homme", "Femme", et "Autre".
+- **Mot de passe** : champ mot de passe (`type="password"`)
+- **Bouton** : bouton pour soumettre le formulaire (`<button>` ou `type="submit"`)
+
+**Consignes :**
+- Tous les champs doivent être obligatoires (utilisez `required`).
+- Assurez-vous que les `label` soient associés à leurs champs correspondants avec l'attribut `for`.
+
+**Astuce :** Voici un exemple pour le champ "Nom" :
 ```html
-<main>
-    <h1>Contactez-moi</h1>
-    <form action="#" method="post">
-        <div>
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="subject">Sujet :</label>
-            <input type="text" id="subject" name="subject" required>
-        </div>
-        <div>
-            <label for="message">Message :</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <div>
-            <button type="submit">Envoyer</button>
-        </div>
-    </form>
-</main>
+<label for="nom">Nom :</label>
+<input type="text" id="nom" name="nom" required>
 ```
 
-**Explications :**
-- La balise `<form>` crée un formulaire et définit l'action (ce qui se passe quand le formulaire est soumis) et la méthode (comment les données sont envoyées).
-- Les balises `<label>` et `<input>` créent des champs de saisie pour le nom, l'email et le sujet.
-- La balise `<textarea>` crée un champ de saisie pour le message.
-- La balise `<button>` crée un bouton de soumission.
-
-### Étape 2 : Créer un Fichier CSS pour les Formulaires
-
-Créez un fichier CSS appelé `form-styles.css` et liez-le à votre fichier `contact.html` en ajoutant la ligne suivante dans la section `<head>` :
-
-```html
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="form-styles.css">
-</head>
-```
-
-**Explications :**
-- La balise `<link rel="stylesheet" href="form-styles.css">` permet de lier le fichier CSS contenant les styles spécifiques aux formulaires.
-
-### Étape 3 : Styliser le Formulaire
-
-Ajoutez les styles suivants à votre fichier `form-styles.css` :
-
-```css
-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 1em;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form div {
-    margin-bottom: 1em;
-}
-
-label {
-    display: block;
-    margin-bottom: .5em;
-    color: #333;
-}
-
-input, textarea {
-    width: 100%;
-    padding: .5em;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 0.7em;
-    color: #fff;
-    background-color: #0056b3;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #004494;
-}
-```
-
-**Explications :**
-- La balise `form` définit les styles de base pour le formulaire, y compris la largeur maximale, le centrage, le padding, la couleur de fond, le rayon de la bordure et l'ombre de la boîte.
-- Les balises `form div`, `label`, `input`, `textarea` et `button` définissent les styles pour les différents éléments du formulaire, y compris les marges, le padding, les bordures, les couleurs et les rayons des bordures.
-
-### Étape 4 : Ajouter des Styles de Focus et de Validation
-
-Ajoutez les styles suivants à votre fichier `form-styles.css` pour améliorer l'expérience utilisateur avec des effets de focus et de validation :
-
-```css
-input:focus, textarea:focus {
-    border-color: #0056b3;
-    outline: none;
-}
-
-input:invalid, textarea:invalid {
-    border-color: #e74c3c;
-}
-
-input:valid, textarea:valid {
-    border-color: #2ecc71;
-}
-```
-
-**Explications :**
-- Les balises `input:focus` et `textarea:focus` définissent les styles pour les champs de saisie lorsqu'ils sont sélectionnés par l'utilisateur.
-- Les balises `input:invalid` et `textarea:invalid` définissent les styles pour les champs de saisie invalides.
-- Les balises `input:valid` et `textarea:valid` définissent les styles pour les champs de saisie valides.
-
-### Étape 5 : Ajouter un Message de Confirmation
-
-Modifiez votre fichier `contact.html` pour ajouter un message de confirmation qui s'affichera lorsque le formulaire est soumis. Ajoutez le code HTML suivant après le formulaire :
-
-```html
-<div id="confirmation" style="display:none;">
-    <p>Merci pour votre message ! Nous vous répondrons dès que possible.</p>
-</div>
-
-<script>
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    document.querySelector('#confirmation').style.display = 'block';
-});
-</script>
-```
-
-**Explications :**
-- La balise `<div id="confirmation" style="display:none;">` crée un message de confirmation qui est initialement caché.
-- Le script JavaScript écoute l'événement de soumission du formulaire, empêche le comportement par défaut et affiche le message de confirmation.
-
-### Étape 6 : Ajouter des Champs Optionnels
-
-Ajoutez un champ optionnel au formulaire pour recueillir des informations supplémentaires. Ajoutez le code HTML suivant dans le formulaire existant :
-
-```html
-<div>
-    <label for="phone">Téléphone (optionnel) :</label>
-    <input type="tel" id="phone" name="phone">
-</div>
-```
-
-**Explications :**
-- La balise `<label for="phone">Téléphone (optionnel) :</label>` crée une étiquette pour le champ de saisie du téléphone.
-- La balise `<input type="tel" id="phone" name="phone">` crée un champ de saisie pour le numéro de téléphone.
-
-### Conclusion
-
-En suivant ces étapes, vous avez appris à créer et styliser des formulaires en HTML et CSS. Vous avez également ajouté des fonctionnalités interactives pour améliorer l'expérience utilisateur. N'hésitez pas à expérimenter davantage pour améliorer vos compétences en création et stylisation de formulaires.
-
-## Résultats
-
-Une fois que vous avez terminé toutes les étapes, soumettez votre travail en utilisant le lien suivant : [Lien de soumission des résultats](#)
+**Documentation :**
+- [MDN sur les balises de formulaire HTML](https://developer.mozilla.org/fr/docs/Web/HTML/Element/form).
 
 ---
+
+### Étape 2 : Centrer le Formulaire avec Flexbox
+
+Centrez le formulaire au milieu de la page, horizontalement et verticalement, en utilisant **Flexbox**.
+
+**Consignes :**
+- Ajoutez une classe ou un ID à l'élément parent contenant le formulaire.
+- Utilisez `display: flex` et les propriétés appropriées pour centrer le formulaire.
+
+**Astuce :**
+```css
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+```
+
+**Documentation :**
+- [MDN sur Flexbox](https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox).
+
+---
+
+### Étape 3 : Organiser les Champs du Formulaire avec Flexbox
+
+Ajoutez une mise en page dans le formulaire pour que :
+1. Les étiquettes soient positionnées au-dessus des champs.
+2. Les champs soient bien espacés verticalement.
+
+**Consignes :**
+- Utilisez **Flexbox** pour organiser les champs du formulaire.
+- Ajoutez un espace uniforme entre les champs avec `gap`.
+
+**Astuce :**
+```css
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+```
+
+**Questions pour Réfléchir :**
+- Quelle propriété CSS permet de définir un espace uniforme entre les éléments d'un conteneur ?
+
+---
+
+### Étape 4 : Styliser le Formulaire (Style Statique)
+
+Ajoutez des styles de base pour améliorer l'apparence du formulaire. 
+
+**Consignes :**
+1. Ajoutez une bordure arrondie et une ombre légère autour du formulaire.
+2. Appliquez une couleur de fond à la page et une autre au formulaire.
+3. Donnez des marges intérieures (`padding`) au formulaire pour qu'il respire.
+
+**Astuce :**
+```css
+.form-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 400px;
+}
+```
+
+**Documentation :**
+- [MDN sur `box-shadow`](https://developer.mozilla.org/fr/docs/Web/CSS/box-shadow).
+
+---
+
+### Étape 5 : Ajouter des Transitions et des États Interactifs
+
+Ajoutez des transitions et des styles d'interaction aux champs du formulaire et au bouton.
+
+**Consignes :**
+1. Ajoutez une transition fluide aux champs lorsque l'utilisateur les survole (`hover`) ou les sélectionne (`focus`).
+2. Appliquez une couleur différente ou une bordure spéciale lors du survol du bouton.
+
+**Astuce :**
+Pour les champs :
+```css
+input:focus, select:focus {
+    border-color: #007BFF;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+```
+
+Pour le bouton :
+```css
+button:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+}
+```
+
+**Questions pour Réfléchir :**
+- Quelle propriété CSS permet de contrôler la durée d'une transition ?
+- Quelles pseudo-classes CSS sont utilisées pour gérer les interactions utilisateur ?
+
+---
+
+### Étape 6 : Créer une Page de Confirmation
+
+Ajoutez une nouvelle page HTML nommée `confirmation.html`. Cette page doit contenir un message simple, par exemple : "Inscription réussie !".
+
+**Consignes :**
+- Configurez le formulaire pour rediriger vers cette page après la soumission (utilisez l'attribut `action`).
+- Ajoutez un style minimal pour centrer le message sur la page.
+
+**Astuce pour centrer :**
+```css
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+```
+
+---
+
+## Résultats Attendus
+
+1. Une page d'inscription statique avec un formulaire complet et bien organisé.
+2. Un formulaire centré avec Flexbox.
+3. Des styles CSS statiques pour améliorer l'apparence.
+4. Des transitions fluides sur les champs et le bouton.
+5. Une redirection vers une page de confirmation après soumission.
+
+---
+
+## Critères d'Évaluation
+
+1. Le formulaire contient tous les champs requis avec les types appropriés.
+2. Le formulaire est centré et organisé avec Flexbox.
+3. Les styles statiques sont correctement appliqués.
+4. Les transitions CSS sont présentes et fonctionnelles.
+5. La page de confirmation est simple et fonctionnelle.
+
+---
+
+## Points de Réflexion
+
+- Comment améliorer encore l'expérience utilisateur ?
+- Quels autres styles ou animations pourraient être ajoutés pour rendre le formulaire plus engageant ?
