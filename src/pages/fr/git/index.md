@@ -5,9 +5,11 @@ title: Introduction au Git CLI
 
 # Introduction au Git CLI
 
-Ce cours vous apprend les bases de Git CLI. Nous couvrirons `clone`, `pull`, `fetch`, `checkout`, `branch`, `switch`, `commit`, `rebase`, et Git Flow.
+Ce cours vous apprend les bases de Git CLI. Nous couvrirons l'installation, la configuration, SSH, les opérations de base, la gestion des conflits, Git Flow et les conventions de commit.
 
-## 1. Installation de Git
+## 1. Installation et Configuration de Git
+
+### 1.1 Installation de Git
 
 Vérifiez l'installation de Git :
 
@@ -17,7 +19,16 @@ git --version
 
 Si Git n'est pas installé, téléchargez-le depuis [le site officiel](https://git-scm.com/).
 
-## 2. Configuration de SSH
+### 1.2 Configuration de Git
+
+Configurez votre nom et votre email pour les commits :
+
+```bash
+git config --global user.name "Votre Nom"
+git config --global user.email "votre-email@example.com"
+```
+
+### 1.3 Configuration de SSH
 
 Pour utiliser SSH avec Git, générez une clé SSH et ajoutez-la à votre compte Git :
 
@@ -44,17 +55,149 @@ Pour utiliser SSH avec Git, générez une clé SSH et ajoutez-la à votre compte
 
 ### Avantages de SSH
 
-- **Sécurité** : Utilise desés cl cryptographiques.
+- **Sécurité** : Utilise des clés cryptographiques.
 - **Confort** : Pas de mot de passe à chaque interaction.
 - **Performance** : Opérations plus rapides.
 
-## 3. Cloner un dépôt
+## 2. Opérations de Base
+
+### 2.1 Cloner un Dépôt
 
 Pour cloner un dépôt :
 
 ```bash
 git clone https://github.com/username/repository.git
 ```
+
+### 2.2 Fetch
+
+Pour récupérer les dernières modifications du dépôt distant sans les fusionner :
+
+```bash
+git fetch origin
+```
+
+### 2.3 Pull
+
+Pour récupérer et fusionner les dernières modifications du dépôt distant :
+
+```bash
+git pull origin main
+```
+
+### 2.4 Ajouter des Fichiers
+
+Pour ajouter des fichiers à la zone de staging :
+
+```bash
+git add fichier1 fichier2
+```
+
+Pour ajouter tous les fichiers modifiés :
+
+```bash
+git add .
+```
+
+### 2.5 Commit
+
+Pour valider les modifications :
+
+```bash
+git commit -m "Description des modifications"
+```
+
+### 2.6 Rebase
+
+Pour réappliquer vos commits sur la dernière version du dépôt distant :
+
+```bash
+git rebase origin/main
+```
+
+### 2.7 Merge
+
+Pour fusionner une branche dans la branche courante :
+
+```bash
+git merge nom-de-la-branche
+```
+
+### 2.8 Stash
+
+Pour sauvegarder les modifications non validées :
+
+```bash
+git stash
+```
+
+Pour récupérer les modifications sauvegardées :
+
+```bash
+git stash pop
+```
+
+## 3. Gestion des Conflits
+
+### 3.1 Résolution de Conflits lors d'un Rebase
+
+Si des conflits surviennent lors d'un rebase, Git vous indiquera les fichiers concernés. Ouvrez ces fichiers et résolvez les conflits manuellement. Une fois les conflits résolus, ajoutez les fichiers modifiés :
+
+```bash
+git add fichier1 fichier2
+```
+
+Puis continuez le rebase :
+
+```bash
+git rebase --continue
+```
+
+### 3.2 Finir un Rebase
+
+Si vous souhaitez abandonner un rebase en cours :
+
+```bash
+git rebase --abort
+```
+
+## 4. Git Flow et Conventional Commit
+
+### 4.1 Git Flow
+
+Git Flow est une méthode de gestion de branches pour Git. Pour plus d'informations, consultez la [documentation officielle](https://nvie.com/posts/a-successful-git-branching-model/).
+
+### 4.2 Conventional Commit
+
+Les commits conventionnels suivent une structure spécifique pour faciliter la lecture et la compréhension des modifications. Pour plus d'informations, consultez la [documentation officielle](https://www.conventionalcommits.org/en/v1.0.0/).
+
+## 5. Récapitulatif des Commandes
+
+### 5.1 Commandes de Base
+
+| Commande            | Description                                      |
+|---------------------|--------------------------------------------------|
+| `git clone`         | Cloner un dépôt                                  |
+| `git fetch`         | Récupérer les dernières modifications            |
+| `git pull`          | Récupérer et fusionner les dernières modifications |
+| `git add`           | Ajouter des fichiers à la zone de staging        |
+| `git commit`        | Valider les modifications                        |
+| `git rebase`        | Réappliquer les commits sur la dernière version  |
+| `git merge`         | Fusionner une branche dans la branche courante   |
+| `git stash`         | Sauvegarder les modifications non validées       |
+
+### 5.2 Commandes Chainées
+
+| Commandes Chainées            | Description                                      |
+|-------------------------------|--------------------------------------------------|
+| `git fetch && git pull`       | Récupérer et fusionner les dernières modifications |
+| `git fetch && git checkout -b nom-de-la-branche origin/nom-de-la-branche && git branch --set-upstream-to=origin/nom-de-la-branche` | Cloner une branche distante et la suivre |
+
+### 5.3 Pourquoi utiliser `origin/main` plutôt que `main` ?
+
+Utiliser `origin/main` spécifie explicitement que vous travaillez avec la branche `main` du dépôt distant `origin`. Cela évite toute ambiguïté et garantit que vous travaillez avec la version la plus récente du dépôt distant.
+
+Pour plus d'informations sur les commandes Git, consultez la [documentation officielle](https://git-scm.com/doc).
 
 
 
