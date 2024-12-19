@@ -56,6 +56,14 @@ Pour basculer vers une autre branche existante (disponible depuis Git 2.23), uti
 git switch nom-de-la-branche
 ```
 
+### Switch avec mise en place de l'upstream
+
+Pour basculer vers une autre branche et définir l'upstream, utilisez la commande `switch` avec l'option `-u` :
+
+```bash
+git switch -u nom-de-la-branche
+```
+
 ## 5. Créer et gérer des branches
 
 ### Branch
@@ -107,6 +115,35 @@ Pour enregistrer vos modifications dans le dépôt local, suivez ces étapes :
 ## 7. Git Flow
 
 Git Flow est un ensemble de conventions pour gérer les branches dans un projet Git. Il définit des branches principales (`main` et `develop`) et des branches secondaires pour les fonctionnalités, les corrections de bugs, les releases et les hotfixes.
+
+## 8. Utilisation des Pull Requests (PR) ou Merge Requests (MR)
+
+Lorsque vous travaillez en équipe, il est préférable d'utiliser des Pull Requests (PR) sur GitHub ou des Merge Requests (MR) sur GitLab plutôt que de fusionner directement les branches avec `git merge`. Voici pourquoi :
+
+- **Relecture de code** : Les PR/MR permettent à d'autres membres de l'équipe de revoir le code avant sa fusion, ce qui réduit les erreurs et améliore la qualité du code.
+- **Discussion et collaboration** : Les PR/MR fournissent un espace pour discuter des modifications et apporter des suggestions, favorisant la collaboration.
+- **Historique des modifications** : Les PR/MR conservent un historique des modifications proposées, facilitant le suivi des changements et la compréhension de l'évolution du projet.
+- **Intégration continue** : Les PR/MR peuvent être configurés pour déclencher des tests automatiques, assurant que les modifications ne cassent pas le code existant.
+
+## 9. Commandes recommandées pour la gestion des branches
+
+### Créer et basculer vers une nouvelle branche avec mise en place de l'upstream
+
+Pour créer une nouvelle branche et basculer dessus immédiatement tout en définissant l'upstream, utilisez la commande `switch` avec l'option `-c` :
+
+```bash
+git switch -c nom-de-la-nouvelle-branche
+```
+
+### Définir l'upstream pour une branche existante
+
+Pour définir l'upstream pour une branche existante, utilisez la commande `branch` avec l'option `--set-upstream-to` :
+
+```bash
+git branch --set-upstream-to=origin/nom-de-la-branche nom-de-la-branche
+```
+
+Ce cours vous a fourni les bases pour utiliser Git via la ligne de commande et comprendre Git Flow. Pour approfondir vos connaissances, consultez la [documentation officielle de Git](https://git-scm.com/doc).
 
 ### Structure des branches
 
