@@ -1,3 +1,8 @@
+---
+title: Introduction au Git CLI
+---
+
+<Layout>
 # Introduction au Git CLI
 
 Ce cours vise à vous apprendre les bases de l'utilisation de Git via la ligne de commande (CLI). Nous couvrirons les commandes essentielles telles que `clone`, `pull`, `fetch`, `checkout`, `branch`, `switch`, et `commit`. Nous expliquerons également ce qu'est Git Flow et comment l'utiliser dans le développement.
@@ -220,8 +225,9 @@ Ce cours vous a fourni les bases pour utiliser Git via la ligne de commande et c
     git merge hotfix/1.0.1
     git tag -a v1.0.1 -m "Version 1.0.1"
     git checkout develop
-    merge git hotfix/1.0.1
+    git merge hotfix/1.0.1
     git branch -d hotfix/1.0.1
     ```
 
 Ce cours vous a fourni les bases pour utiliser Git via la ligne de commande et comprendre Git Flow. Pour approfondir vos connaissances, consultez la [documentation officielle de Git](https://git-scm.com/doc).
+</Layout>
