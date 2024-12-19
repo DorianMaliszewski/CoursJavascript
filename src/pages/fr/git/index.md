@@ -17,6 +17,49 @@ git --version
 
 Si Git n'est pas installé, vous pouvez le télécharger depuis [le site officiel de Git](https://git-scm.com/).
 
+## 2. Configuration de SSH pour Git
+
+Pour utiliser SSH avec Git, vous devez générer une clé SSH et l'ajouter à votre compte Git (par exemple, GitHub, GitLab, etc.). Voici comment procéder :
+
+1. **Générer une clé SSH** :
+
+    Ouvrez un terminal et exécutez la commande suivante, en remplaçant `votre-email@example.com` par votre adresse e-mail :
+
+    ```bash
+    ssh-keygen -t rsa -b 4096 -C "votre-email@example.com"
+    ```
+
+    Appuyez sur Entrée pour accepter l'emplacement par défaut du fichier. Vous pouvez également définir un mot de passe pour sécuriser votre clé.
+
+2. **Ajouter la clé SSH à l'agent SSH** :
+
+    Démarrez l'agent SSH et ajoutez votre clé SSH à celui-ci :
+
+    ```bash
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa
+    ```
+
+3. **Ajouter la clé SSH à votre compte Git** :
+
+    Copiez le contenu de votre clé SSH publique :
+
+    ```bash
+    cat ~/.ssh/id_rsa.pub
+    ```
+
+    Collez ce contenu dans la section des clés SSH de votre compte Git (par exemple, [GitHub](https://github.com/settings/keys), [GitLab](https://gitlab.com/-/profile/keys)).
+
+### Avantages de l'utilisation de SSH par rapport à HTTP
+
+- **Sécurité** : SSH utilise des clés cryptographiques pour l'authentification, ce qui est plus sécurisé que l'utilisation de mots de passe via HTTP.
+- **Confort** : Une fois configuré, SSH ne demande pas de mot de passe à chaque interaction avec le dépôt, contrairement à HTTP qui demande un nom d'utilisateur et un mot de passe à chaque opération.
+- **Performance** : Les opérations Git via SSH sont généralement plus rapides que via HTTP, surtout pour les opérations de clonage et de push de grands dépôts.
+
+## 3. Cloner un dépôt
+
+Pour cloner un dépôt Git existant sur votre machine locale, utilisez la commande `clone` suivie de l'URL du dépôt :
+
 ## 2. Cloner un dépôt
 
 Pour cloner un dépôt Git existant sur votre machine locale, utilisez la commande `clone` suivie de l'URL du dépôt :
