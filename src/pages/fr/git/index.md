@@ -72,7 +72,7 @@ git clone https://github.com/username/repository.git
 
 ### Pull
 
-Pour récupérer les dernières modifications du dépôt distant et les fusionner avec votre branche locale, utilisez la commande `pull` :
+Pour récupérer et fusionner les dernières modifications du dépôt distant, utilisez la commande `pull` :
 
 ```bash
 git pull origin main
@@ -80,7 +80,7 @@ git pull origin main
 
 ### Fetch
 
-Pour récupérer les dernières modifications du dépôt distant sans les fusionner avec votre branche locale, utilisez la commande `fetch` :
+Pour récupérer les dernières modifications du dépôt distant sans fusion, utilisez la commande `fetch` :
 
 ```bash
 git fetch origin
@@ -90,7 +90,7 @@ git fetch origin
 
 ### Checkout
 
-Pour basculer vers une autre branche existante, utilisez la commande `checkout` :
+Pour basculer vers une autre branche, utilisez `checkout` :
 
 ```bash
 git checkout nom-de-la-branche
@@ -98,15 +98,15 @@ git checkout nom-de-la-branche
 
 ### Switch
 
-Pour basculer vers une autre branche existante (disponible depuis Git 2.23), utilisez la commande `switch` :
+Pour basculer vers une autre branche (Git 2.23+), utilisez `switch` :
 
 ```bash
 git switch nom-de-la-branche
 ```
 
-### Switch avec mise en place de l'upstream
+### Switch avec upstream
 
-Pour basculer vers une autre branche et définir l'upstream, utilisez la commande `switch` avec l'option `-u` :
+Pour basculer et définir l'upstream, utilisez `switch -u` :
 
 ```bash
 git switch -u nom-de-la-branche
@@ -116,7 +116,7 @@ git switch -u nom-de-la-branche
 
 ### Branch
 
-Pour créer une nouvelle branche sans basculer dessus, utilisez la commande `branch` :
+Pour créer une branche sans basculer dessus, utilisez `branch` :
 
 ```bash
 git branch nom-de-la-nouvelle-branche
@@ -124,7 +124,7 @@ git branch nom-de-la-nouvelle-branche
 
 ### Checkout -b
 
-Pour créer une nouvelle branche et basculer dessus immédiatement, utilisez la commande `checkout` avec l'option `-b` :
+Pour créer et basculer vers une nouvelle branche, utilisez `checkout -b` :
 
 ```bash
 git checkout -b nom-de-la-nouvelle-branche
@@ -132,7 +132,7 @@ git checkout -b nom-de-la-nouvelle-branche
 
 ### Switch -c
 
-Pour créer une nouvelle branche et basculer dessus immédiatement (disponible depuis Git 2.23), utilisez la commande `switch` avec l'option `-c` :
+Pour créer et basculer vers une nouvelle branche (Git 2.23+), utilisez `switch -c` :
 
 ```bash
 git switch -c nom-de-la-nouvelle-branche
@@ -140,21 +140,21 @@ git switch -c nom-de-la-nouvelle-branche
 
 ## 6. Commiter vos modifications
 
-Pour enregistrer vos modifications dans le dépôt local, suivez ces étapes :
+Pour enregistrer vos modifications, suivez ces étapes :
 
-1. Ajoutez les fichiers modifiés à l'index :
+1. Ajoutez les fichiers modifiés :
 
     ```bash
     git add nom-du-fichier
     ```
 
-    Ou ajoutez tous les fichiers modifiés :
+    Ou ajoutez tous les fichiers :
 
     ```bash
     git add .
     ```
 
-2. Committez les modifications avec un message descriptif :
+2. Committez avec un message :
 
     ```bash
     git commit -m "Description des modifications"
@@ -162,22 +162,22 @@ Pour enregistrer vos modifications dans le dépôt local, suivez ces étapes :
 
 ## 7. Git Flow
 
-Git Flow est un ensemble de conventions pour gérer les branches dans un projet Git. Il définit des branches principales (`main` et `develop`) et des branches secondaires pour les fonctionnalités, les corrections de bugs, les releases et les hotfixes.
+Git Flow est un ensemble de conventions pour gérer les branches dans un projet Git. Il définit des branches principales (`main` et `develop`) et des branches secondaires pour les fonctionnalités, corrections de bugs, releases et hotfixes.
 
 ## 8. Utilisation des Pull Requests (PR) ou Merge Requests (MR)
 
-Lorsque vous travaillez en équipe, il est préférable d'utiliser des Pull Requests (PR) sur GitHub ou des Merge Requests (MR) sur GitLab plutôt que de fusionner directement les branches avec `git merge`. Voici pourquoi :
+Lorsque vous travaillez en équipe, utilisez des PR/MR plutôt que `git merge`. Voici pourquoi :
 
-- **Relecture de code** : Les PR/MR permettent à d'autres membres de l'équipe de revoir le code avant sa fusion, ce qui réduit les erreurs et améliore la qualité du code.
-- **Discussion et collaboration** : Les PR/MR fournissent un espace pour discuter des modifications et apporter des suggestions, favorisant la collaboration.
-- **Historique des modifications** : Les PR/MR conservent un historique des modifications proposées, facilitant le suivi des changements et la compréhension de l'évolution du projet.
-- **Intégration continue** : Les PR/MR peuvent être configurés pour déclencher des tests automatiques, assurant que les modifications ne cassent pas le code existant.
+- **Relecture de code** : Les PR/MR permettent de revoir le code avant fusion, réduisant les erreurs et améliorant la qualité.
+- **Discussion et collaboration** : Les PR/MR favorisent la collaboration en permettant des discussions et des suggestions.
+- **Historique des modifications** : Les PR/MR conservent un historique des modifications proposées, facilitant le suivi des changements.
+- **Intégration continue** : Les PR/MR déclenchent des tests automatiques, assurant que les modifications ne cassent pas le code existant.
 
 ## 9. Commandes recommandées pour la gestion des branches
 
-### Créer et basculer vers une nouvelle branche avec mise en place de l'upstream
+### Créer et basculer vers une nouvelle branche avec upstream
 
-Pour créer une nouvelle branche et basculer dessus immédiatement tout en définissant l'upstream, utilisez la commande `switch` avec l'option `-c` :
+Pour créer et basculer vers une nouvelle branche avec upstream, utilisez `switch -c` :
 
 ```bash
 git switch -c nom-de-la-nouvelle-branche
@@ -185,7 +185,7 @@ git switch -c nom-de-la-nouvelle-branche
 
 ### Définir l'upstream pour une branche existante
 
-Pour définir l'upstream pour une branche existante, utilisez la commande `branch` avec l'option `--set-upstream-to` :
+Pour définir l'upstream pour une branche existante, utilisez `branch --set-upstream-to` :
 
 ```bash
 git branch --set-upstream-to=origin/nom-de-la-branche nom-de-la-branche
@@ -195,11 +195,11 @@ Ce cours vous a fourni les bases pour utiliser Git via la ligne de commande et c
 
 ### Structure des branches
 
-- `main` : La branche principale qui contient le code stable.
-- `develop` : La branche de développement où toutes les nouvelles fonctionnalités sont intégrées.
+- `main` : La branche principale avec le code stable.
+- `develop` : La branche de développement pour nouvelles fonctionnalités.
 - `feature/*` : Les branches pour développer de nouvelles fonctionnalités.
 - `release/*` : Les branches pour préparer une nouvelle release.
-- `hotfix/*` : Les branches pour corriger des bugs critiques dans la version en production.
+- `hotfix/*` : Les branches pour corriger des bugs critiques.
 
 ### Workflow
 
