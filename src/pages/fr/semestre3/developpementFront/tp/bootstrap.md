@@ -82,55 +82,61 @@ Voici une structure de base pour l'interface :
 Voici un script JavaScript pour envoyer la question posée dans le champ input et afficher la réponse dans la zone de chat :
 
 ```javascript
-document.getElementById("sendButton").addEventListener("click", async () => {
-    // Récupérer la saisie utilisateur depuis l'input
-    const userInput = document.getElementById("userInput").value.trim();
-    if (!userInput) {
-        alert("Veuillez entrer une question !");
-        return;
-    }
+<script>
+   document.getElementById("sendButton").addEventListener("click", async() => {
+       // Récupérer la saisie utilisateur depuis l'input
+       const userInput = document.getElementById("userInput").value.trim();
+       if (!userInput) {
+           alert("Veuillez entrer une question !");
+           return;
+       }
 
-    // Ajouter la question de l'utilisateur dans la zone de chat
-    addMessage("You", userInput);
+       // Ajouter la question de l'utilisateur dans la zone de chat
+       addMessage("You", userInput);
 
-    try {
-        // Envoyer la requête à Ollama
-        const response = await fetch("http://localhost:11434/api/ask", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                prompt: `Imagine que tu es cet étudiant. Réponds comme si la question te concernait : ${userInput}`
-            })
-        });
+       try {
+           // Envoyer la requête à Ollama
+           const response = await fetch("http://127.0.0.1:11434/api/generate", {
+               method: "POST",
+               headers: {
+                   "Content-Type": "application/json"
+               },
+               body: JSON.stringify({
+                   model: "llama3.2",
+                   prompt: `Imagine que tu es cet étudiant. Réponds comme si la question te concernait : ${userInput}`,
+                   stream: false
+               })
+           });
 
-        // Lire la réponse
-        if (!response.ok) throw new Error("Erreur de l'API");
-        const data = await response.json();
 
-        // Afficher la réponse du chatbot
-        addMessage("Chatbot", data.answer || "Pas de réponse reçue.");
-    } catch (error) {
-        console.error(error);
-        addMessage("Chatbot", "Erreur lors de la connexion à Ollama.");
-    }
+           // Lire la réponse
+           if (!response.ok) throw new Error("Erreur de l'API");
 
-    // Vider le champ input
-    document.getElementById("userInput").value = "";
-});
+           const data = await response.json();
 
-// Fonction pour ajouter un message dans la zone de chat
-function addMessage(sender, message) {
-    const chatBox = document.getElementById("chatBox");
-    const messageElement = document.createElement("div");
-    messageElement.className = sender === "You" ? "text-right text-blue-600" : "text-left text-gray-800";
-    messageElement.textContent = `${sender}: ${message}`;
-    chatBox.appendChild(messageElement);
+           // Afficher la réponse du chatbot
+           addMessage("Chatbot", data.response || "Pas de réponse reçue.");
+       } catch (error) {
+           console.error(error);
+           addMessage("Chatbot", "Erreur lors de la connexion à Ollama.");
+       }
 
-    // Scroller automatiquement vers le bas
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+       // Vider le champ input
+       document.getElementById("userInput").value = "";
+   });
+
+   // Fonction pour ajouter un message dans la zone de chat
+   function addMessage(sender, message) {
+       const chatBox = document.getElementById("chatBox");
+       const messageElement = document.createElement("div");
+       messageElement.className = sender === "You" ? "text-right text-blue-600" : "text-left text-gray-800";
+       messageElement.textContent = `${sender}: ${message}`;
+       chatBox.appendChild(messageElement);
+
+       // Scroller automatiquement vers le bas
+       chatBox.scrollTop = chatBox.scrollHeight;
+   }
+</script>
 ```
 
 ---
