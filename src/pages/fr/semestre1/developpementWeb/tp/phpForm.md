@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = trim($_POST['message']);
 
     if (!empty($pseudo) && !empty($message)) {
-        $formattedMessage = "[" . date('H:i:s') . "] " . $pseudo . ": " . $message . "n";
+        $formattedMessage = "[" . date('H:i:s') . "] " . $pseudo . ": " . $message . "\n";
         file_put_contents('messages.txt', $formattedMessage, FILE_APPEND);
     }
 }
