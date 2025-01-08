@@ -97,13 +97,12 @@ Créez un fichier `messages.txt` pour stocker les messages et vérifiez qu'il es
 
 | **Critère**                         | **Description**                                                                                 | **Points** |
 |-------------------------------------|-----------------------------------------------------------------------------------------------|-----------|
-| **Beauté (CSS)**                    | - Respect de l'esthétique : alignement, couleurs harmonieuses, responsive.                     | 3 points  |
-| **Fonctionnalité du chat**          | - Les messages s'affichent correctement.<br>- Les nouveaux messages sont ajoutés.             | 4 points  |
-| **Structure du site avec Flexbox**  | - Utilisation de `display: flex` pour organiser les éléments (messages, formulaire, etc.).      | 3 points  |
-| **Validation des données**          | - Vérification que le pseudo et le message ne sont pas vides.                                  | 2 points  |
-| **Gestion des fichiers**            | - Création et utilisation du fichier `messages.txt` pour stocker les messages.                | 3 points  |
-| **Redirection après envoi**         | - Après avoir envoyé un message, l'utilisateur est redirigé vers la page principale.           | 2 points  |
-| **Bonus : Fonctionnalités avancées**| - Ajout d'options supplémentaires comme un bouton pour effacer les messages ou limiter l'affichage à 10 messages. | 3 points  |
+| **Beauté (CSS)**                    | - Respect de l'esthétique : alignement, couleurs harmonieuses, responsive.                     | 5 points  |
+| **Fonctionnalité du chat**          | - Les messages s'affichent correctement.<br>- Les nouveaux messages sont ajoutés.               | 4 points  |
+| **Structure du site avec Flexbox**  | - Utilisation de `display: flex` pour organiser les éléments (messages, formulaire, etc.).      |  points  |
+| **Style par pseudo**                | - Le choix de pouvoir choisir dans quelle couleur s'affichera son message grace a un color pick. ( https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color )    | 2 points  |
+| **Animation sur le bouton**         | - Une animation sur le bouton envoyez ou sur un autre element du MiniChat.                                  | 2 points  |
+| **Bonus : Fonctionnalités avancées**| - Ajout d'options supplémentaires comme un bouton pour effacer les messages ou limiter l'affichage à 10 messages. | 2 points  |
 
 **Total** : 20 points
 
