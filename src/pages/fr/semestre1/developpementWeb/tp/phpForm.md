@@ -3,75 +3,29 @@ layout: "layouts/Layout.astro"
 title: "TP Complet : PHP et Formulaires"
 ---
 
-# TP 2 : PHP et Formulaires 
+# TP : Mini-Chat en PHP (sans base de données)
 
-## Objectifs
+---
 
-1. Comprendre les bases de l'intégration de PHP avec les formulaires HTML.
-2. Apprendre à traiter les données de formulaire en PHP.
-3. Valider les entrées utilisateur côté serveur.
-4. Créer une page de contact dynamique avec PHP et HTML.
+## Objectifs du TP :
+1. Comprendre les bases de PHP (formulaires, sessions, fichiers).
+2. Apprendre à stocker des données dans un fichier texte.
+3. Développer un chat simple qui permet d'envoyer et afficher des messages.
 
-## Instructions
+---
 
-### Étape 1 : Création de la Page de Contact
+## Étapes du développement
 
-Créez un fichier HTML appelé `contact.html` et ajoutez le code HTML suivant pour créer un formulaire de contact de base :
+### Étape 1 : Structure de base du projet
+Créez un dossier appelé **mini-chat** contenant :
+- `index.php` : Page principale pour afficher le chat.
+- `chat.php` : Script pour traiter l'envoi des messages.
+- `messages.txt` : Fichier pour stocker les messages (vide au départ).
 
-```html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="form-styles.css">
-</head>
-<body>
-    <header>
-        <h1>Contactez-moi</h1>
-    </header>
-    <main>
-        <form action="process_contact.php" method="post">
-            <div>
-                <label for="name">Nom :</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="subject">Sujet :</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-            <div>
-                <label for="message">Message :</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <div>
-                <label for="phone">Téléphone (optionnel) :</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <div>
-                <button type="submit">Envoyer</button>
-            </div>
-        </form>
-    </main>
-    <footer>
-        <p>&copy; 2024 Mon Projet Web Étudiant</p>
-    </footer>
-</body>
-</html>
-```
-
-**Explications :**
-- Ce formulaire HTML envoie les données à un script PHP `process_contact.php` via la méthode POST.
-
-### Étape 2 : Traitement des Données du Formulaire en PHP
-
-Créez un fichier PHP appelé `process_contact.php` pour traiter les données soumises par le formulaire :
+### Étape 2 : Page principale (`index.php`)
+Incluez :
+- Une section pour afficher les messages stockés.
+- Un formulaire pour envoyer un pseudo et un message.
 
 ```php
 <!DOCTYPE html>
@@ -79,215 +33,93 @@ Créez un fichier PHP appelé `process_contact.php` pour traiter les données so
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Process Contact</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="form-styles.css">
+    <title>Mini Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .messages { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; max-height: 300px; overflow-y: auto; }
+        .message { margin-bottom: 10px; }
+    </style>
 </head>
 <body>
-    <?php
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $subject = $_POST['subject'];
-        $message = $_POST['message'];
-        $phone = $_POST['phone'];
-    ?>
-    <header>
-        <h1>Merci pour votre message, <?php echo htmlspecialchars($name); ?>!</h1>
-    </header>
-    <main>
-        <p>Nous avons bien reçu votre message :</p>
-        <ul>
-            <li><strong>Nom :</strong> <?php echo htmlspecialchars($name); ?></li>
-            <li><strong>Email :</strong> <?php echo htmlspecialchars($email); ?></li>
-            <li><strong>Sujet :</strong> <?php echo htmlspecialchars($subject); ?></li>
-            <li><strong>Message :</strong> <?php echo nl2br(htmlspecialchars($message)); ?></li>
-            <li><strong>Téléphone :</strong> <?php echo htmlspecialchars($phone); ?></li>
-        </ul>
-    </main>
-    <footer>
-        <p>&copy; 2024 Mon Projet Web Étudiant</p>
-    </footer>
+    <h1>Mini Chat</h1>
+
+    <div class="messages">
+        <?php
+        if (file_exists('messages.txt')) {
+            $messages = file('messages.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            foreach ($messages as $message) {
+                echo '<div class="message">' . htmlspecialchars($message) . '</div>';
+            }
+        } else {
+            echo '<p>Aucun message pour le moment.</p>';
+        }
+        ?>
+    </div>
+
+    <form action="chat.php" method="post">
+        <label for="pseudo">Pseudo :</label>
+        <input type="text" id="pseudo" name="pseudo" required>
+        <br><br>
+        <label for="message">Message :</label>
+        <input type="text" id="message" name="message" required>
+        <br><br>
+        <button type="submit">Envoyer</button>
+    </form>
 </body>
 </html>
 ```
 
-**Explications :**
-- Les données du formulaire sont récupérées à l'aide de `$_POST`.
-- La fonction `htmlspecialchars` est utilisée pour échapper les caractères spéciaux et éviter les attaques XSS.
-
-### Exercice Autonome 1
-
-Modifiez le fichier `process_contact.php` pour ajouter une validation de base :
-1. Vérifiez que les champs `name`, `email`, `subject` et `message` ne sont pas vides.
-2. Affichez un message d'erreur si l'un de ces champs est vide.
-
-### Étape 3 : Validation des Données de Formulaire
-
-Ajoutez une validation plus avancée dans `process_contact.php` :
+### Étape 3 : Traitement des messages (`chat.php`)
+Traitez le formulaire en ajoutant les messages dans le fichier texte et redirigez vers la page principale.
 
 ```php
 <?php
-    $errors = [];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $subject = $_POST['subject'];
-    $message = $_POST['message'];
-    $phone = $_POST['phone'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $pseudo = trim($_POST['pseudo']);
+    $message = trim($_POST['message']);
 
-    if (empty($name)) {
-        $errors[] = "Le nom est requis.";
+    if (!empty($pseudo) && !empty($message)) {
+        $formattedMessage = "[" . date('H:i:s') . "] " . $pseudo . ": " . $message . "n";
+        file_put_contents('messages.txt', $formattedMessage, FILE_APPEND);
     }
+}
 
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Un email valide est requis.";
-    }
-
-    if (empty($subject)) {
-        $errors[] = "Le sujet est requis.";
-    }
-
-    if (empty($message)) {
-        $errors[] = "Le message est requis.";
-    }
-
-    if (count($errors) > 0) {
-        foreach ($errors as $error) {
-            echo "<p style='color:red;'>$error</p>";
-        }
-    } else {
-        echo "<h1>Merci pour votre message, " . htmlspecialchars($name) . "!</h1>";
-        echo "<p>Nous avons bien reçu votre message :</p>";
-        echo "<ul>";
-        echo "<li><strong>Nom :</strong> " . htmlspecialchars($name) . "</li>";
-        echo "<li><strong>Email :</strong> " . htmlspecialchars($email) . "</li>";
-        echo "<li><strong>Sujet :</strong> " . htmlspecialchars($subject) . "</li>";
-        echo "<li><strong>Message :</strong> " . nl2br(htmlspecialchars($message)) . "</li>";
-        echo "<li><strong>Téléphone :</strong> " . htmlspecialchars($phone) . "</li>";
-        echo "</ul>";
-    }
-?>
+header('Location: index.php');
+exit;
 ```
 
-**Explications :**
-- Un tableau `$errors` est utilisé pour stocker les messages d'erreur.
-- `filter_var` est utilisé pour valider l'email.
+### Étape 4 : Gestion des fichiers
+Créez un fichier `messages.txt` pour stocker les messages et vérifiez qu'il est accessible en écriture.
 
-### Exercice Autonome 2
+---
 
-Ajoutez la validation suivante au formulaire :
-1. Le numéro de téléphone doit être facultatif, mais s'il est fourni, il doit contenir uniquement des chiffres.
-2. Affichez un message d'erreur approprié si le numéro de téléphone contient des caractères non numériques.
+## Critères d'évaluation et barème
 
-### Étape 4 : Amélioration de la Validation et Feedback
+| **Critère**                         | **Description**                                                                                 | **Points** |
+|-------------------------------------|-----------------------------------------------------------------------------------------------|-----------|
+| **Beauté (CSS)**                    | - Respect de l'esthétique : alignement, couleurs harmonieuses, responsive.                     | 3 points  |
+| **Fonctionnalité du chat**          | - Les messages s'affichent correctement.<br>- Les nouveaux messages sont ajoutés.             | 4 points  |
+| **Structure du site avec Flexbox**  | - Utilisation de `display: flex` pour organiser les éléments (messages, formulaire, etc.).      | 3 points  |
+| **Validation des données**          | - Vérification que le pseudo et le message ne sont pas vides.                                  | 2 points  |
+| **Gestion des fichiers**            | - Création et utilisation du fichier `messages.txt` pour stocker les messages.                | 3 points  |
+| **Redirection après envoi**         | - Après avoir envoyé un message, l'utilisateur est redirigé vers la page principale.           | 2 points  |
+| **Bonus : Fonctionnalités avancées**| - Ajout d'options supplémentaires comme un bouton pour effacer les messages ou limiter l'affichage à 10 messages. | 3 points  |
 
-Améliorez le fichier `process_contact.php` pour conserver les valeurs de formulaire en cas d'erreur afin que l'utilisateur n'ait pas à les ressaisir :
+**Total** : 20 points
 
-```php
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Process Contact</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="form-styles.css">
-</head>
-<body>
-    <?php
-        $errors = [];
-        $name = $_POST['name'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $subject = $_POST['subject'] ?? '';
-        $message = $_POST['message'] ?? '';
-        $phone = $_POST['phone'] ?? '';
+---
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (empty($name)) {
-                $errors[] = "Le nom est requis.";
-            }
+## Instructions pour les étudiants
 
-            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Un email valide est requis.";
-            }
+1. **Mise en place du projet** : 
+   - Placez votre dossier **mini-chat** dans le dossier `htdocs` ou équivalent.
+   - Assurez-vous que PHP est bien installé et configuré sur votre environnement (XAMPP, WAMP, ou autre).
 
-            if (empty($subject)) {
-                $errors[] = "Le sujet est requis.";
-            }
+2. **Livrable attendu** :
+   - Fournissez un dossier compressé contenant votre code source.
+   - Indiquez les étapes pour tester votre mini-chat.
 
-            if (empty($message)) {
-                $errors[] = "Le message est requis.";
-            }
-
-            if (!empty($phone) && !ctype_digit($phone)) {
-                $errors[] = "Le numéro de téléphone doit contenir uniquement des chiffres.";
-            }
-
-            if (count($errors) == 0) {
-                echo "<h1>Merci pour votre message, " . htmlspecialchars($name) . "!</h1>";
-                echo "<p>Nous avons bien reçu votre message :</p>";
-                echo "<ul>";
-                echo "<li><strong>Nom :</strong> " . htmlspecialchars($name) . "</li>";
-                echo "<li><strong>Email :</strong> " . htmlspecialchars($email) . "</li>";
-                echo "<li><strong>Sujet :</strong> " . htmlspecialchars($subject) . "</li>";
-                echo "<li><strong>Message :</strong> " . nl2br(htmlspecialchars($message)) . "</li>";
-                echo "<li><strong>Téléphone :</strong> " . htmlspecialchars($phone) . "</li>";
-                echo "</ul>";
-            }
-        }
-    ?>
-    <?php if (count($errors) > 0): ?>
-        <?php foreach ($errors as $error): ?>
-            <p style="color:red;"><?php echo $error; ?></p>
-        <?php endforeach; ?>
-        <form action="process_contact.php" method="post">
-            <div>
-                <label for="name">Nom :</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
-            </div>
-            <div>
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
-            </div>
-            <div>
-                <label for="subject">Sujet :</label>
-                <input type="text" id="subject" name="subject" value="<?php echo htmlspecialchars($subject); ?>" required>
-            </div>
-            <div>
-                <label for="message">Message :</label>
-                <textarea id="message" name="message" rows="5" required><?php echo htmlspecialchars($message); ?></textarea>
-            </div>
-            <div>
-                <label for="phone">Téléphone (optionnel) :</label>
-                <input type="tel" id="phone" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
-            </div>
-            <div>
-                <button type="submit">Envoyer</button>
-            </div>
-        </form>
-    <?php endif; ?>
-</body>
-</html>
-```
-
-**Explications :**
-- Les valeurs des champs sont conservées en cas d'erreur pour éviter que l'utilisateur ait à tout ressaisir.
-
-### Exercice Autonome 3
-
-Améliorez encore le formulaire pour :
-1. Ajouter une validation côté client en utilisant des attributs HTML5 tels que `pattern` pour le numéro de téléphone.
-2. Ajouter un champ de sélection pour le sujet avec plusieurs options prédéfinies.
-
-### Conclusion
-
-En suivant ces étapes, vous avez appris à :
-- Créer et intégrer des formulaires HTML avec PHP.
-- Traiter et valider les données de formulaire en PHP.
-- Offrir un retour utilisateur approprié en cas d'erreur de validation.
-- Améliorer l'expérience utilisateur en conservant les valeurs des champs et en ajoutant des validations côté client.
-
-## Résultats
-
-Une fois que vous avez terminé toutes les étapes, soumettez votre travail en utilisant le lien suivant : [Lien de soumission des résultats](#)
-
+3. **Conseils** :
+   - N'hésitez pas à consulter la documentation officielle PHP pour les fonctions `file_put_contents` et `file_get_contents`.
+   - Faites des essais réguliers pour vérifier que vos modifications fonctionnent.
 ---
