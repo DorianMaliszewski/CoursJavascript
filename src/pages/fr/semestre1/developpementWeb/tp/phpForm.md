@@ -99,9 +99,9 @@ Créez un fichier `messages.txt` pour stocker les messages et vérifiez qu'il es
 |-------------------------------------|-----------------------------------------------------------------------------------------------|-----------|
 | **Beauté (CSS)**                    | - Respect de l'esthétique : alignement, couleurs harmonieuses, responsive.                     | 5 points  |
 | **Fonctionnalité du chat**          | - Les messages s'affichent correctement.<br>- Les nouveaux messages sont ajoutés.               | 4 points  |
-| **Structure du site avec Flexbox**  | - Utilisation de `display: flex` pour organiser les éléments (messages, formulaire, etc.).      |  points  |
+| **Structure du site avec Flexbox**  | - Utilisation de `display: flex` pour organiser les éléments (messages, formulaire, etc.).      | 4 points  |
 | **Style par pseudo**                | - Le choix de pouvoir choisir dans quelle couleur s'affichera son message grace a un color pick. ( https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color )    | 2 points  |
-| **Animation sur le bouton**         | - Une animation sur le bouton envoyez ou sur un autre element du MiniChat.                                  | 2 points  |
+| **Animation sur le bouton**         | - Une animation sur le bouton envoyez ou sur un autre element du MiniChat.                                  | 3 points  |
 | **Bonus : Fonctionnalités avancées**| - Ajout d'options supplémentaires comme un bouton pour effacer les messages ou limiter l'affichage à 10 messages. | 2 points  |
 
 **Total** : 20 points
