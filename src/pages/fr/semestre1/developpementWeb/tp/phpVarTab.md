@@ -514,4 +514,91 @@ function checkWinner($board) {
 
 # TP 4 : Calculatrice en HTML/CSS/PHP
 
+# TP : Création d'une calculatrice avec PHP et CSS
+
+Dans ce TP, vous allez travailler sur une calculatrice simple développée en PHP. Vous allez personnaliser son design et ajouter une fonctionnalité supplémentaire.
+
+## Objectifs du TP
+
+1. **Partie 1 : Appliquer le design CSS**  
+   Vous allez appliquer un style en CSS pour que la calculatrice corresponde au design vu lors de la séance précédente.
+
+2. **Partie 2 : Ajouter une fonctionnalité "historique des calculs"**  
+   Vous ajouterez un tableau affichant les derniers calculs effectués sous la calculatrice.
+
+---
+Ajouter une fonctionnalité "historique des calculs"
+
+Dans cette partie, vous allez ajouter une section sous la calculatrice pour afficher les derniers calculs effectués.
+
+1. Modifiez votre fichier PHP pour inclure un tableau des historiques. Voici un exemple de modification dans votre fichier :
+
+   \```php
+   <?php
+   // Initialisation des variables
+   $result = "";
+   $display = "";
+   $history = [];
+
+   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+       $input = $_POST['input'] ?? "";
+
+       // Évaluer l'expression si "=" est pressé
+       if (isset($_POST['equals'])) {
+           try {
+               $result = eval("return $input;");
+               $history[] = $input . " = " . $result;
+               $display = $result;
+           } catch (Throwable $e) {
+               $display = "Erreur";
+           }
+       } elseif (isset($_POST['clear'])) {
+           $display = "";
+           $input = "";
+       } else {
+           $display = $input;
+       }
+   }
+   ?>
+
+   <div class="history">
+       <h2>Historique des calculs</h2>
+       <ul>
+           <?php foreach ($history as $entry): ?>
+               <li><?= htmlspecialchars($entry) ?></li>
+           <?php endforeach; ?>
+       </ul>
+   </div>
+   \```
+
+2. Ajoutez le style suivant à votre fichier `style.css` pour styliser l'historique :
+
+   \```css
+   .history {
+       margin-top: 20px;
+       font-size: 0.9em;
+       color: #333;
+   }
+   .history ul {
+       list-style: none;
+       padding: 0;
+   }
+   .history li {
+       background: #f9f9f9;
+       padding: 5px 10px;
+       margin-bottom: 5px;
+       border-radius: 3px;
+   }
+   \```
+
+3. Testez à nouveau votre calculatrice et assurez-vous que les calculs effectués s'affichent dans l'historique.
+
+---
+
+## Bonus
+
+- Ajoutez un bouton pour effacer l'historique.
+- Personnalisez les couleurs des boutons et du fond pour mieux correspondre au style de votre choix.
+
+
 ---
