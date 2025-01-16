@@ -46,7 +46,7 @@ Le but de ce devoir est de vous familiariser avec le développement web en utili
 
 ## Date de remise
 
-Le devoir doit être soumis avant la date de 17/03/2024 à 23h59.
+Le devoir doit être soumis avant la date de 26/01/2025 à 23h59.
 
 ## Note :
 
