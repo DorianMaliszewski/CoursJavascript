@@ -245,10 +245,6 @@ Dans cette partie, vous devez implémenter un système pour détecter si un joue
 
 ---
 
-## À vous de jouer !
-
-Ces indices vous donnent une structure claire pour progresser dans la détection des gagnants. Utilisez vos connaissances pour coder la logique et créer un morpion pleinement fonctionnel !
-
 # TP 2 : Puissance 4
 
 ## Objectif
@@ -509,14 +505,196 @@ function checkWinner($board) {
     // Votre code pour vérifier la victoire
 }
 ```
+---
 
 # TP 3 : Test de Personnalité
 
+Dans ce TP vous allez devoir appliquer le Style que nous avions definis dans la dernière séance au code PHP que je vous donne. 
+
+## Le code PHP
+
+Le code est composé de deux pages, une page permettant la saisie des questions et une page permettant l'affichage des résultats. 
+
+### Le Questionnaire (index.php)
+
+```php
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Personnalité</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Test de Personnalité</h1>
+        <form action="resultat.php" method="POST">
+            <div class="question">
+                <p>1. Vous aimez aider les autres.</p>
+                <input type="hidden" name="criteria[q1]" value="gentillesse">
+                <div class="options">
+                    <label><input type="radio" name="q1" value="1" required> Pas du tout d'accord</label>
+                    <label><input type="radio" name="q1" value="2"> Pas d'accord</label>
+                    <label><input type="radio" name="q1" value="3"> Neutre</label>
+                    <label><input type="radio" name="q1" value="4"> D'accord</label>
+                    <label><input type="radio" name="q1" value="5"> Très d'accord</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>2. Vous préférez économiser que dépenser.</p>
+                <input type="hidden" name="criteria[q2]" value="radin">
+                <div class="options">
+                    <label><input type="radio" name="q2" value="1" required> Pas du tout d'accord</label>
+                    <label><input type="radio" name="q2" value="2"> Pas d'accord</label>
+                    <label><input type="radio" name="q2" value="3"> Neutre</label>
+                    <label><input type="radio" name="q2" value="4"> D'accord</label>
+                    <label><input type="radio" name="q2" value="5"> Très d'accord</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>3. Vous aimez être le centre de l'attention.</p>
+                <input type="hidden" name="criteria[q3]" value="egocentrique">
+                <div class="options">
+                    <label><input type="radio" name="q3" value="1" required> Pas du tout d'accord</label>
+                    <label><input type="radio" name="q3" value="2"> Pas d'accord</label>
+                    <label><input type="radio" name="q3" value="3"> Neutre</label>
+                    <label><input type="radio" name="q3" value="4"> D'accord</label>
+                    <label><input type="radio" name="q3" value="5"> Très d'accord</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>4. Vous vous sentez satisfait après avoir aidé quelqu'un.</p>
+                <input type="hidden" name="criteria[q4]" value="gentillesse">
+                <div class="options">
+                    <label><input type="radio" name="q4" value="1" required> Pas du tout d'accord</label>
+                    <label><input type="radio" name="q4" value="2"> Pas d'accord</label>
+                    <label><input type="radio" name="q4" value="3"> Neutre</label>
+                    <label><input type="radio" name="q4" value="4"> D'accord</label>
+                    <label><input type="radio" name="q4" value="5"> Très d'accord</label>
+                </div>
+            </div>
+
+            <button type="submit">Voir les résultats</button>
+        </form>
+    </div>
+</body>
+</html>
+```
+
+### La page des résultats (resultat.php)
+
+```php
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $criteria = $_POST['criteria'];
+    $results = [];
+
+    foreach ($criteria as $question => $criterion) {
+        if (!isset($results[$criterion])) {
+            $results[$criterion] = 0;
+        }
+        $results[$criterion] += (int) $_POST[$question];
+    }
+
+    echo "<div style='text-align:center; padding: 20px;'>";
+    echo "<h1>Résultats du Test de Personnalité</h1>";
+    foreach ($results as $criterion => $score) {
+        echo "<p><strong>$criterion:</strong> $score points</p>";
+    }
+    echo "</div>";
+} else {
+    header('Location: index.php');
+    exit;
+}
+?>
+```
+
+## Partie 1 : Styliser le formulaire
+
+Vous devez styliser le formulaire comme nous l'avons vue dans le cours.
+
+## Partie 2 : Styliser la page des résultats
+
+Vous allez devoir modifier la page resultat.php afin que la page présente le résusltat du questionnaire de manière jolie. Vous pouvez par exemple transformer le nombre de points obtenu dans certain critère par une progress bar.
+
+## Bonus : Faire un graphique
+
+Vous devrez faire un graphique permettant de visualiser les différents critères.
+
+---
+
 # TP 4 : Calculatrice en HTML/CSS/PHP
 
-# TP : Création d'une calculatrice avec PHP et CSS
-
 Dans ce TP, vous allez travailler sur une calculatrice simple développée en PHP. Vous allez personnaliser son design et ajouter une fonctionnalité supplémentaire.
+
+Pour vous aider, vous vous baserez sur le code php suivant : 
+
+```php
+    <?php
+// Initialisation des variables
+$result = "";
+$display = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $input = $_POST['input'] ?? "";
+
+    // Évaluer l'expression si "=" est pressé
+    if (isset($_POST['equals'])) {
+        try {
+            $display = eval("return $input;");
+        } catch (Throwable $e) {
+            $display = "Erreur";
+        }
+    } elseif (isset($_POST['clear'])) {
+        $display = "";
+        $input = "";
+    } else {
+        $display = $input;
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <div class="calculator">
+        <form method="POST">
+            <input type="text" class="screen" name="input" value="<?= htmlspecialchars($display) ?>" readonly>
+            <div class="buttons">
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '7') ?>">7</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '8') ?>">8</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '9') ?>">9</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '/') ?>">/</button>
+
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '4') ?>">4</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '5') ?>">5</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '6') ?>">6</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '*') ?>">x</button>
+
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '1') ?>">1</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '2') ?>">2</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '3') ?>">3</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '-') ?>">-</button>
+
+                <button type="submit" name="clear">C</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '0') ?>">0</button>
+                <button type="submit" name="equals">=</button>
+                <button type="submit" name="input" value="<?= htmlspecialchars($display . '+') ?>">+</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+```
 
 ## Objectifs du TP
 
@@ -533,7 +711,7 @@ Dans cette partie, vous allez ajouter une section sous la calculatrice pour affi
 
 1. Modifiez votre fichier PHP pour inclure un tableau des historiques. Voici un exemple de modification dans votre fichier :
 
-   \```php
+   ```php
    <?php
    // Initialisation des variables
    $result = "";
@@ -569,11 +747,11 @@ Dans cette partie, vous allez ajouter une section sous la calculatrice pour affi
            <?php endforeach; ?>
        </ul>
    </div>
-   \```
+   ```
 
 2. Ajoutez le style suivant à votre fichier `style.css` pour styliser l'historique :
 
-   \```css
+   ```css
    .history {
        margin-top: 20px;
        font-size: 0.9em;
@@ -589,7 +767,7 @@ Dans cette partie, vous allez ajouter une section sous la calculatrice pour affi
        margin-bottom: 5px;
        border-radius: 3px;
    }
-   \```
+   ```
 
 3. Testez à nouveau votre calculatrice et assurez-vous que les calculs effectués s'affichent dans l'historique.
 
