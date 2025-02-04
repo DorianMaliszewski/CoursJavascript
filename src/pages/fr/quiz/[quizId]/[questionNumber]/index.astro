@@ -1,0 +1,114 @@
+---
+import Layout from "layouts/Layout.astro";
+import type { Answers } from "types";
+import { Code } from "astro:components";
+import { AnswerForm } from "components/AnswerForm.tsx";
+import { getQuiz } from "utils/getQuiz";
+import { getCookieName } from "utils/getCookieName";
+import { getRandomQuestion } from "utils/getRandomQuestion";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+export const prerender = false;
+
+// Retrieve questions
+
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+const { quizId, questionNumber: questionNumberString } = Astro.params;
+
+if (!quizId || !questionNumberString) {
+  return Astro.redirect("/404");
+}
+
+const questionIndex = Number.parseInt(questionNumberString);
+const questionsAndResponses = await getQuiz(quizId);
+if (!questionsAndResponses) {
+  return Astro.redirect("/404");
+}
+const totalQuestions = questionsAndResponses.questionsPerTest;
+
+const currentQuestion = questionsAndResponses.questions[questionIndex];
+if (!questionNumberString || Number.isNaN(questionIndex)) {
+  return Astro.redirect("/404");
+}
+
+let answers: Answers = {};
+const cookieKey = getCookieName(quizId);
+if (Astro.cookies.has(cookieKey)) {
+  const answersCookie = Astro.cookies.get(cookieKey);
+  answers = answersCookie?.json();
+}
+const [_, nextQuestionIndex] = getRandomQuestion(
+  questionsAndResponses.questions,
+  Object.keys(answers).map(Number),
+);
+
+const meta = {
+  title: `MMI Quiz`,
+  description: `Testez vos compétences avec ce questionnaire`,
+};
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const answerIndex = data.get("answerIndex");
+    if (typeof answerIndex !== "string") throw new Error("No answer provided");
+
+    if (
+      answers[questionIndex] === null ||
+      answers[questionIndex] === undefined
+    ) {
+      answers[questionIndex] = parseInt(answerIndex);
+      Astro.cookies.set(cookieKey, JSON.stringify(answers), {
+        maxAge: ONE_DAY_IN_SECONDS,
+        path: "/",
+        sameSite: true,
+        httpOnly: true,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+// For malicious student that want the same question
+// We already set the cookie in case they change the url for another question it will be count as a false response
+if (answers[questionIndex] === null || answers[questionIndex] === undefined) {
+  answers[questionIndex] = null;
+  Astro.cookies.set(cookieKey, JSON.stringify(answers), {
+    maxAge: ONE_DAY_IN_SECONDS,
+    path: "/",
+    sameSite: true,
+    httpOnly: true,
+  });
+}
+
+const totalAnswers = Object.keys(answers).length;
+
+---
+
+<Layout title={meta.title}>
+  <div class="flex flex-col gap-8">
+    <h1>Questionnaire</h1>
+    <div class="flex flex-col gap-4">
+      <div class="text-xl font-semibold">
+        Question {totalAnswers} sur {totalQuestions}
+      </div>
+      <progress
+        class="progress progress-primary w-full max-w-lg"
+        value={totalAnswers}
+        max={totalQuestions}></progress>
+    </div>
+    <Code code={currentQuestion.question} lang="md" />
+    <AnswerForm
+      hasMoreQuestions={totalAnswers < totalQuestions}
+      answerIndex={answers[questionIndex]}
+      quizId={quizId}
+      answers={currentQuestion.answers}
+      question={currentQuestion.question}
+      correctAnswerIndex={currentQuestion.correctAnswerIndex}
+      nextQuestionIndex={nextQuestionIndex}
+      currentLocale={Astro.currentLocale}
+    />
+  </div>
+</Layout>

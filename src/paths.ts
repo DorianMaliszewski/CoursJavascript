@@ -4,6 +4,7 @@ export const PATHS = {
     recap: "/mmi2/css/recap",
     flex: "/mmi2/css/flex",
     grid: "/mmi2/css/grid",
+    quiz: "/quiz/htmlcss",
   },
   php: {
     php: "/mmi2/php/phpsql",

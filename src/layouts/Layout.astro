@@ -1,18 +1,14 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import Sidebar from "components/Sidebar/Sidebar.astro";
-import { getLangFromUrl, useTranslations } from "i18n/utils";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 interface Props {
   title: string;
+  frontmatter?: { title?: string };
 }
 
-const { title } = Astro.props;
-const { frontmatter } = Astro.props;
-const finalTitle = title ?? frontmatter.title;
+const { title, frontmatter } = Astro.props;
+const finalTitle = title ?? frontmatter?.title ?? "MMI - Site";
 ---
 
 <!doctype html>
@@ -22,15 +18,18 @@ const finalTitle = title ?? frontmatter.title;
     <meta name="description" content="MMI2 Dev website" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/png" href="/src/assets/univ_logo.png">
+    <link rel="icon" type="image/png" href="/src/assets/univ_logo.png" />
     <title>{finalTitle}</title>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body>
     <header transition:persist>
       <Sidebar />
     </header>
-    <main class="p-10 px-18 mt-20 prose prose-slante lg:prose-lg max-w-full">
+    <main
+      transition:animate="fade"
+      class="p-10 px-18 mt-20 prose prose-slante lg:prose-lg max-w-full"
+    >
       <slot />
     </main>
   </body>
