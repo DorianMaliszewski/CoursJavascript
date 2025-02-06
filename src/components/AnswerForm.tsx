@@ -1,7 +1,7 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import clsx from "clsx";
 import { CheckIcon, XIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Question } from "types";
 import { isNullOrUndefined } from "utils/isNullOrUndefined";
 
@@ -29,6 +29,7 @@ export const AnswerForm = ({
 
 	return (
 		<form
+      id="answerForm"
 			method="POST"
 			onSubmit={() => {
 				setIsSubmitting(true);
@@ -53,7 +54,7 @@ export const AnswerForm = ({
 							className="peer appearance-none focus:outline-none"
 							disabled={!isNullOrUndefined(answerIndex)}
 							checked={
-								!isNullOrUndefined(answerIndex) ? answerIndex === i : undefined
+								!isNullOrUndefined(answerIndex) ? answerIndex === i : i === 0
 							}
 							onChange={() => {}}
 							required

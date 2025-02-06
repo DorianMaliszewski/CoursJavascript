@@ -7,6 +7,8 @@ import { getQuiz } from "utils/getQuiz";
 import { getCookieName } from "utils/getCookieName";
 import { getRandomQuestion } from "utils/getRandomQuestion";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { PATHS } from "paths";
+import { isNullOrUndefined } from "utils/isNullOrUndefined";
 
 export const prerender = false;
 
@@ -20,13 +22,18 @@ if (!quizId || !questionNumberString) {
 }
 
 const questionIndex = Number.parseInt(questionNumberString);
-const questionsAndResponses = await getQuiz(quizId);
-if (!questionsAndResponses) {
+const quizData = await getQuiz(quizId);
+if (!quizData) {
   return Astro.redirect("/404");
 }
-const totalQuestions = questionsAndResponses.questionsPerTest;
+if (quizData.mode === "close") {
+  return Astro.redirect(
+    getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz(quizId, "closed")),
+  );
+}
+const totalQuestions = quizData.questionsPerTest;
 
-const currentQuestion = questionsAndResponses.questions[questionIndex];
+const currentQuestion = quizData.questions[questionIndex];
 if (!questionNumberString || Number.isNaN(questionIndex)) {
   return Astro.redirect("/404");
 }
@@ -38,12 +45,12 @@ if (Astro.cookies.has(cookieKey)) {
   answers = answersCookie?.json();
 }
 const [_, nextQuestionIndex] = getRandomQuestion(
-  questionsAndResponses.questions,
+  quizData.questions,
   Object.keys(answers).map(Number),
 );
 
 const meta = {
-  title: `MMI Quiz`,
+  title: `MMI Quiz - ${quizData.name}`,
   description: `Testez vos compétences avec ce questionnaire`,
 };
 
@@ -85,9 +92,23 @@ if (answers[questionIndex] === null || answers[questionIndex] === undefined) {
 
 const totalAnswers = Object.keys(answers).length;
 
+const timeByQuestionInSeconds = quizData.mode === 'exam' ? quizData.timeByQuestionInSeconds : 0;
 ---
 
 <Layout title={meta.title}>
+{isNullOrUndefined(answers[questionIndex]) && timeByQuestionInSeconds > 0 && (
+  <div
+      class="fixed top-0 left-0 right-0 h-2 bg-primary w-full animate-timer"
+      id="timer"
+      style=`animation-duration: ${timeByQuestionInSeconds}s; animation-fill-mode: forwards;`
+    >
+    </div>
+    <script is:inline>
+      document.getElementById("timer").addEventListener("animationend", () => {
+        document.getElementById("answerForm").submit();
+      });
+  </script>
+  )}
   <div class="flex flex-col gap-8">
     <h1>Questionnaire</h1>
     <div class="flex flex-col gap-4">
@@ -99,7 +120,7 @@ const totalAnswers = Object.keys(answers).length;
         value={totalAnswers}
         max={totalQuestions}></progress>
     </div>
-    <Code code={currentQuestion.question} lang="md" />
+    <Code code={currentQuestion.question} lang='markdown' />
     <AnswerForm
       hasMoreQuestions={totalAnswers < totalQuestions}
       answerIndex={answers[questionIndex]}
@@ -109,6 +130,7 @@ const totalAnswers = Object.keys(answers).length;
       correctAnswerIndex={currentQuestion.correctAnswerIndex}
       nextQuestionIndex={nextQuestionIndex}
       currentLocale={Astro.currentLocale}
+      timeByQuestionInSeconds={timeByQuestionInSeconds}
     />
   </div>
 </Layout>

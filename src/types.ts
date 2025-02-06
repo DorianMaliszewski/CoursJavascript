@@ -14,4 +14,6 @@ export type APIResponse = {
 	mode: QuizMode;
 	questions: Question[];
 	questionsPerTest: number;
+  timeByQuestionInSeconds: number;
+  name: string;
 };

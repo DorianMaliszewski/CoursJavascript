@@ -1,5 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { PATHS } from "paths";
 import { getCookieName } from "utils/getCookieName";
 
 export const prerender = false;
@@ -19,6 +20,6 @@ if (Astro.cookies.has(cookieKey)) {
 }
 
 return Astro.redirect(
-  getRelativeLocaleUrl(Astro.currentLocale, `quiz/${quizId}/1`),
+  getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz(quizId, 1)),
 );
 ---

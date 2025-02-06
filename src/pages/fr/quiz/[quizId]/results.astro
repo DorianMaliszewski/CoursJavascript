@@ -9,7 +9,7 @@ export const prerender = false;
 
 const { quizId } = Astro.params;
 if (!quizId) return Astro.redirect("/404");
-const questionsAndResponses = await getQuiz(quizId);
+const quizData = await getQuiz(quizId);
 
 const cookieKey = getCookieName(quizId);
 
@@ -22,21 +22,20 @@ if (!answersCookie) {
   Astro.redirect(`/quiz/${quizId}/1`);
 }
 const answers: Answers = answersCookie?.json();
-console.log(questionsAndResponses)
-if (Object.keys(answers).length !== questionsAndResponses.questionsPerTest) {
+console.log(quizData)
+if (Object.keys(answers).length !== quizData.questionsPerTest) {
   Astro.redirect(`/quiz/${quizId}/1`);
 }
 
 const correctAnswers = Object.entries(answers)?.reduce(
   (acc, [questionIndex, answerIndex]) =>
     acc +
-    (questionsAndResponses.questions[questionIndex]?.correctAnswerIndex ===
+    (quizData.questions[questionIndex]?.correctAnswerIndex ===
     answerIndex
       ? 1
       : 0),
   0,
 );
-const totalAnswers = answers?.length;
 
 const meta = {
   title: `Resultat | MMI Quiz`,
@@ -48,14 +47,14 @@ const meta = {
   <div class="flex flex-col items-center justify-center gap-4">
     <section class="flex flex-col gap-4">
       <h1 class="flex flex-col gap-2">
-        Quiz terminé ! <strong>Vous avez...</strong>
+        Quiz {quizData.name} terminé ! <strong>Vous avez...</strong>
       </h1>
     </section>
-    <section class="flex flex-col gap-4">
-      <div class="flex flex-col items-center rounded-xl bg-base-300 p-8">
-        <h2 class="flex items-center gap-4 font-medium">Questionnaire</h2>
-        <div class="mb-4 text-9xl font-medium">{correctAnswers}</div>
-        <div class="text-foreground-brand/70">sur {questionsAndResponses.questionsPerTest}</div>
+    <section class="flex flex-col gap-8">
+      <div class="flex flex-col items-center justify-center gap-4 rounded-xl bg-base-300 p-8 not-prose">
+        <p class="flex items-center gap-4 font-semibold text-3xl">{quizData.name}</p>
+        <div class="text-9xl">{correctAnswers}</div>
+        <div class="text-foreground-brand/70">sur {quizData.questionsPerTest}</div>
       </div>
       <a
         href={getRelativeLocaleUrl(

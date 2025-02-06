@@ -1,14 +1,18 @@
 import type { APIResponse } from "types";
+import { questions } from "questions";
 
 // Yolo cache but it works
 let cachedData: { [x: string]: {res: APIResponse, lastFetch: number} } = {};
-const CACHE_DURATION = 60 * 1000; // 1 minute
+const CACHE_DURATION = import.meta.env.DEV ? 60 * 60 * 8 * 1000 :  60 * 1000; // *hours in dev otherwise 1 minute
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsUnyUPjQhv1mjnRLPcIN8Z5W3vjzG1AWvVhcQOEmENHUkkB2mb77oL31pXSW8Q-6J/exec"
 const API_KEY = import.meta.env.API_KEY
 
 export async function getQuiz(
 	quizId: string,
 ): Promise<APIResponse | undefined> {
+  // Delete me, use me for testing purpose
+  return questions 
+
   const now = Date.now();
 
 
