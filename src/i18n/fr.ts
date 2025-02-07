@@ -30,6 +30,7 @@ export const fr = {
   "menu.css.recap.title": "On revoit les bases HTML/CSS",
   "menu.css.grid.title": "Les grids",
   "menu.css.flex.title": "Les flexbox",
+  "menu.css.quiz.title": "Questionnaire",
   "menu.php.title": "PHP",
   "menu.php.php.title": "Connexion à une base de donnée",
   "menu.mmi1.intro": "Introduction",

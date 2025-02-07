@@ -1,3 +1,4 @@
+# Old one we used when we had a static deployment
 name: Deploy to GitHub Pages
 
 on:

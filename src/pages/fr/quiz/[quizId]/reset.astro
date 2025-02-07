@@ -1,0 +1,25 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { PATHS } from "paths";
+import { getCookieName } from "utils/getCookieName";
+
+export const prerender = false;
+
+const { quizId } = Astro.params;
+if (!quizId) {
+  return Astro.redirect("/404");
+}
+const cookieKey = getCookieName(quizId);
+
+if (Astro.cookies.has(cookieKey)) {
+  Astro.cookies.delete(cookieKey, {
+    path: "/",
+    sameSite: true,
+    httpOnly: true,
+  });
+}
+
+return Astro.redirect(
+  getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz(quizId, 1)),
+);
+---
