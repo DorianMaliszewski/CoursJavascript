@@ -1,13 +1,16 @@
+process.env.DEBUG = "*"; // Active tous les logs de débogage
+
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
+
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
   site: "https://DorianMaliszewski.github.io",
   base: "/CoursJavascript",
-  output: "static",
+  output: "server",
 	i18n: {
 		locales: ["fr"],
 		defaultLocale: "fr",
