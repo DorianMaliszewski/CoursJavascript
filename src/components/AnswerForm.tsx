@@ -29,7 +29,7 @@ export const AnswerForm = ({
 
 	return (
 		<form
-      id="answerForm"
+			id="answerForm"
 			method="POST"
 			onSubmit={() => {
 				setIsSubmitting(true);
@@ -73,11 +73,13 @@ export const AnswerForm = ({
 									: "",
 								{
 									"border-success text-success [&>_span[data-letter]]:bg-success [&>_span[data-letter]]:text-success-content":
-										!isNullOrUndefined(answerIndex) && answerIndex === i,
+										!isNullOrUndefined(answerIndex) &&
+										correctAnswerIndex === i &&
+										answerIndex === i,
 									"border-error text-error [&>_span[data-letter]]:bg-error [&>_span[data-letter]]:text-error-content":
 										!isNullOrUndefined(answerIndex) &&
-										answerIndex !== i &&
-										correctAnswerIndex === i,
+										answerIndex === i &&
+										correctAnswerIndex !== i,
 								},
 							)}
 							htmlFor={`answer-${i}`}
@@ -90,12 +92,14 @@ export const AnswerForm = ({
 							</span>
 							<span className="flex-grow">{answer}</span>
 							<div>
-								{!isNullOrUndefined(answerIndex) && answerIndex === i ? (
+								{!isNullOrUndefined(answerIndex) &&
+								answerIndex === i &&
+								correctAnswerIndex === i ? (
 									<CheckIcon className="size-8 text-success" />
 								) : null}
 								{!isNullOrUndefined(answerIndex) &&
-								answerIndex !== i &&
-								correctAnswerIndex === i ? (
+								answerIndex === i &&
+								correctAnswerIndex !== i ? (
 									<XIcon className="size-8 text-error" />
 								) : null}
 							</div>

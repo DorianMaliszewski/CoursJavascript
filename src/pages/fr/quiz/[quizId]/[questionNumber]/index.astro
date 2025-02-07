@@ -111,7 +111,7 @@ const timeByQuestionInSeconds = quizData.mode === 'exam' ? quizData.timeByQuesti
   </script>
   )}
   <div class="flex flex-col gap-8">
-    <h1>Questionnaire</h1>
+    <h1>{quizData.name}</h1>
     <div class="flex flex-col gap-4">
       <div class="text-xl font-semibold">
         Question {totalAnswers} sur {totalQuestions}

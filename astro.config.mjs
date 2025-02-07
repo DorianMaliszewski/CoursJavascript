@@ -7,7 +7,6 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   site: "https://DorianMaliszewski.github.io",
   base: "/CoursJavascript",
-  output: "static",
 	i18n: {
 		locales: ["fr"],
 		defaultLocale: "fr",
