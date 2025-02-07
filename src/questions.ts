@@ -1,7 +1,7 @@
 // This is for testing purpose
 export const questions = {
   name: "HTML/CSS",
-	mode: "train",
+	mode: "exam",
 	questionsPerTest: 20,
   timeByQuestionInSeconds: 10,
 	questions: [

@@ -11,9 +11,6 @@ const API_KEY = import.meta.env.API_KEY;
 export async function getQuiz(
 	quizId: string,
 ): Promise<APIResponse | undefined> {
-	if (import.meta.env.DEV) {
-		return questions as APIResponse;
-	}
 
 	const now = Date.now();
 
