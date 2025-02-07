@@ -8,37 +8,36 @@ import { getQuiz } from "utils/getQuiz";
 export const prerender = false;
 
 const { quizId } = Astro.params;
-if (!quizId) return Astro.redirect("/404");
+if (!quizId) {
+  return Astro.redirect("/404");
+}
 const quizData = await getQuiz(quizId);
-
 const cookieKey = getCookieName(quizId);
 
 if (!Astro.cookies.has(cookieKey)) {
-  Astro.redirect(`/quiz/${quizId}/1`);
+  return Astro.redirect(`/quiz/${quizId}/1`);
 }
 const answersCookie = Astro.cookies.get(cookieKey);
 
 if (!answersCookie) {
-  Astro.redirect(`/quiz/${quizId}/1`);
+  return Astro.redirect(`/quiz/${quizId}/1`);
 }
 const answers: Answers = answersCookie?.json();
-console.log(quizData)
 if (Object.keys(answers).length !== quizData.questionsPerTest) {
-  Astro.redirect(`/quiz/${quizId}/1`);
+  return Astro.redirect(`/quiz/${quizId}/1`);
 }
 
 const correctAnswers = Object.entries(answers)?.reduce(
   (acc, [questionIndex, answerIndex]) =>
     acc +
-    (quizData.questions[questionIndex]?.correctAnswerIndex ===
-    answerIndex
+    (quizData.questions[questionIndex]?.correctAnswerIndex === answerIndex
       ? 1
       : 0),
   0,
 );
 
 const meta = {
-  title: `Resultat | MMI Quiz`,
+title: `Resultat | Quiz - ${quizData.name}`,
   description: `Decouvrez le resultat de votre quiz!`,
 };
 ---
@@ -51,10 +50,16 @@ const meta = {
       </h1>
     </section>
     <section class="flex flex-col gap-8">
-      <div class="flex flex-col items-center justify-center gap-4 rounded-xl bg-base-300 p-8 not-prose">
-        <p class="flex items-center gap-4 font-semibold text-3xl">{quizData.name}</p>
+      <div
+        class="flex flex-col items-center justify-center gap-4 rounded-xl bg-base-300 p-8 not-prose"
+      >
+        <p class="flex items-center gap-4 font-semibold text-3xl">
+          {quizData.name}
+        </p>
         <div class="text-9xl">{correctAnswers}</div>
-        <div class="text-foreground-brand/70">sur {quizData.questionsPerTest}</div>
+        <div class="text-foreground-brand/70">
+          sur {quizData.questionsPerTest}
+        </div>
       </div>
       <a
         href={getRelativeLocaleUrl(

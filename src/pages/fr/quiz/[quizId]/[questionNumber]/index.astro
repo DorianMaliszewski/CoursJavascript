@@ -12,8 +12,6 @@ import { isNullOrUndefined } from "utils/isNullOrUndefined";
 
 export const prerender = false;
 
-// Retrieve questions
-
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const { quizId, questionNumber: questionNumberString } = Astro.params;
 
@@ -21,25 +19,27 @@ if (!quizId || !questionNumberString) {
   return Astro.redirect("/404");
 }
 
+const cookieKey = getCookieName(quizId);
 const questionIndex = Number.parseInt(questionNumberString);
 const quizData = await getQuiz(quizId);
+
 if (!quizData) {
   return Astro.redirect("/404");
 }
+
 if (quizData.mode === "close") {
   return Astro.redirect(
     getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz(quizId, "closed")),
   );
 }
-const totalQuestions = quizData.questionsPerTest;
 
+const totalQuestions = quizData.questionsPerTest;
 const currentQuestion = quizData.questions[questionIndex];
 if (!questionNumberString || Number.isNaN(questionIndex)) {
   return Astro.redirect("/404");
 }
 
 let answers: Answers = {};
-const cookieKey = getCookieName(quizId);
 if (Astro.cookies.has(cookieKey)) {
   const answersCookie = Astro.cookies.get(cookieKey);
   answers = answersCookie?.json();
@@ -54,6 +54,7 @@ const meta = {
   description: `Testez vos compétences avec ce questionnaire`,
 };
 
+// When an answer is submitted
 if (Astro.request.method === "POST") {
   try {
     const data = await Astro.request.formData();
@@ -130,7 +131,6 @@ const timeByQuestionInSeconds = quizData.mode === 'exam' ? quizData.timeByQuesti
       correctAnswerIndex={currentQuestion.correctAnswerIndex}
       nextQuestionIndex={nextQuestionIndex}
       currentLocale={Astro.currentLocale}
-      timeByQuestionInSeconds={timeByQuestionInSeconds}
     />
   </div>
 </Layout>

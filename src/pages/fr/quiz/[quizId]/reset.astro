@@ -6,10 +6,10 @@ import { getCookieName } from "utils/getCookieName";
 export const prerender = false;
 
 const { quizId } = Astro.params;
-if (!quizId) return Astro.redirect("/404");
+if (!quizId) {
+  return Astro.redirect("/404");
+}
 const cookieKey = getCookieName(quizId);
-
-console.log(cookieKey);
 
 if (Astro.cookies.has(cookieKey)) {
   Astro.cookies.delete(cookieKey, {
