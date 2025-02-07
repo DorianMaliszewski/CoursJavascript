@@ -97,5 +97,7 @@ export const PATHS = {
 			bootstrap: "/semestre3/developpementFront/tp/bootstrap",
 			sae: "/semestre3/integrerInterface/tp/sae",
 		},
+		
 	},
+	oral: "/oral/"
 };

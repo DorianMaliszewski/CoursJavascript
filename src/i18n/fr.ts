@@ -86,4 +86,5 @@ export const fr = {
   "menu.semestre3.developpementFront.tp.bootstrap": "Développement front et intégration",
   "menu.semestre3.integrerInterface.td.retool": "Retool pour Birbone",
   "menu.semestre3.integrerInterface.tp.sae": "Accompagnement SAE",
+  "menu.quiz.generation": "Génerez votre quizz personnalisé",
 } as const;
