@@ -1,6 +1,6 @@
 ---
 import Layout from "layouts/Layout.astro";
-import type { Answers } from "types";
+import type { Answers, APIResponse } from "types";
 import { Code } from "astro:components";
 import { AnswerForm } from "components/AnswerForm.tsx";
 import { getQuiz } from "utils/getQuiz";
@@ -9,6 +9,8 @@ import { getRandomQuestion } from "utils/getRandomQuestion";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { PATHS } from "paths";
 import { isNullOrUndefined } from "utils/isNullOrUndefined";
+import crypto from "crypto";
+
 
 export const prerender = false;
 
@@ -21,8 +23,8 @@ if (!quizId || !questionNumberString) {
 
 const cookieKey = getCookieName(quizId);
 const questionIndex = Number.parseInt(questionNumberString);
-const quizData = await getQuiz(quizId);
 
+const quizData = await getQuiz(quizId, Astro.cookies);
 if (!quizData) {
   return Astro.redirect("/404");
 }

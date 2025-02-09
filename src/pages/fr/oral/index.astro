@@ -3,43 +3,62 @@ import Layout from "layouts/Layout.astro";
 import OpenAI from 'openai';
 import { z } from 'zod';
 import { zodResponseFormat } from 'openai/helpers/zod';
+import { PATHS } from "paths.ts"
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { encryptQuiz } from "utils/encryptQuiz";
+import { getCookieName } from "utils/getCookieName";
+import type { APIResponse } from "types";
 
-
-console.error("coucou"); 
 const openai = new OpenAI({
   apiKey: import.meta.env.AI_API_KEY,
   baseURL: import.meta.env.AI_API_URL,
 });
 
 // Définition du schéma Zod pour la validation du quiz
-const quizSchema = z.object({
-  mode: z.literal('exam'),
-  questionsPerTest: z.literal(20),
-  questions: z.array(
-    z.object({
-      question: z.string(),
-      answers: z.array(z.string()).length(4),
-      correctAnswerIndex: z.number().min(0).max(3),
-    })
-  ).length(20),
-});
+const quizSchema = z.array(
+  z.object({
+    question: z.string(),
+    answers: z.array(z.string().min(1, "La réponse ne peut pas être vide")).length(4),
+    correctAnswerIndex: z.number().min(0).max(3),
+  }).required()
+).min(1).max(50);
 
-let quizData = null;
+let quizData: APIResponse = {
+  mode:"exam",
+  questionsPerTest:0,
+  questions:[],
+  timeByQuestionInSeconds:10,
+  name: "Easy Anti Chat GPT",
+};
+
 let errorMessage = '';
 
 if (Astro.request.method === "POST") {
+  
+  if (Astro.cookies.has(getCookieName("generated")))
+  {
+    Astro.cookies.delete(getCookieName("generated"));
+  }
+  if (Astro.cookies.has("generatedQuiz"))
+  {
+    Astro.cookies.delete("generatedQuiz");
+  }
+
   try {
     const data = await Astro.request.formData();
     const codeSnippet = data.get("codeSnippet");
 
-
-    console.error("Json envoyer : " + codeSnippet);
     if (!codeSnippet || typeof codeSnippet !== "string") {
       errorMessage = "Code invalide ou manquant.";
     } else {
       // Envoi à OpenAI
       const response = await openai.beta.chat.completions.parse({
-        model: 'llama-3.1-8b-instruct',
+        model: import.meta.env.LLM_MODEL,
+        temperature: 0.9,
+        top_p: 1,
+        response_format: zodResponseFormat(quizSchema, "quizSchema"),
+        max_tokens:4000,
+        stream:false,
         messages: [
           {
             role: "system",
@@ -47,27 +66,50 @@ if (Astro.request.method === "POST") {
           },
           {
             role: "user",
-            content: `Voici un extrait de code:\n\n${codeSnippet}\n\n 
-            Génère un quiz de 20 questions en respectant ce format JSON:
-          {
-            "mode": "train",
-            "questionsPerTest": 20,
-            "questions": [
-              {"question": "Quelle est la lettre qui précede la lettre A ?", "answers": ["A", "B", "C", "D"], "correctAnswerIndex": 1},
-              ...
-            ]
-          },
+            content: `
+            Génère 10 questions en JSON conforme au schéma suivant. Assure-toi qu'il est strictement valide. Les question devront être basé sur un code spécifique que je te donnerai plus bas.
             
+            Exemple de retour:
+            [
+              {
+                "question": "Texte de la question",
+                "answers": ["Réponse A", "Réponse B", "Réponse C", "Réponse D"],
+                "correctAnswerIndex": 1
+              },
+            ]
+              
+            Code spécifique: 
+            \`\`\`
+            ${codeSnippet}
+            \`\`\`
             `,
+            
           },
         ],
-        response_format: zodResponseFormat(quizSchema, "quizSchema"),
+
+        
       });
 
       // Validation de la réponse
-      quizData = response.choices?.[0]?.message?.parsed || null;
+      quizData.questions = response.choices[0].message.parsed as APIResponse["questions"] || [];
+
+
       if (!quizData) {
         errorMessage = "Erreur : Aucune donnée valide reçue de OpenAI.";
+      }
+      else
+      {
+        quizData.questionsPerTest= quizData.questions.length;
+        Astro.cookies.set("generatedQuiz", encryptQuiz(quizData) , {
+          maxAge: 60 * 60, // 1 heure, pas en mili ici
+          path: "/",
+          httpOnly: true,
+          sameSite: true,
+        });
+
+        console.error(quizData);
+
+        return Astro.redirect(getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz("generated")));
       }
     }
   } catch (error) {
@@ -81,7 +123,7 @@ if (Astro.request.method === "POST") {
     
     <h1 class="text-3xl font-bold mb-4">Générer un Quiz</h1>
     
-    <form method="POST" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
+    <form method="POST" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md" onsubmit="showLoader()">
       <label for="codeSnippet" class="block text-gray-700 font-medium mb-2">Collez votre code :</label>
       <textarea 
         name="codeSnippet" 
@@ -90,23 +132,22 @@ if (Astro.request.method === "POST") {
         placeholder="Écrivez votre code ici..."
       ></textarea>
       <button 
+        id="submitButton"
         type="submit" 
-        class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg"
+        class="btn mt-4 w-full btn-primary"
       >
-        Générer votre Quiz
+      <span id="loader" class="loading loading-spinner hidden"></span>
+      Générer votre Quiz
       </button>
     </form>
-
-    <!-- Affichage des résultats -->
-    <div class="mt-6 w-full max-w-lg bg-white p-4 rounded-lg shadow-md">
-      {errorMessage && <p class="text-red-500 font-semibold">{errorMessage}</p>}
-      {quizData && (
-        <div>
-          <h2 class="text-xl font-semibold mt-4">Quiz généré :</h2>
-          <pre class="bg-gray-200 p-4 rounded-lg mt-2 text-left text-sm">{JSON.stringify(quizData, null, 2)}</pre>
-        </div>
-      )}
-    </div>
-
   </div>
+
+<script is:inline>
+  function showLoader() {
+    document.getElementById("submitButton").disabled = true;
+    document.getElementById("submitButton").classList.add("cursor-not-allowed");
+    document.getElementById("loader").classList.remove("hidden");
+  }
+</script>
 </Layout>
+
