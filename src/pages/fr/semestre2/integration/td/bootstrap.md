@@ -1,6 +1,6 @@
 ---
 layout: "layouts/Layout.astro"
-title: "Développemennt du mockup"
+title: "Tailwindcss"
 ---
 
 # TODO
