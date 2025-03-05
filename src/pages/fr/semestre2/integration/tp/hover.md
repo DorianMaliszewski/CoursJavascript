@@ -11,11 +11,11 @@ Elles permettent de rendre un site **responsive**, c’est-à-dire qu'il s'ajust
 Grâce aux Media Queries, vous pouvez modifier des couleurs, des tailles, des positions, ou encore masquer/afficher des éléments selon la largeur ou la hauteur de l’écran.
 
 La syntaxe de base :
-'''css
+```css
 @media (condition) {
   /* Styles CSS spécifiques */
 }
-'''
+```
 
 Exemples de conditions :
 - `(max-width: 600px)` : pour les écrans de 600px de large ou moins (souvent les téléphones).
@@ -29,7 +29,7 @@ Exemples de conditions :
 
 Nous allons commencer par un exemple simple où la couleur de fond change selon la largeur de l’écran.
 
-'''css
+```css
 /* Styles par défaut */
 body {
   background-color: lightblue;
@@ -41,9 +41,9 @@ body {
     background-color: lightcoral;
   }
 }
-'''
+```
 
-'''html
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -64,7 +64,7 @@ body {
   <h1>Redimensionnez la fenêtre pour voir le fond changer</h1>
 </body>
 </html>
-'''
+```
 
 ---
 
@@ -73,15 +73,15 @@ body {
 ### Objectif :
 Afficher plusieurs `<div>` qui changent de couleur selon la taille de l’écran et l’orientation.
 
-'''html
+```html
 <div class="portrait">Portrait</div>
 <div class="paysage">Paysage</div>
 <div class="large">Large Screen</div>
 <div class="medium">Medium Screen</div>
 <div class="small">Small Screen</div>
-'''
+```
 
-'''css
+```css
 div {
   padding: 20px;
   margin: 10px;
@@ -114,9 +114,9 @@ div {
 @media (orientation: landscape) {
   .paysage { background-color: steelblue; }
 }
-'''
+```
 
-'''html
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -155,17 +155,17 @@ div {
   <div class="small">Small Screen</div>
 </body>
 </html>
-'''
+```
 
 ---
 
 ## 3. Exercice 2 – Changer dynamiquement le texte ✍️
 
-'''html
+```html
 <p class="responsive-text">Bienvenue sur mon site !</p>
-'''
+```
 
-'''css
+```css
 .responsive-text::after {
   content: " Version Ordinateur.";
 }
@@ -181,9 +181,9 @@ div {
     content: " Version Mobile.";
   }
 }
-'''
+```
 
-'''html
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -209,18 +209,18 @@ div {
   <p class="responsive-text">Bienvenue sur mon site !</p>
 </body>
 </html>
-'''
+```
 
 ---
 
 ## 4. Exercice 3 – Masquer et afficher selon l’écran 🕵️‍♂️
 
-'''html
+```html
 <div class="desktop-only">Visible uniquement sur ordinateur</div>
 <div class="mobile-only">Visible uniquement sur mobile</div>
-'''
+```
 
-'''css
+```css
 .desktop-only, .mobile-only {
   display: none;
 }
@@ -242,9 +242,9 @@ div {
     padding: 20px;
   }
 }
-'''
+```
 
-'''html
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -277,7 +277,7 @@ div {
   <div class="mobile-only">Visible uniquement sur mobile</div>
 </body>
 </html>
-'''
+```
 
 ---
 
