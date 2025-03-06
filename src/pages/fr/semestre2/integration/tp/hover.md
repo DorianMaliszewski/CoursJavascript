@@ -291,14 +291,3 @@ Créer un site responsive complet comprenant :
   - **1 carte par ligne** (< 600px).
 - Un **footer** simple avec copyright.
 
-### Barème :
-
-| Critère | Points |
-|---------|--------|
-| Structure correcte (HTML/CSS) | 2 |
-| Responsive réussi (Media Queries) | 3 |
-| Menu adaptatif | 2 |
-| Affichage des cartes conforme | 2 |
-| Esthétique et propreté du code | 1 |
-
-**Total : 10 points**
