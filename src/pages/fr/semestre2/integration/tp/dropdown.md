@@ -129,6 +129,7 @@ Créer une page web **responsive** qui contient :
 1. Un **menu de navigation** avec une version **desktop** et une version **mobile**.
 2. Un **menu hamburger** en JavaScript qui s'affiche sur mobile.
 3. Une **section de cartes** qui s'affiche en **3 par ligne** sur desktop et **1 par ligne** sur mobile.
+4. Un style avec TailwindCSS 
 
 ### Consignes
 - Utiliser les **media queries** pour gérer l'affichage du menu et des cartes.
