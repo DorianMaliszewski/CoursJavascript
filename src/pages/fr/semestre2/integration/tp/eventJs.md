@@ -155,7 +155,8 @@ Lorsque l'utilisateur survole un élément, le texte de cet élément doit chang
 
 ## 5. Exercice Final : Créer une Application de Cartes Simple
 
-
+- **Design avec tailwindCSS**
+- L'application doit permettre d'ajouter au click des cartes dans lequel vous aurez des informations.
 
 ### Consignes pour l'Exercice Final :
 
