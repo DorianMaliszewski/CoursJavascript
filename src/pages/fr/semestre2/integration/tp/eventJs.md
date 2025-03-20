@@ -155,79 +155,7 @@ Lorsque l'utilisateur survole un élément, le texte de cet élément doit chang
 
 ## 5. Exercice Final : Créer une Application de Cartes Simple
 
-### Objectif du Projet
 
-Créer une page web simple qui simule une application de type Trello. L'utilisateur pourra ajouter des cartes dans une colonne en cliquant sur un bouton.
-
-#### Étapes :
-1. **HTML** : Créez une structure avec un conteneur pour les cartes et un bouton pour ajouter des cartes.
-2. **CSS** : Utilisez Flexbox pour organiser les cartes.
-3. **JavaScript** : Ajoutez la logique pour ajouter de nouvelles cartes lorsque l'utilisateur clique sur le bouton.
-
-#### Code Exemple :
-
-```
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application de Cartes</title>
-  <style>
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .card {
-      width: 150px;
-      height: 200px;
-      background-color: lightblue;
-      border: 1px solid #ccc;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card button {
-      background-color: lightcoral;
-      border: none;
-      padding: 5px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <h1>Ajouter une Carte</h1>
-  <button id="addCardBtn">Ajouter une carte</button>
-
-  <div class="card-container" id="cardContainer"></div>
-
-  <script>
-    document.getElementById('addCardBtn').addEventListener('click', function() {
-      const cardContainer = document.getElementById('cardContainer');
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
-        <p>Nouvelle carte</p>
-        <button>Supprimer</button>
-      `;
-
-      const deleteButton = card.querySelector('button');
-      deleteButton.addEventListener('click', function() {
-        cardContainer.removeChild(card);
-      });
-
-      cardContainer.appendChild(card);
-    });
-  </script>
-</body>
-</html>
-```
-
----
 
 ### Consignes pour l'Exercice Final :
 
