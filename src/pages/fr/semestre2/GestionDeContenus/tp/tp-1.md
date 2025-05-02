@@ -10,7 +10,7 @@
 ## ⏱️ Durée : 2h  
 ## 🔧 Matériel requis :
 - Un poste avec accès à Internet
-- [LocalWP](https://localwp.com) **ou** XAMPP + WordPress (fourni si besoin)
+- XAMPP + WordPress (fourni si besoin)
 - Navigateur web
 - Éditeur de texte (optionnel)
 
@@ -19,18 +19,8 @@
 ## 🧭 Étapes du TP
 
 ### 1. Créer un site WordPress localement (30 min)
-#### Option 1 : Avec LocalWP
-1. Télécharger et installer [LocalWP](https://localwp.com).
-2. Créer un nouveau site :
-   - Nom du site : `MaBoutiqueEtudiante`
-   - Utilisateur admin : `admin` / mot de passe : `admin123`
-3. Lancer le site et accéder au tableau de bord WordPress.
 
-#### Option 2 : Avec XAMPP (ou équivalent)
-1. Démarrer Apache + MySQL.
-2. Placer le dossier WordPress dans `htdocs`.
-3. Accéder à `localhost/wordpress` pour démarrer l’installation.
-4. Créer un utilisateur admin (`admin` / `admin123`).
+Voir le cours magistral.
 
 ---
 
@@ -46,7 +36,14 @@
 
 ---
 
-### 3. Créer les pages principales du site (30 min)
+### 2. Installer un thème avec Blocksy
+1. Allez dans Apparence 
+2. Ajouter un thème > Cherchez **Blocksy**
+3. Installer et activer le thème 
+4. A fin de l'installation, **Cliquer sur activer Blocksy Companion** > si besoin activer les extensions 
+5. A la fin de l'installation > Changer de style de base dans Blocksy
+
+### . Créer ou modifier les pages principales du site (30 min)
 Aller dans **Pages > Ajouter** et créer les pages suivantes :
 - Accueil
 - Boutique
@@ -58,17 +55,6 @@ Aller dans **Pages > Ajouter** et créer les pages suivantes :
 - Aller dans **Réglages > Lecture** pour définir la page d’accueil.
 
 ---
-
-### 4. Personnaliser légèrement le site (30 min)
-1. Aller dans **Apparence > Thèmes**.
-2. Installer un thème simple et gratuit (ex : **Astra**, **Storefront**, **Zakra**).
-3. Aller dans **Apparence > Personnaliser** :
-   - Ajouter un titre au site
-   - Créer un menu avec les pages principales
-   - Changer les couleurs ou la police (si envie)
-
----
-
 ## ✅ Travail attendu à la fin de la séance
 - Un site WordPress fonctionnel
 - WooCommerce installé et configuré
@@ -86,5 +72,4 @@ Vous commencerez à les ajouter dans WooCommerce à la prochaine séance.
 ## 📝 Aide / Ressources
 - [Documentation officielle WooCommerce](https://woocommerce.com/documentation/)
 - [Thèmes WordPress gratuits](https://wordpress.org/themes/)
-- [Images libres de droit](https://www.pexels.com/fr-fr/) – à utiliser séance 2
 
