@@ -1,0 +1,153 @@
+---
+import Layout from "layouts/Layout.astro";
+import OpenAI from 'openai';
+import { z } from 'zod';
+import { zodResponseFormat } from 'openai/helpers/zod';
+import { PATHS } from "paths.ts"
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { encryptQuiz } from "utils/encryptQuiz";
+import { getCookieName } from "utils/getCookieName";
+import type { APIResponse } from "types";
+
+const openai = new OpenAI({
+  apiKey: import.meta.env.AI_API_KEY,
+  baseURL: import.meta.env.AI_API_URL,
+});
+
+// Définition du schéma Zod pour la validation du quiz
+const quizSchema = z.array(
+  z.object({
+    question: z.string(),
+    answers: z.array(z.string().min(1, "La réponse ne peut pas être vide")).length(4),
+    correctAnswerIndex: z.number().min(0).max(3),
+  }).required()
+).min(1).max(50);
+
+let quizData: APIResponse = {
+  mode:"exam",
+  questionsPerTest:0,
+  questions:[],
+  timeByQuestionInSeconds:10,
+  name: "Easy Anti Chat GPT",
+};
+
+let errorMessage = '';
+
+if (Astro.request.method === "POST") {
+  
+  if (Astro.cookies.has(getCookieName("generated")))
+  {
+    Astro.cookies.delete(getCookieName("generated"));
+  }
+  if (Astro.cookies.has("generatedQuiz"))
+  {
+    Astro.cookies.delete("generatedQuiz");
+  }
+
+  try {
+    const data = await Astro.request.formData();
+    const codeSnippet = data.get("codeSnippet");
+
+    if (!codeSnippet || typeof codeSnippet !== "string") {
+      errorMessage = "Code invalide ou manquant.";
+    } else {
+      // Envoi à OpenAI
+      const response = await openai.beta.chat.completions.parse({
+        model: import.meta.env.LLM_MODEL,
+        temperature: 0.9,
+        top_p: 1,
+        response_format: zodResponseFormat(quizSchema, "quizSchema"),
+        max_tokens:4000,
+        stream:false,
+        messages: [
+          {
+            role: "system",
+            content: "Tu es un générateur de quiz pour des étudiants.",
+          },
+          {
+            role: "user",
+            content: `
+            Génère 10 questions en JSON conforme au schéma suivant. Assure-toi qu'il est strictement valide. Les question devront être basé sur un code spécifique que je te donnerai plus bas.
+            
+            Exemple de retour:
+            [
+              {
+                "question": "Texte de la question",
+                "answers": ["Réponse A", "Réponse B", "Réponse C", "Réponse D"],
+                "correctAnswerIndex": 1
+              },
+            ]
+              
+            Code spécifique: 
+            \`\`\`
+            ${codeSnippet}
+            \`\`\`
+            `,
+            
+          },
+        ],
+
+        
+      });
+
+      // Validation de la réponse
+      quizData.questions = response.choices[0].message.parsed as APIResponse["questions"] || [];
+
+
+      if (!quizData) {
+        errorMessage = "Erreur : Aucune donnée valide reçue de OpenAI.";
+      }
+      else
+      {
+        quizData.questionsPerTest= quizData.questions.length;
+        Astro.cookies.set("generatedQuiz", encryptQuiz(quizData) , {
+          maxAge: 60 * 60, // 1 heure, pas en mili ici
+          path: "/",
+          httpOnly: true,
+          sameSite: true,
+        });
+
+        console.error(quizData);
+
+        return Astro.redirect(getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz("generated")));
+      }
+    }
+  } catch (error) {
+    errorMessage = `Erreur API: ${error instanceof Error ? error.message : "Erreur inconnue"}`;
+  }
+}
+---
+
+<Layout title="Générer votre quiz personnalisé !">
+  <div class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+    
+    <h1 class="text-3xl font-bold mb-4">Générer un Quiz</h1>
+    
+    <form method="POST" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md" onsubmit="showLoader()">
+      <label for="codeSnippet" class="block text-gray-700 font-medium mb-2">Collez votre code :</label>
+      <textarea 
+        name="codeSnippet" 
+        id="codeSnippet" 
+        class="w-full h-40 p-3 border rounded-lg focus:ring focus:ring-blue-300" 
+        placeholder="Écrivez votre code ici..."
+      ></textarea>
+      <button 
+        id="submitButton"
+        type="submit" 
+        class="btn mt-4 w-full btn-primary"
+      >
+      <span id="loader" class="loading loading-spinner hidden"></span>
+      Générer votre Quiz
+      </button>
+    </form>
+  </div>
+
+<script is:inline>
+  function showLoader() {
+    document.getElementById("submitButton").disabled = true;
+    document.getElementById("submitButton").classList.add("cursor-not-allowed");
+    document.getElementById("loader").classList.remove("hidden");
+  }
+</script>
+</Layout>
+

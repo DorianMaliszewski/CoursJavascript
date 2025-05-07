@@ -6,6 +6,7 @@ import MMI2Menu from "./MMI2Menu/MMI2Menu.astro";
 import Semestre1Menu from "./Semestre1Menu/semestre1Menu.astro";
 import Semestre2Menu from "./Semestre2Menu/semestre2Menu.astro";
 import Semestre3Menu from "./Semestre3Menu/semestre3Menu.astro";
+import { PATHS } from "paths";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -109,6 +110,11 @@ const t = useTranslations(lang);
           <summary>{t("menu.mmi2.title")}</summary>
           <MMI2Menu />
         </details>
+      </li>
+      <li>
+        <Link type="QI" href={PATHS.oral}>
+          {t("menu.quiz.generation")}
+        </Link>
       </li>
     </ul>
   </div>
