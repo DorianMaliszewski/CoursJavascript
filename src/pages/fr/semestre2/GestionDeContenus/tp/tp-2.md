@@ -37,6 +37,7 @@
 
 1. Dans **Produits > Catégories**, créez 2 ou 3 catégories (ex. : Cosmétiques, Épicerie, Accessoires).
 2. Retournez dans chaque fiche produit pour leur attribuer une ou plusieurs catégories.
+3. Créer une section dans votre page proposant les produit d'une seul catégorie.
 
 ---
 
