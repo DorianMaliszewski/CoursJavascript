@@ -18,11 +18,9 @@
 
 ## 🧭 Étapes du TP
 
-### 1. Choisir et personnaliser un thème (30 min)
+### 1. Personnaliser un thème (30 min)
 
-1. Aller dans **Apparence > Thèmes**.
-2. Installer un thème gratuit au choix (**Astra**, **Storefront**, **Neve**, etc.).
-3. Aller dans **Apparence > Personnaliser** pour :
+1. Aller dans **Apparence > Personnaliser** pour :
    - Ajouter un **logo** (optionnel)
    - Modifier les **couleurs principales** (boutons, texte, fond…)
    - Changer la **typographie** si souhaité
