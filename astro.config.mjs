@@ -1,9 +1,14 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
+import nodeAdapter from '@astrojs/node'; // ✅ nom explicite, plus d'ambiguïté
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',                
+  adapter: nodeAdapter({ mode: 'standalone' }),
+  
+  server: { host: true, port: 4321 }, 
   integrations: [tailwind(), react()],
   site: "https://DorianMaliszewski.github.io",
   base: "/CoursJavascript",
