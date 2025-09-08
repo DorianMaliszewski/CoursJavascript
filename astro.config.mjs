@@ -10,8 +10,8 @@ export default defineConfig({
   
   server: { host: true, port: 4321 }, 
   integrations: [tailwind(), react()],
-  site: "https://DorianMaliszewski.github.io",
-  base: "/CoursJavascript",
+  site: "https://doto.ovh",
+  base: "/",
 	i18n: {
 		locales: ["fr"],
 		defaultLocale: "fr",
