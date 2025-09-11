@@ -52,7 +52,7 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
   deploy:
-    needs: publish
+    needs: build-and-push-image
     name: Deploy image on the server
     runs-on: ubuntu-latest
     steps:
