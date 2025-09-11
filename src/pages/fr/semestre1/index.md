@@ -11,7 +11,7 @@ Bienvenue dans mes cours ! Je suis Antoine Dominici, votre professeur, et je sui
 
 Pour toute question ou assistance supplémentaire, n'hésitez pas à me contacter via Discord en scannant le QR code ci-dessous :
 
-<img src="/src/assets/qr_code.png" alt="QR Code pour Discord Antoine Dominici" style="margin:auto; margin-top:10vh;margin-bottom:10vh; width: 300px; height: 300px;">
+<img src="../../../assets/qr_code.png" alt="QR Code pour Discord Antoine Dominici" style="margin:auto; margin-top:10vh;margin-bottom:10vh; width: 300px; height: 300px;">
 
 
 ## Programme des cours
