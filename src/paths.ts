@@ -43,6 +43,10 @@ export const PATHS = {
 	},
 	semestre1: {
 		intro: "/semestre1/",
+		cm:{
+			html: "/semestre1/integration/cm/html",
+			css: "/semestre1/integration/cm/css"
+		},
 		td: {
 			html: "/semestre1/integration/td/html",
 			css: "/semestre1/integration/td/css",
