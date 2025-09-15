@@ -39,6 +39,10 @@ jobs:
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        env:
+          LLM_USERNAME: ${{ secrets.LLM_USERNAME }}
+          LLM_PASSWORD: ${{ secrets.LLM_PASSWORD }}
+          API_KEY: ${{ secrets.GOOGLE_DRIVE_SCRIPT_API_KEY }}
         with:
           context: .
           push: true

@@ -1,9 +1,7 @@
-process.env.DEBUG = "*"; // Active tous les logs de débogage
-
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import nodeAdapter from '@astrojs/node'; // ✅ nom explicite, plus d'ambiguïté
+import nodeAdapter from '@astrojs/node';
 
 
 // https://astro.build/config
@@ -19,8 +17,8 @@ export default defineConfig({
 		locales: ["fr"],
 		defaultLocale: "fr",
     routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
       fallbackType: "redirect",
     }
 	},

@@ -5,7 +5,12 @@ import { getLangFromUrl, useTranslations } from "i18n/utils";
 import DeveloppementWebMenu from "./developpementWebMenu.astro";
 import ProduireUnSiteWebMenu from "./produireUnSiteWebMenu.astro";
 import IntegrationMenu from "./integrationMenu.astro";
+import { glob } from 'astro/loaders';
+import { defineCollection } from 'astro:content';
 
+const pages = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/pages/fr", generateId: ({ entry }) => entry.replace(/\.md$/, ''), }),
+});
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

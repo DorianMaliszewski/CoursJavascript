@@ -3,15 +3,22 @@ import Layout from "layouts/Layout.astro";
 import OpenAI from 'openai';
 import { z } from 'zod';
 import { zodResponseFormat } from 'openai/helpers/zod';
-import { PATHS } from "paths.ts"
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { encryptQuiz } from "utils/encryptQuiz";
 import { getCookieName } from "utils/getCookieName";
 import type { APIResponse } from "types";
+import { PATHS } from "paths";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+
+export const prefetch = false
+
+const authKey = btoa(`${import.meta.env.LLM_USERNAME}:${import.meta.env.LLM_PASSWORD}`)
 const openai = new OpenAI({
-  apiKey: import.meta.env.AI_API_KEY,
-  baseURL: import.meta.env.AI_API_URL,
+  apiKey: '',
+  baseURL: `http://${import.meta.env.LLM_HOSTNAME}/v1`,
+  defaultHeaders: {
+    Authorization: `Basic ${authKey}`
+  }
 });
 
 // Définition du schéma Zod pour la validation du quiz
@@ -27,7 +34,7 @@ let quizData: APIResponse = {
   mode:"exam",
   questionsPerTest:0,
   questions:[],
-  timeByQuestionInSeconds:10,
+  timeByQuestionInSeconds:20,
   name: "Easy Anti Chat GPT",
 };
 
@@ -35,13 +42,13 @@ let errorMessage = '';
 
 if (Astro.request.method === "POST") {
   
-  if (Astro.cookies.has(getCookieName("generated")))
+  if (await Astro.session?.has(getCookieName("generated")))
   {
-    Astro.cookies.delete(getCookieName("generated"));
+    Astro.session?.delete(getCookieName("generated"));
   }
-  if (Astro.cookies.has("generatedQuiz"))
+  if (await Astro.session?.has("generatedQuiz"))
   {
-    Astro.cookies.delete("generatedQuiz");
+    Astro.session?.delete("generatedQuiz");
   }
 
   try {
@@ -52,10 +59,10 @@ if (Astro.request.method === "POST") {
       errorMessage = "Code invalide ou manquant.";
     } else {
       // Envoi à OpenAI
-      const response = await openai.beta.chat.completions.parse({
+      const response = await openai.chat.completions.parse({
         model: import.meta.env.LLM_MODEL,
-        temperature: 0.9,
-        top_p: 1,
+        temperature: 0.7,
+        top_p: 0.8,
         response_format: zodResponseFormat(quizSchema, "quizSchema"),
         max_tokens:4000,
         stream:false,
@@ -67,7 +74,7 @@ if (Astro.request.method === "POST") {
           {
             role: "user",
             content: `
-            Génère 10 questions en JSON conforme au schéma suivant. Assure-toi qu'il est strictement valide. Les question devront être basé sur un code spécifique que je te donnerai plus bas.
+            Génère 10 questions en JSON conforme au schéma suivant. Assure-toi qu'il est strictement valide. Les question devront être basé sur un code spécifique que je te donnerai plus bas. 
             
             Exemple de retour:
             [
@@ -75,6 +82,11 @@ if (Astro.request.method === "POST") {
                 "question": "Texte de la question",
                 "answers": ["Réponse A", "Réponse B", "Réponse C", "Réponse D"],
                 "correctAnswerIndex": 1
+              },
+              {
+                "question": "Texte de la question",
+                "answers": ["Réponse A", "Réponse B", "Réponse C", "Réponse D"],
+                "correctAnswerIndex": 3
               },
             ]
               
@@ -100,15 +112,11 @@ if (Astro.request.method === "POST") {
       else
       {
         quizData.questionsPerTest= quizData.questions.length;
-        Astro.cookies.set("generatedQuiz", encryptQuiz(quizData) , {
-          maxAge: 60 * 60, // 1 heure, pas en mili ici
-          path: "/",
-          httpOnly: true,
-          sameSite: true,
-        });
-
-        console.error(quizData);
-
+        Astro.session?.delete("mmiquiz-generated");
+        Astro.session?.set("generatedQuiz", quizData);
+        
+        console.log(getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz("generated")))
+        
         return Astro.redirect(getRelativeLocaleUrl(Astro.currentLocale, PATHS.quiz("generated")));
       }
     }

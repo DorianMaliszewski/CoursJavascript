@@ -11,12 +11,8 @@ if (!quizId) {
 }
 const cookieKey = getCookieName(quizId);
 
-if (Astro.cookies.has(cookieKey)) {
-  Astro.cookies.delete(cookieKey, {
-    path: "/",
-    sameSite: true,
-    httpOnly: true,
-  });
+if (await Astro.session?.has(cookieKey)) {
+  Astro.session?.delete(cookieKey);
 }
 
 return Astro.redirect(

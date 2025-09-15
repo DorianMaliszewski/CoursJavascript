@@ -5,25 +5,27 @@ import type { Answers } from "types";
 import { getCookieName } from "utils/getCookieName";
 import { getQuiz } from "utils/getQuiz";
 
-export const prerender = false;
-
 const { quizId } = Astro.params;
 if (!quizId) {
   return Astro.redirect("/404");
 }
-const quizData = await getQuiz(quizId);
+
 const cookieKey = getCookieName(quizId);
+const quizData = await getQuiz(quizId, Astro.session);
 
-if (!Astro.cookies.has(cookieKey)) {
+if (!(await Astro.session?.has(cookieKey))) {
   return Astro.redirect(`/quiz/${quizId}/1`);
 }
-const answersCookie = Astro.cookies.get(cookieKey);
+const answersCookie = await Astro.session?.get(cookieKey);
 
-if (!answersCookie) {
+if (!answersCookie || !quizData) {
   return Astro.redirect(`/quiz/${quizId}/1`);
 }
-const answers: Answers = answersCookie?.json();
-if (Object.keys(answers).length !== quizData.questionsPerTest) {
+const answers: Answers = JSON.parse(answersCookie) as Answers;
+if (
+  Object.keys(answers).length !==
+  (quizData?.questionsPerTest ?? quizData.questions?.length ?? 0)
+) {
   return Astro.redirect(`/quiz/${quizId}/1`);
 }
 
@@ -33,11 +35,11 @@ const correctAnswers = Object.entries(answers)?.reduce(
     (quizData.questions[questionIndex]?.correctAnswerIndex === answerIndex
       ? 1
       : 0),
-  0,
+  0
 );
 
 const meta = {
-title: `Resultat | Quiz - ${quizData.name}`,
+  title: `Resultat | Quiz - ${quizData.name}`,
   description: `Decouvrez le resultat de votre quiz!`,
 };
 ---
@@ -61,15 +63,21 @@ title: `Resultat | Quiz - ${quizData.name}`,
           sur {quizData.questionsPerTest}
         </div>
       </div>
-      <a
-        href={getRelativeLocaleUrl(
-          Astro.currentLocale,
-          `/quiz/${quizId}/reset`,
-        )}
-        class="btn btn-primary"
-      >
-        Relancer le quiz
-      </a>
+      {
+        quizData.mode === "exam" ? (
+          <a
+            href={getRelativeLocaleUrl(
+              Astro.currentLocale,
+              `/quiz/${quizId}/reset`
+            )}
+            class="btn btn-primary"
+          >
+            Relancer le quiz
+          </a>
+        ) : (
+          <div />
+        )
+      }
     </section>
   </div>
 </Layout>

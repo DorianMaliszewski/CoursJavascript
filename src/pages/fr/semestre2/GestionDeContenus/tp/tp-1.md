@@ -1,3 +1,8 @@
+---
+layout: "layouts/Layout.astro"
+title: "Développemennt du mockup"
+---
+
 # 🛠️ TP WordPress – Séance 1 : Installation et découverte de WordPress + WooCommerce
 
 ## 🎯 Objectifs de la séance

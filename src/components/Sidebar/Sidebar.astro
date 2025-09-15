@@ -7,10 +7,56 @@ import Semestre1Menu from "./Semestre1Menu/semestre1Menu.astro";
 import Semestre2Menu from "./Semestre2Menu/semestre2Menu.astro";
 import Semestre3Menu from "./Semestre3Menu/semestre3Menu.astro";
 import { PATHS } from "paths";
+import { getCollection } from 'astro:content';
+
+// const allBlogPosts = await getCollection('pages');
+
+// type Category = {
+//   id: string
+//   title: string
+//   path: string
+//   items: Category[]
+// }
+
+// function createCategory(items: Category[], depth: number, allPosts: typeof allBlogPosts): Category[] {
+//   return allPosts.reduce((acc, next) => {
+//   const categoryIndex = acc.findIndex(({id}) => next.id && id === next.id.split('/').slice(depth, depth + 1).join('/'))
+//   if (categoryIndex > -1) {
+//     const category = acc[categoryIndex]
+//     const subItems = allPosts.filter(({id}) => id.startsWith(next.id))
+//     if (subItems.length > 0) {
+//       if (category.id.startsWith('semestre1')) {
+//         category.items = createCategory(category.items, depth + 1, subItems)
+//       }
+//     } else {
+//       category.items.push({
+//         id: next.id.split('/')[depth],
+//         title: next.data.title ?? 'non',
+//         items: [],
+//         path: next.id.split('/')[depth]
+//       })
+//     }
+//   } else {
+//     if (next.id) {
+//       acc.push({
+//         id: next.id.split('/')[depth],
+//         title: next.id.split('/')[depth],
+//         items: [],
+//         path: next.id.split('/')[depth]
+//       })
+//     }
+//   }
+
+//   return acc
+// }, items)
+// }
+
+// const formatted = createCategory([], 0, allBlogPosts)
+
+// console.log(JSON.stringify(formatted, null, 2))
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
 ---
 
 <script is:inline>

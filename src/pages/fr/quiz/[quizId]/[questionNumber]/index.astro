@@ -9,12 +9,9 @@ import { getRandomQuestion } from "utils/getRandomQuestion";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { PATHS } from "paths";
 import { isNullOrUndefined } from "utils/isNullOrUndefined";
-import crypto from "crypto";
-
 
 export const prerender = false;
 
-const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const { quizId, questionNumber: questionNumberString } = Astro.params;
 
 if (!quizId || !questionNumberString) {
@@ -24,7 +21,7 @@ if (!quizId || !questionNumberString) {
 const cookieKey = getCookieName(quizId);
 const questionIndex = Number.parseInt(questionNumberString);
 
-const quizData = await getQuiz(quizId, Astro.cookies);
+const quizData = await getQuiz(quizId, Astro.session);
 if (!quizData) {
   return Astro.redirect("/404");
 }
@@ -42,9 +39,9 @@ if (!questionNumberString || Number.isNaN(questionIndex)) {
 }
 
 let answers: Answers = {};
-if (Astro.cookies.has(cookieKey)) {
-  const answersCookie = Astro.cookies.get(cookieKey);
-  answers = answersCookie?.json();
+if (await Astro.session?.has(cookieKey)) {
+  const answersCookie = await Astro.session?.get(cookieKey);
+  answers = answersCookie ? JSON.parse(answersCookie) as Answers : {};
 }
 const [_, nextQuestionIndex] = getRandomQuestion(
   quizData.questions,
@@ -68,12 +65,7 @@ if (Astro.request.method === "POST") {
       answers[questionIndex] === undefined
     ) {
       answers[questionIndex] = parseInt(answerIndex);
-      Astro.cookies.set(cookieKey, JSON.stringify(answers), {
-        maxAge: ONE_DAY_IN_SECONDS,
-        path: "/",
-        sameSite: true,
-        httpOnly: true,
-      });
+      Astro.session?.set(cookieKey, JSON.stringify(answers));
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -85,17 +77,13 @@ if (Astro.request.method === "POST") {
 // We already set the cookie in case they change the url for another question it will be count as a false response
 if (answers[questionIndex] === null || answers[questionIndex] === undefined) {
   answers[questionIndex] = null;
-  Astro.cookies.set(cookieKey, JSON.stringify(answers), {
-    maxAge: ONE_DAY_IN_SECONDS,
-    path: "/",
-    sameSite: true,
-    httpOnly: true,
-  });
+  Astro.session?.set(cookieKey, JSON.stringify(answers));
 }
 
 const totalAnswers = Object.keys(answers).length;
 
 const timeByQuestionInSeconds = quizData.mode === 'exam' ? quizData.timeByQuestionInSeconds : 0;
+console.log(timeByQuestionInSeconds)
 ---
 
 <Layout title={meta.title}>

@@ -1,10 +1,8 @@
 import type { APIResponse } from "types";
 import { questions } from "questions";
-import Astro from "astro:i18n";
-import type { AstroCookies } from "astro";
 import { isNullOrUndefined } from "./isNullOrUndefined";
 import { decryptQuiz } from "./decryptQuiz";
-
+import type { APIContext } from "astro";
 
 // Yolo cache but it works
 let cachedData: { [x: string]: { res: APIResponse; lastFetch: number } } = {};
@@ -14,13 +12,14 @@ const SCRIPT_URL =
 const API_KEY = import.meta.env.API_KEY;
 
 export async function getQuiz(
-	quizId: string, cookies? : AstroCookies
+	quizId: string, sessions? : APIContext["session"]
 ): Promise<APIResponse | undefined> {
 
 	const now = Date.now();
-	if ( quizId === "generated" && cookies.has("generatedQuiz")) 
+	if ( quizId === "generated" && (await sessions?.has("generatedQuiz"))) 
 	{
-		return decryptQuiz(cookies.get("generatedQuiz").value);
+		const value = await sessions?.get("generatedQuiz")
+		return value;
 	}
 
 	if (

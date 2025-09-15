@@ -1,3 +1,8 @@
+---
+layout: "layouts/Layout.astro"
+title: "Développemennt du mockup"
+---
+
 # 🛠️ TP WordPress – Séance 2 : Création du catalogue de produits
 
 ## 🎯 Objectifs de la séance

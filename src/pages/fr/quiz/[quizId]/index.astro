@@ -4,6 +4,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 export const prerender = false;
 
 const { quizId } = Astro.params;
+
 if (!quizId) {
   return Astro.redirect("/404");
 }
