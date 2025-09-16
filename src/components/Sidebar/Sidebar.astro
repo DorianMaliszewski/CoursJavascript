@@ -7,7 +7,7 @@ import Semestre1Menu from "./Semestre1Menu/semestre1Menu.astro";
 import Semestre2Menu from "./Semestre2Menu/semestre2Menu.astro";
 import Semestre3Menu from "./Semestre3Menu/semestre3Menu.astro";
 import { PATHS } from "paths";
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 import { coerce } from "astro:schema";
 
 // CA FONCTIONNE PAS LE TERMINAL IL A ENCORE BUG !!!!!
@@ -58,27 +58,37 @@ import { coerce } from "astro:schema";
 
 // console.log(JSON.stringify(formatted, null, 2))
 
-const allBlogPosts = await getCollection('pages');
+const allBlogPosts = await getCollection("pages");
 
 type Category = {
-id: string
-title: string
-path: string
-items: Category[]
-}
+  id: string;
+  title: string;
+  path: string;
+  items: Category[];
+};
 
+console.log(JSON.stringify(recurAntoine(allBlogPosts, null),null, 2));
 
-console.log(recurAntoine(allBlogPosts, ""))
+function recurAntoine(sub: typeof allBlogPosts, subDir: string|null) {
+  const final = [];
+  const ids = [
+    ...new Set(sub.map((post) => post.filePath.replace("src/pages/fr/","").replace(subDir+"/", "").split("/")[0])),
+  ];
 
-function recurAntoine(sub : typeof allBlogPosts, subDir: string ){
-  const final = []
-  const ids = [...new Set(sub.map(post => post.id.replace(subDir, "").split("/")[0]))];
+  console.log(ids, "le filtre etait  :  " + subDir)
+  ids.forEach((id) => {
+    const customsuffixe = subDir?`${subDir}/${id}`:id;
+    const childrens = sub.filter((p) =>
+      p.id.startsWith(customsuffixe)
+    );
 
-  ids.forEach(id => {
-    const children = allBlogPosts.filter(p => p.id.startsWith(`${subDir}/${id}`));
-    console.log(children)
-    final.push(recurAntoine(children, `${subDir}/${id}`));
+    final.push({
+      title: id,
+      path: customsuffixe,
+      items: recurAntoine(childrens, customsuffixe),
+    });
   });
+
   return final;
 }
 
@@ -91,9 +101,8 @@ const t = useTranslations(lang);
     document.getElementById("sidebar").classList.toggle("-translate-x-full");
   }
 
-  function isSideBarOpen()
-  {
-    document.getElementById("sidebar").classList.contains("-translate-x-full")
+  function isSideBarOpen() {
+    document.getElementById("sidebar").classList.contains("-translate-x-full");
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -120,11 +129,13 @@ const t = useTranslations(lang);
       });
     });
   });
-
 </script>
 
-<div style="background: linear-gradient( to bottom,var(--fallback-b1, oklch(var(--b1) / 1)) 0%,var(--fallback-b1, oklch(var(--b1) / 1)) 60%,transparent 100%);" class="fixed top-0 left-0 w-100 border-solid w-full pb-10 z-1000">
-    <button
+<div
+  style="background: linear-gradient( to bottom,var(--fallback-b1, oklch(var(--b1) / 1)) 0%,var(--fallback-b1, oklch(var(--b1) / 1)) 60%,transparent 100%);"
+  class="fixed top-0 left-0 w-100 border-solid w-full pb-10 z-1000"
+>
+  <button
     onclick="handleClick()"
     aria-controls="sidebar"
     type="button"
@@ -134,7 +145,6 @@ const t = useTranslations(lang);
     <MenuIcon isOpen={false} />
   </button>
 </div>
-
 
 <aside
   id="sidebar"
