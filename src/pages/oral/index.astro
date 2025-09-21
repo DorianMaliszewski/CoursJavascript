@@ -17,6 +17,7 @@ const openai = new OpenAI({
     Authorization: `Basic ${authKey}`
   }
 });
+console.log("URL", import.meta.env.LLM_HOSTNAME)
 
 // Définition du schéma Zod pour la validation du quiz
 const quizSchema = z.array(
