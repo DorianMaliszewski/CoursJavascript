@@ -30,6 +30,7 @@ const finalTitle = title ?? frontmatter?.title ?? "MMI - Site";
       transition:animate="fade"
       class="p-10 px-18 mt-20 prose prose-slante lg:prose-lg max-w-full"
     >
+      <h1>{finalTitle}</h1>
       <slot />
     </main>
   </body>

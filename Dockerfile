@@ -17,6 +17,12 @@ RUN pnpm install --frozen-lockfile
 
 # ---- Build ----
 FROM build-deps AS build
+ARG LLM_USERNAME=${LLM_USERNAME}
+ARG LLM_PASSWORD=${LLM_PASSWORD}
+ARG LLM_HOSTNAME=${LLM_HOSTNAME}
+ARG API_KEY=${API_KEY}
+ARG QUIZ_PASSWORD=${QUIZ_PASSWORD}
+
 COPY . .
 RUN pnpm run build
 

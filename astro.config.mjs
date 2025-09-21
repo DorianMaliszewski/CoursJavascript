@@ -1,7 +1,8 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import nodeAdapter from '@astrojs/node'; // ✅ nom explicite, plus d'ambiguïté
+import nodeAdapter from '@astrojs/node';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,13 +13,5 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   site: "https://doto.ovh",
   base: "/",
-	i18n: {
-		locales: ["fr"],
-		defaultLocale: "fr",
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
-      fallbackType: "redirect",
-    }
-	},
+  prefetch: true
 });

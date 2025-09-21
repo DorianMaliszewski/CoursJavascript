@@ -3,6 +3,11 @@
 
 interface ImportMetaEnv {
   readonly API_KEY: string;
+  readonly LLM_HOSTNAME: string;
+  readonly LLM_USERNAME: string;
+  readonly LLM_PASSWORD: string;
+  readonly LLM_MODEL: string;
+  readonly QUIZ_PASSWORD: string;
 }
 
 interface ImportMeta {

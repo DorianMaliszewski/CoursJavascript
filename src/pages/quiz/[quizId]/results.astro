@@ -1,0 +1,120 @@
+---
+import Layout from "layouts/Layout.astro";
+import type { Answers } from "types";
+import { getCookieName } from "utils/getCookieName";
+import { getQuiz } from "utils/getQuiz";
+
+const { quizId } = Astro.params;
+if (!quizId) {
+  return Astro.redirect("/404");
+}
+
+const cookieKey = getCookieName(quizId);
+const quizData = await getQuiz(quizId, Astro.session);
+
+if (!(await Astro.session?.has(cookieKey))) {
+  return Astro.redirect(`/quiz/${quizId}/1`);
+}
+const answersCookie = await Astro.session?.get(cookieKey);
+
+if (!answersCookie || !quizData) {
+  return Astro.redirect(`/quiz/${quizId}/1`);
+}
+const answers: Answers = JSON.parse(answersCookie) as Answers;
+if (
+  Object.keys(answers).length !==
+  (quizData?.questionsPerTest ?? quizData.questions?.length ?? 0)
+) {
+  return Astro.redirect(`/quiz/${quizId}/1`);
+}
+
+const correctAnswers = Object.entries(answers)?.reduce(
+  (acc, [questionIndex, answerIndex]) =>
+    acc +
+    (quizData.questions[questionIndex]?.correctAnswerIndex === answerIndex
+      ? 1
+      : 0),
+  0
+);
+
+const url = new URL(Astro.request.url);
+if (url.searchParams.get("verify") === "1") {
+  return new Response(
+    JSON.stringify({
+      score: correctAnswers,
+      total: quizData.questionsPerTest ?? quizData.questions.length,
+      verifiedAt: Date.now(),
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+      },
+    }
+  );
+}
+
+const meta = {
+  title: `Resultat | Quiz - ${quizData.name}`,
+  description: `Decouvrez le resultat de votre quiz!`,
+};
+---
+
+<Layout title={meta.title}>
+  <div class="flex flex-col items-center justify-center gap-4">
+    <section class="flex flex-col gap-8">
+      <div
+        class="flex flex-col items-center justify-center gap-4 rounded-xl bg-base-300 p-8 not-prose"
+      >
+        <p class="flex items-center gap-4 font-semibold text-3xl">
+          {quizData.name}
+        </p>
+        <div id="score" class="text-9xl">{correctAnswers}</div>
+        <div class="text-foreground-brand/70">
+          sur {quizData.questionsPerTest}
+        </div>
+        <div id="verified" class="text-xs opacity-70">
+          Vérifié (serveur) à {new Date().toLocaleTimeString()}
+        </div>
+        <div class="flex gap-2">
+          <button id="verifyBtn" class="btn btn-sm"
+            >Vérifier</button
+          >
+          {
+            quizData.mode !== "exam" ? (
+              <a href={`/quiz/${quizId}/reset`} class="btn btn-primary btn-sm">
+                Relancer le quiz
+              </a>
+            ) : null
+          }
+        </div>
+        
+      </div>
+    </section>
+    <div  class="mt-20">
+          <a href="/" class="btn btn-primary">Retour a l'acceuil</a>
+      </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  const scoreEl = document.getElementById("score");
+  const verEl = document.getElementById("verified");
+  const btn = document.getElementById("verifyBtn");
+  async function verifyNow() {
+    try {
+      const res = await fetch("?verify=1", {
+        cache: "no-store",
+        headers: { "X-Verify": "1" },
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      scoreEl.textContent = String(data.score);
+      verEl.textContent = `Vérifié (serveur) à ${new Date().toLocaleTimeString()}`;
+    } catch {}
+  }
+  btn?.addEventListener("click", verifyNow);
+  window.addEventListener("keydown", (e) => {
+    if (e.key.toLowerCase() === "v") verifyNow();
+  });
+</script>
