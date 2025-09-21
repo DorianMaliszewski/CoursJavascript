@@ -40,6 +40,12 @@ jobs:
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
+          secrets: |
+            LLM_MODEL=qwen2.5-coder:7b
+            LLM_USERNAME=${{ secrets.LLM_USERNAME }}
+            LLM_PASSWORD=${{ secrets.LLM_PASSWORD }}
+            LLM_HOSTNAME=${{ secrets.LLM_HOSTNAME }}
+            API_KEY=${{ secrets.GOOGLE_DRIVE_SCRIPT_API_KEY }}
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
