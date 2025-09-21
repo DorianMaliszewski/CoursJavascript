@@ -118,7 +118,7 @@ if (Astro.request.method === "POST") {
     }
   } catch (error) {
     errorMessage = `Erreur API: ${error instanceof Error ? error.message : "Erreur inconnue"}`;
-    console.log(errorMessage)
+    console.log(error)
   }
 }
 ---
