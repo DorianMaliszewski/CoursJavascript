@@ -6,3 +6,5 @@ services:
       - "80:4321"
     environment:
       NODE_ENV: production
+    env_file:
+      - .env

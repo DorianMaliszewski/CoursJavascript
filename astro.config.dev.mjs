@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import nodeAdapter from '@astrojs/node';
@@ -11,11 +11,10 @@ export default defineConfig({
 	site: "http://localhost:4321",
 	base: "/",
 	output: "server",
-	i18n: {
-		locales: ["fr"],
-		defaultLocale: "fr",
-    routing: {
-        prefixDefaultLocale: true
-    }
-	},
+	prefetch: true,
+	env: {
+	schema: {
+		QUIZ_PASSWORD: envField.string({ context: "client", access: "public", optional: true }),
+	}
+  }
 });

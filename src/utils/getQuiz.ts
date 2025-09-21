@@ -1,7 +1,4 @@
 import type { APIResponse } from "types";
-import { questions } from "questions";
-import { isNullOrUndefined } from "./isNullOrUndefined";
-import { decryptQuiz } from "./decryptQuiz";
 import type { APIContext } from "astro";
 
 // Yolo cache but it works

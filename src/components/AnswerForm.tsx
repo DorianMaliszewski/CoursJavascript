@@ -1,4 +1,3 @@
-import { getRelativeLocaleUrl } from "astro:i18n";
 import clsx from "clsx";
 import { CheckIcon, XIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -101,7 +100,7 @@ const QuestionRow = ({
       >
         {String.fromCharCode(64 + currentIndex + 1)}
       </span>
-      <span className="flex-grow">{currentIndex}</span>
+      <span className="flex-grow">{answer}</span>
       <div>
         <QuestionIcon
           correctAnswerIndex={correctAnswerIndex}
@@ -156,20 +155,15 @@ export const AnswerForm = ({
         <>
           {hasMoreQuestions ? (
             <a
-              href={getRelativeLocaleUrl(
-                currentLocale,
-                `/quiz/${quizId}/${nextQuestionIndex}`
-              )}
+              href={
+                `${nextQuestionIndex}`}
               className="btn btn-primary w-full btn-md"
             >
               Question suivante
             </a>
           ) : (
             <a
-              href={getRelativeLocaleUrl(
-                currentLocale,
-                `/quiz/${quizId}/results`
-              )}
+              href={`/quiz/${quizId}/results`}
               className="btn btn-primary w-full btn-md"
             >
               Voir mon résultat

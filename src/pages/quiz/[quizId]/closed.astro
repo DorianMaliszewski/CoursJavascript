@@ -1,0 +1,15 @@
+---
+import Layout from "layouts/Layout.astro";
+
+
+export const prerender = false;
+
+const link = "/";
+---
+
+<Layout title="Quiz fermé">
+  <p>
+    Ce test n'est pas disponible pour le moment, vous ne pouvez pas y acceder
+  </p>
+  <a class="btn btn-primary" href={link}>Retourner a l'acceuil</a>
+</Layout>

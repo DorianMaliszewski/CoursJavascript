@@ -1,0 +1,12 @@
+---
+
+export const prerender = false;
+
+const { quizId } = Astro.params;
+
+if (!quizId) {
+  return Astro.redirect("/404");
+}
+
+return Astro.redirect(`${quizId}/1`,);
+---

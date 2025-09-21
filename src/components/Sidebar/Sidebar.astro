@@ -1,108 +1,57 @@
 ---
-import Link from "components/Link.astro";
+import Link from "components/Link.tsx";
 import MenuIcon from "components/MenuIcon.astro";
-import { getLangFromUrl, useTranslations } from "i18n/utils";
-import MMI2Menu from "./MMI2Menu/MMI2Menu.astro";
-import Semestre1Menu from "./Semestre1Menu/semestre1Menu.astro";
-import Semestre2Menu from "./Semestre2Menu/semestre2Menu.astro";
-import Semestre3Menu from "./Semestre3Menu/semestre3Menu.astro";
-import { PATHS } from "paths";
 import { getCollection } from "astro:content";
-import { coerce } from "astro:schema";
+import RecursiveTree from "./RecursiveTree.tsx";
+import { bigint } from "astro:schema";
+import { LucideSearch } from "lucide-react";
 
-// CA FONCTIONNE PAS LE TERMINAL IL A ENCORE BUG !!!!!
-// const allBlogPosts = await getCollection('pages');
+export const prefetch = false
 
-// type Category = {
-//   id: string
-//   title: string
-//   path: string
-//   items: Category[]
-// }
+const currentPath = Astro.url.pathname.replace(/^\/+/, "").replace(/\/$/, "");
 
-// function createCategory(items: Category[], depth: number, allPosts: typeof allBlogPosts): Category[] {
-//   return allPosts.reduce((acc, next) => {
-//   const pathId = next.id.split('/').slice(depth, depth + 1).join('/')
-//   const categoryIndex = acc.findIndex(({id}) => next.id && id === pathId)
-//   if (categoryIndex > -1) {
-//     const category = acc[categoryIndex]
-//     const subItems = allPosts.filter(({id}) => id.startsWith(next.id))
-//     if (subItems.length > 0) {
-//       if (category.id.startsWith('semestre1')) {
-//         category.items = createCategory(category.items, depth + 1, subItems)
-//       }
-//     } else {
-//       category.items.push({
-//         id: pathId,
-//         title: next.data.title ?? 'non',
-//         items: [],
-//         path: next.id.split('/')[depth]
-//       })
-//     }
-//   } else {
-//     if (next.id) {
-//       acc.push({
-//         id: pathId,
-//         title: next.id.split('/')[depth],
-//         items: [],
-//         path: next.id.split('/')[depth]
-//       })
-//     }
-//   }
-
-//   return acc
-// }, items)
-// }
-
-// const formatted = createCategory([], 0, allBlogPosts)
-
-// console.log(JSON.stringify(formatted, null, 2))
 
 const allBlogPosts = await getCollection("pages");
 
-type Category = {
-  id: string;
-  title: string;
-  path: string;
-  items: Category[];
-};
-
-console.log(JSON.stringify(recurAntoine(allBlogPosts, null),null, 2));
-
-function recurAntoine(sub: typeof allBlogPosts, subDir: string|null) {
+function createSidebar(sub: typeof allBlogPosts, subDir: string | null) {
   const final = [];
-  const ids = [
-    ...new Set(sub.map((post) => post.filePath.replace("src/pages/fr/","").replace(subDir+"/", "").split("/")[0])),
+  let ids = [
+    ...new Set(
+      sub.map(
+        (post) =>
+          post.filePath
+            .replace("src/pages/", "")
+            .replace(subDir + "/", "")
+            .split("/")[0]
+      )
+    ),
   ];
+  ids = ids.toSorted((a, b) => 
+  a.toLowerCase().includes("extra") ? 1 : b.toLowerCase().includes("extra") ? -1 : a.localeCompare(b, "fr", { numeric: true })
+);
 
-  console.log(ids, "le filtre etait  :  " + subDir)
   ids.forEach((id) => {
-    const customsuffixe = subDir?`${subDir}/${id}`:id;
-    const childrens = sub.filter((p) =>
-      p.id.startsWith(customsuffixe)
-    );
-
+    const customsuffixe = subDir ? `${subDir}/${id}` : id;
+    const childrens = sub.filter((p) => p.id.startsWith(customsuffixe));
+    const tr = sub.find((s) => s.filePath === "src/pages/" + customsuffixe);
+    if (!tr?.data.hidden)
     final.push({
-      title: id,
+      title: tr?.data.title ?? id,
       path: customsuffixe,
-      items: recurAntoine(childrens, customsuffixe),
+      type: tr?.data.type ?? undefined,
+      items: createSidebar(childrens, customsuffixe),
     });
   });
 
   return final;
 }
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
----
+const sidebarData = createSidebar(allBlogPosts, null);
 
+---
 <script is:inline>
   function handleClick() {
     document.getElementById("sidebar").classList.toggle("-translate-x-full");
-  }
-
-  function isSideBarOpen() {
-    document.getElementById("sidebar").classList.contains("-translate-x-full");
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -169,34 +118,12 @@ const t = useTranslations(lang);
         >
       </Link>
     </div>
+    
+    <RecursiveTree data={sidebarData} currentPath={currentPath} client:load />
     <ul class="space-y-2 font-medium menu">
       <li>
-        <details id="semestre1">
-          <summary>{t("menu.semestre1.title")}</summary>
-          <Semestre1Menu />
-        </details>
-      </li>
-      <li>
-        <details id="semestre2">
-          <summary>{t("menu.semestre2.title")}</summary>
-          <Semestre2Menu />
-        </details>
-      </li>
-      <li>
-        <details id="semestre3">
-          <summary>{t("menu.semestre3.title")}</summary>
-          <Semestre3Menu />
-        </details>
-      </li>
-      <li>
-        <details id="test2">
-          <summary>{t("menu.mmi2.title")}</summary>
-          <MMI2Menu />
-        </details>
-      </li>
-      <li>
-        <Link type="QI" href={PATHS.oral}>
-          {t("menu.quiz.generation")}
+    <Link type="QI" href={"/oral"}>
+          Quizz
         </Link>
       </li>
     </ul>
