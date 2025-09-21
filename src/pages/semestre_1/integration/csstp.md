@@ -1,10 +1,8 @@
 ---
 layout: "layouts/Layout.astro"
-title: "TP CSS pour Étudiants de Première Année en Informatique"
+title: "Travaux pratiques CSS"
 type: "TP"
 ---
-
-# TP 2 : Créer une Page Web Interactif avec CSS
 
 ## Objectifs
 

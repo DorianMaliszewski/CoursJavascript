@@ -1,10 +1,8 @@
 ---
 layout: "layouts/Layout.astro"
-title: "CSS"
+title: "Introduction au CSS"
 type: "CM"
 ---
-
-# Introduction au Web
 
 ## Brève histoire du Web
 

@@ -4,8 +4,6 @@ title: "Introduction au CSS"
 type: "td"
 ---
 
-# Introduction au CSS
-
 ## Qu'est-ce que le CSS ?
 
 CSS (Cascading Style Sheets) est un langage utilisé pour décrire la présentation d'un document HTML. Tandis que HTML s'occupe de la structure du contenu, CSS gère l'apparence visuelle. Le CSS permet de contrôler la mise en page, les couleurs, les polices, et bien plus encore, afin de rendre les pages web attrayantes et faciles à utiliser.
