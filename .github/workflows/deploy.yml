@@ -45,7 +45,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            "LLM_MODEL=qwen2.5-coder:7b"
+            "LLM_MODEL=alibayram/Qwen3-30B-A3B-Instruct-2507:latest"
             "LLM_USERNAME=${{ secrets.LLM_USERNAME }}"
             "LLM_PASSWORD=${{ secrets.LLM_PASSWORD }}"
             "LLM_HOSTNAME=${{ secrets.LLM_HOSTNAME }}"
