@@ -73,6 +73,8 @@ if (Astro.request.method === "POST") {
             role: "user",
             content: `
             Génère 10 questions en JSON conforme au schéma suivant. Assure-toi qu'il est strictement valide. Les question devront être basé sur un code spécifique que je te donnerai plus bas. 
+            Je veux que les question soit accées sur la comprehension et non des connaissance par coeur (ex: je ne veux pas que tu leur demande la couleur précise, qu'ils on utiliser pour colorié un texte en rouge, je veux que tu leur demande quelle propriété utiliser pour colorié du texte )
+            Ne pose pas de question sur ce qu'il n'ont pas fait. Base toi toujours sur leur code. Le but est de verifier leur comprehension sur ce qu'il t'envoi.
             
             Exemple de retour:
             [
