@@ -72,9 +72,21 @@ if (Astro.request.method === "POST") {
           {
             role: "user",
             content: `
-            Génère 10 questions en JSON conforme au schéma suivant. Assure-toi qu'il est strictement valide. Les question devront être basé sur un code spécifique que je te donnerai plus bas. 
-            Je veux que les question soit accées sur la comprehension et non des connaissance par coeur (ex: je ne veux pas que tu leur demande la couleur précise, qu'ils on utiliser pour colorié un texte en rouge, je veux que tu leur demande quelle propriété utiliser pour colorié du texte )
-            Ne pose pas de question sur ce qu'il n'ont pas fait. Base toi toujours sur leur code. Le but est de verifier leur comprehension sur ce qu'il t'envoi.
+            Tu es chargé de générer **exactement 10 questions** en **JSON strictement valide** qui respectent le **schéma ci-dessous**.  
+Les questions doivent être **exclusivement basées sur le code fourni plus bas** et vérifier la **compréhension des concepts** (HTML/CSS/JS) utilisés, **pas** la mémorisation de valeurs littérales.
+
+## Règles obligatoires
+
+1. **Base-toi uniquement sur le code fourni** : ne pose **aucune** question sur des éléments, bibliothèques, APIs, fichiers ou fonctionnalités **absentes** du code.
+2. Les questions doivent tester la **compréhension** (exemples :  
+   - « Quelle propriété CSS permet de changer la couleur du texte ? »  
+   - « À quoi sert l’attribut `alt` dans une balise `<img>` ? »  
+   - « Quelle balise HTML est utilisée pour créer un lien cliquable ? »  
+   )  
+   et non la mémoire exacte (pas de « Quelle couleur a été utilisée ? »).
+3. Les questions doivent être **claires, précises, sans ambiguïté**.
+4. Le JSON doit être **strictement valide** et conforme au schéma donné.
+
             
             Exemple de retour:
             [
