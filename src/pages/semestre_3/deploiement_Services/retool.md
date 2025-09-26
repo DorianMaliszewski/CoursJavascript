@@ -1,15 +1,13 @@
 ---
 layout: "layouts/Layout.astro"
-title: "TP Noté : Utilisation de l'API RESTful avec Retool pour la Gestion des Devoirs"
+title: "Gestion de stock de tee-shirts avec Retool + Firebase (Firestore)"
 type : "tp"
 ---
-
-# TP — Gestion de stock de tee-shirts avec Retool + Firebase (Firestore)
 
 > Objectif : construire une app d’admin en **Retool** connectée à **Firestore** pour gérer un catalogue de tee-shirts et des promotions (globales, par marque, ou par produit), avec une **UI plaisante** (header + pages).  
 > Livrable : app Retool fonctionnelle + mini-rapport (captures et explications) + barème en fin de document.
 
----
+
 
 ## 0) Pré-requis
 
@@ -18,7 +16,7 @@ type : "tp"
 - Un compte **Retool** (Cloud ou Self-hosted).
 - (Option) **Firebase Auth** si vous voulez restreindre l’accès (hors scope minimal du TP).
 
----
+
 
 ## 1) Modèle de données Firestore
 
@@ -69,7 +67,7 @@ type : "tp"
 }
 ```
 
----
+
 
 ## 2) (Option) Règles de sécurité Firestore (dev simple)
 
@@ -87,7 +85,6 @@ service cloud.firestore {
 }
 ```
 
----
 
 ## 3) Connexion Firebase dans Retool
 
@@ -97,8 +94,6 @@ service cloud.firestore {
 
 > Alternative (REST) : ressource **REST API** vers `https://firestore.googleapis.com/v1/projects/<PROJECT_ID>/databases/(default)/documents/` (plus verbeux).  
 > Recommandé : **ressource Firestore native** (plus simple pour CRUD).
-
----
 
 ## 4) Architecture de l’app Retool (Header + Pages)
 
@@ -131,7 +126,6 @@ service cloud.firestore {
    - Graphiques (option) : stock par marque, répartition tailles
    - Liste “Promos actives aujourd’hui”
 
----
 
 ## 5) Requêtes Retool (Firestore) — Catalogue
 
@@ -185,8 +179,6 @@ return rows.filter(r => {
 - Path: `teeshirts/{{ tableTees.selectedRow.data.id }}`
 - Confirm dialog avant exécution.
 
----
-
 ## 6) Requêtes Retool — Promotions
 
 ### Lire promos
@@ -226,7 +218,6 @@ return false;
 - **[deletePromo]** (Firestore > Delete doc)
 - Path: `promos/{{ tablePromos.selectedRow.data.id }}`
 
----
 
 ## 7) Application des promotions (calcul affiché)
 
@@ -283,7 +274,6 @@ return bp?.applied ? `${bp.applied.nom} (-${bp.applied.reduction_percent}%)` : "
 
 > **Simplification si trop dur** : ne gérer que `scope.type = "global"` (ou global + marque), ignorer “produit”.
 
----
 
 ## 8) UI/UX recommandations (Retool)
 
@@ -306,7 +296,6 @@ return bp?.applied ? `${bp.applied.nom} (-${bp.applied.reduction_percent}%)` : "
   - 1 Pie chart : répartition par `taille`.
   - Table mini : promos actives (nom, % et fin).
 
----
 
 ## 9) Queries Dashboard (exemples)
 
@@ -331,8 +320,6 @@ const map = {};
 return Object.entries(map).map(([marque, stock]) => ({ marque, stock }));
 ```
 
----
-
 ## 10) Données de test (seed rapide)
 
 ### Produits
@@ -354,8 +341,6 @@ return Object.entries(map).map(([marque, stock]) => ({ marque, stock }));
 
 > Vous pouvez coller ces objets via des **Query JSON** dans Retool et boucler pour créer les docs, ou ajouter à la main.
 
----
-
 ## 11) Multi-pages dans Retool
 
 - Soit **plusieurs apps** (Catalogue / Promotions / Dashboard) avec un **Header commun** et navigation par liens.
@@ -366,15 +351,11 @@ const p = utils.getUrlParam("page") || "catalogue";
 tabsMain.setValue(p);
 ```
 
----
-
 ## 13) Chemin “simplifié” si c’est trop dur
 
 - Ignorer `scope.type="produit"`.
 - Conserver uniquement `global` **ou** `global + marque`.
 - Ne pas afficher le “Prix affiché” (ou l’afficher seulement pour `global`).
-
----
 
 ## 15) Barème ( /20 )
 
@@ -398,18 +379,3 @@ tabsMain.setValue(p);
   - Header propre + pages/tabs cohérents (1)
   - Modals et toasts/confirmations (2)
 
-> **Tolérance** : si la version simplifiée est choisie (ex: pas de scope “produit”), **ne pénaliser** que la partie correspondante du barème.
-
----
-
-
-- Travail autonome pour la To-Do List : 15 points, répartis comme suit :
-  - Ajout des tâches : 5 points
-  - Lecture et affichage des tâches : 5 points
-  - Qualité visuelle et organisation de l'interface : 5 points
-
-**Ressources Supplémentaires**
-- Documentation Firebase
-- Documentation officielle de Retool
-
-Bonne chance !
