@@ -1,219 +1,222 @@
 ---
+
 layout: "layouts/Layout.astro"
 title: "Publier un site avec GitHub Pages — du zéro à l’URL publique"
 type: "TP"
----
+----------
 
-#### Objectifs du TD
+#### Objectifs du Tutoriel
 
-- Créer un dépôt GitHub et y pousser un site statique.
-- Activer **GitHub Pages** (user site ou project site).
-- Déployer depuis `main`, `docs/` ou `gh-pages`.
-- (Optionnel) Configurer un **domaine personnalisé** et HTTPS.
-- Comprendre les limites et bonnes pratiques.
+* Mettre en ligne un **site statique** (HTML/CSS/JS) sur **GitHub Pages**.
+* Deux chemins au choix :
 
----
-
-## 1) Pré-requis
-
-- Un compte **GitHub**.
-- **Git** installé localement + un éditeur (ex. VS Code).
-- Un dossier contenant votre site **statique** (HTML/CSS/JS) — ou un projet *buildé* (ex. Astro, React, Vite) dont la sortie est en `dist/`.
-
-> Rappel naming :
-> - Pas d’espaces ni d’accents dans les noms de dossiers/fichiers.
-> - Préférez `kebab-case` ou `snake_case`.
+  1. **Démarrer un nouveau projet** (recommandé si vous partez de zéro).
+  2. **Publier un projet déjà existant**.
+* Activer **GitHub Pages** et obtenir une **URL publique**.
 
 ---
 
-## 2) Deux types de sites GitHub Pages
+# Avant de commencer (pré‑requis)
 
-1) **User/Organization Site** (page d’accueil de votre compte)  
-   - Nom du dépôt **obligatoire** : `votrePseudo.github.io`  
-   - L’URL publique sera : `https://votrePseudo.github.io`
+* Un **compte GitHub** (gratuit).
+* **Git** installé (+ un éditeur comme **VS Code**).
+* Connexion Internet.
 
-2) **Project Site** (site d’un projet spécifique)  
-   - Nom de dépôt libre (ex. `mon-projet`)  
-   - L’URL publique sera : `https://votrePseudo.github.io/mon-projet/`
-
-> Choisissez le type qui correspond à votre besoin. On peut en avoir **un seul** de type *User Site* par compte, mais **autant** de *Project Sites* que vous voulez.
+> Rappels de nommage : pas d’espaces ni d’accents dans les noms de fichiers/dossiers. Utilisez `kebab-case` ou `snake_case`.
 
 ---
 
-## 3) Création du dépôt & premier push
+# Les deux types de GitHub Pages
 
-### 3.1 Créer le dépôt sur GitHub
-- **New repository** → nommez-le selon votre choix (ou `votrePseudo.github.io` pour un *User Site*).
-- Laissez public (recommandé pour Pages), sans README (facultatif).
+1. **User Site** (page d’accueil de votre compte)
 
-### 3.2 Initialiser localement et pousser
-- Dans le terminal, placez-vous dans votre dossier de site, puis :
-  - ```
-  git init
-  git add .
-  git commit -m "Initial commit"
-  git branch -M main
-  git remote add origin https://github.com/votrePseudo/mon-projet.git
-  git push -u origin main
-  ```
+   * Nom **obligatoire** du dépôt : `votrePseudo.github.io`
+   * URL : `https://votrePseudo.github.io`
+   * **Un seul** User Site par compte.
 
-> Remplacez l’URL par celle de **votre** dépôt.  
-> Si vous avez déjà un dépôt local, adaptez (ne refaites pas `git init`).
+2. **Project Site** (site d’un projet)
+
+   * Nom libre (ex. `mon-portfolio`)
+   * URL : `https://votrePseudo.github.io/mon-portfolio/`
+   * Autant que vous voulez.
+
+> Pour un **portfolio**, le plus simple est souvent un **Project Site**. Si vous voulez une page d’accueil personnelle, choisissez un **User Site**.
 
 ---
 
-## 4) Activer GitHub Pages
+# Chemin A — Démarrer un nouveau projet (zéro → en ligne)
 
-### 4.1 Méthode A — Depuis la branche `main` (racine ou `/docs`)
-- Allez dans **Settings → Pages**.
-- **Source** :
-  - *Branch* : `main`
-  - *Folder* : `/ (root)` **ou** `/docs`
-- Cliquez **Save**.
+## Étape A1 — Créer le dépôt sur GitHub
 
-> Si vous choisissez `/docs`, placez votre `index.html` dans un dossier `docs/` à la racine du repo.
+1. Connectez‑vous sur [https://github.com](https://github.com).
+2. Cliquez sur **➕ New** (ou **New repository**).
+3. **Repository name** :
 
-### 4.2 Méthode B — Branche dédiée `gh-pages` (souvent utilisée pour sites buildés)
-- Créez une branche `gh-pages` contenant **uniquement** les fichiers **buildés** (ex. `dist/`).
-- Dans **Settings → Pages** :
-  - *Branch* : `gh-pages`
-  - *Folder* : `/ (root)`
-- **Save**.
+   * *User Site* → `votrePseudo.github.io`,
+   * *Project Site* → `mon-portfolio` (par exemple).
+4. **Public** (recommandé).
+5. Laissez le reste par défaut (README **facultatif**).
+6. Cliquez **Create repository**.
 
-> Avantage : votre branche `main` contient le **code source**, `gh-pages` ne contient que le **site publié**.
+## Étape A2 — Créer le site en local
 
----
+Créez un dossier sur votre ordinateur (même nom que le dépôt, ce n’est pas obligatoire mais pratique) et ajoutez un fichier **`index.html`** minimal :
 
-## 5) Arborescences types
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mon Portfolio</title>
+</head>
+<body>
+  <h1>Bonjour 👋</h1>
+  <p>Ceci est mon premier site sur GitHub Pages.</p>
+</body>
+</html>
+```
 
-### 5.1 Déploiement direct depuis `main` (racine)
-- ```
-  mon-projet/
-  ├─ index.html
-  ├─ assets/
-  └─ styles.css
-  ```
+> Important : **`index.html` doit être à la racine** du projet (pas dans un sous‑dossier) si vous déployez depuis la racine.
 
-### 5.2 Déploiement depuis `docs/`
-- ```
-  mon-projet/
-  ├─ docs/
-  │  ├─ index.html
-  │  └─ assets/
-  └─ src/ (vos sources éventuelles)
-  ```
+## Étape A3 — Initialiser Git (méthode Terminal)
 
-### 5.3 Déploiement via `gh-pages`
-- ```
-  mon-projet/
-  ├─ src/ ... (code source)
-  ├─ dist/ ... (sortie de build)
-  └─ (CI) publie dist/ → branche gh-pages
-  ```
+Dans ce dossier, ouvrez un **terminal** et tapez :
 
----
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+```
 
-## 6) Exemple minimal d’index
+Associez ensuite votre dépôt distant (remplacez par votre URL GitHub) :
 
-- ```html
-  <!DOCTYPE html>
-  <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mon site GitHub Pages</title>
-  </head>
-  <body>
-    <h1>Bonjour GitHub Pages 👋</h1>
-    <p>Déployé depuis GitHub !</p>
-  </body>
-  </html>
-  ```
+```bash
+git remote add origin https://github.com/votrePseudo/mon-portfolio.git
+git push -u origin main
+```
 
-> Commit/push, puis attendez 30–90 secondes que GitHub génère le site.
+### Alternative : faire le commit/push avec **VS Code** (sans terminal)
 
----
+1. Ouvrez le dossier dans **VS Code**.
+2. Allez dans l’onglet **Source Control** (icône branche).
+3. Cliquez **Initialize Repository**.
+4. Entrez un **message** (ex. "Initial commit") dans le champ tout en haut et cliquez **Commit**.
+5. Cliquez **Publish Branch** (ou **Sync Changes**). Si VS Code demande l’URL du dépôt distant, collez celle de votre repo GitHub.
 
-## 7) Cas des sites “buildés” (Astro, Vite, React…)
+> **Définitions utiles** :
+>
+> * **Commit** = prendre un "instantané" de vos fichiers avec un message.
+> * **Push** = envoyer vos commits sur GitHub.
 
-### 7.1 Build local → push manuel sur `gh-pages`
-- ```
-  npm install
-  npm run build        # génère /dist
-  ```
-- Publier `dist/` sur la branche `gh-pages` :
-  - ```
-    git subtree push --prefix dist origin gh-pages
-    ```
-  - ou utilisez l’outil `gh-pages` :
-    - ```
-      npm i -D gh-pages
-      npx gh-pages -d dist
-      ```
+## Étape A4 — Activer GitHub Pages
 
-### 7.2 Via GitHub Actions (automatique à chaque push)
-- Ajoutez un workflow `.github/workflows/pages.yml` :
-  - ```yaml
-    name: Deploy to GitHub Pages
+1. Sur GitHub, ouvrez **votre dépôt** → onglet **Settings** → **Pages** (menu latéral).
+2. Section **Build and deployment** → **Source** : choisissez **Deploy from a branch**.
+3. **Branch** : `main` ; **Folder** : `/ (root)`.
+4. Cliquez **Save**.
 
-    on:
-      push:
-        branches: [ main ]
-
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    concurrency:
-      group: "pages"
-      cancel-in-progress: true
-
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v4
-          - uses: actions/setup-node@v4
-            with:
-              node-version: '20'
-          - run: npm ci
-          - run: npm run build
-          - uses: actions/upload-pages-artifact@v3
-            with:
-              path: ./dist
-
-      deploy:
-        needs: build
-        runs-on: ubuntu-latest
-        environment:
-          name: github-pages
-          url: \${{ steps.deployment.outputs.page_url }}
-        steps:
-          - id: deployment
-            uses: actions/deploy-pages@v4
-    ```
-
-- Dans **Settings → Pages**, mettez **Source** sur *GitHub Actions*.
-
-> Pour **Astro** : assurez-vous que la sortie est dans `dist/` (par défaut) et, si déployé en sous-chemin (project site), configurez `base` dans `astro.config.mjs`.
+Après ~1 minute, une **URL** s’affiche (ou un bouton **Visit site**). Votre site est en ligne ! 🎉
 
 ---
 
-## 8) Tester l’accès
+# Chemin B — Vous avez **déjà** un projet (dossier existant)
 
-- Pour un **User Site** : `https://votrePseudo.github.io`
-- Pour un **Project Site** : `https://votrePseudo.github.io/mon-projet/`
+## Étape B1 — Créer le dépôt GitHub
 
-> Si 404 : attendez ~1–2 minutes, puis **Actions** (onglet) pour voir les logs de build si vous utilisez un workflow.
+Suivez **A1** (création du dépôt sur GitHub).
+
+## Étape B2 — Connecter votre dossier existant au dépôt
+
+Ouvrez un **terminal dans votre dossier de projet** puis :
+
+```bash
+git init                  # si pas déjà un dépôt git
+git add .
+git commit -m "Initial commit"
+git branch -M main
+
+git remote add origin https://github.com/votrePseudo/mon-projet.git
+# Si un remote 'origin' existe déjà, utilisez :
+# git remote set-url origin https://github.com/votrePseudo/mon-projet.git
+
+git push -u origin main
+```
+
+> **Astuce** : si votre projet a déjà des commits, sautez `git init` et `git add .` et faites directement un `git remote set-url` puis `git push`.
+
+## Étape B3 — Vérifier l’arborescence
+
+Assurez‑vous d’avoir un **`index.html`** à la **racine** si vous déployez depuis `/ (root)` :
+
+```
+mon-projet/
+├─ index.html
+├─ assets/
+└─ styles.css
+```
+
+## Étape B4 — Activer GitHub Pages
+
+Même procédure que **A4** : **Settings → Pages → Deploy from a branch** → Branch `main` + Folder `/ (root)` → **Save**.
 
 ---
 
-## 9) (Optionnel) Domaine personnalisé + HTTPS
+# Mettre à jour votre site (après)
 
-### 9.1 Déclarer le domaine
-- Dans **Settings → Pages**, section **Custom domain** :
-  - Saisissez `www.mondomaine.fr` (recommandé : utiliser le sous-domaine `www`).
-  - GitHub créera un fichier `CNAME` au déploiement.
+Chaque fois que vous modifiez vos fichiers :
 
-### 9.2 Configurer les DNS chez votre registrar
+### Méthode Terminal
+
+```bash
+git add .
+git commit -m "Ma mise à jour"
+git push
+```
+
+### Méthode VS Code
+
+1. Onglet **Source Control**.
+2. Entrez le **message** de commit → **Commit**.
+3. **Sync Changes** (ou **Push**).
+
+GitHub Pages régénère votre site en ~30–90 secondes.
+
+---
+
+# Où trouver l’URL et les logs ?
+
+* **Settings → Pages** : l’**URL** de votre site est affichée ici.
+* **Actions** (onglet du dépôt) : si vous utilisez GitHub Actions, vous verrez l’historique des déploiements.
+* En mode "Deploy from a branch", le déploiement est automatique dès que `main` change.
+
+---
+
+# Problèmes fréquents & solutions rapides
+
+* **404 / Page introuvable** : vérifiez que `index.html` est bien à la **racine** (ou que vous avez choisi le bon **Folder** dans Pages).
+* **L’URL n’apparaît pas** : revérifiez **Settings → Pages**, la **Source** doit être **Deploy from a branch**, **Branch** = `main`, **Folder** = `/ (root)`.
+* **Pas de changement après push** : rafraîchissez après 1–2 min, videz le cache (Ctrl+F5). Vérifiez que vous avez bien fait `git push`.
+* **Nom du dépôt User Site incorrect** : pour un User Site, le dépôt doit être **exactement** `votrePseudo.github.io`.
+
+---
+
+# (Optionnel) Choisir entre User Site et Project Site
+
+* Vous pouvez avoir **1** User Site (page d’accueil personnelle) **et** autant de Project Sites que nécessaire.
+* Un **Project Site** est idéal pour un **portfolio** par projet ou un site de cours.
+
+---
+
+# Récap express
+
+1. Créez un **dépôt GitHub** (Public).
+2. Mettez un **`index.html`** à la racine.
+3. **Commit** → **Push** (Terminal *ou* VS Code).
+4. **Settings → Pages** : **Deploy from a branch**, `main` + `/ (root)` → **Save**.
+5. Récupérez l’**URL** → partagez-la !
+
+---
+
+Bon déploiement ✨
